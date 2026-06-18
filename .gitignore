@@ -51,6 +51,10 @@ coverage/
 /macos/Flutter/flutter_export_environment.sh
 /windows/flutter/ephemeral/
 
+# Generated localization files
+/lib/l10n/app_localizations*.dart
+
+
 # Symbolication related
 app.*.symbols
 
