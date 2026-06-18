@@ -14,6 +14,8 @@ import '../../memory_game/presentation/chimp_game_screen.dart';
 import '../../spatial_game/presentation/spatial_iq_screen.dart';
 import '../../spatial_game/presentation/maze_game_screen.dart';
 import '../../spatial_game/presentation/dice_game_screen.dart';
+import '../../temporal_game/presentation/time_estimator_screen.dart';
+import '../../temporal_game/presentation/rhythm_sync_screen.dart';
 import '../../../core/locale_provider.dart';
 import '../../../core/settings_provider.dart';
 import '../../../core/high_score_service.dart';
@@ -42,6 +44,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
         return l10n.memoryGames;
       case 'Spatial':
         return l10n.spatialGames;
+      case 'Temporal':
+        return l10n.temporalGames;
       default:
         return l10n.all;
     }
@@ -78,6 +82,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               {'id': 'spatial_iq', 'name': l10n.spatialIq, 'icon': Icons.view_in_ar, 'color': const Color(0xFFF43F5E)},
               {'id': 'spatial_dice', 'name': l10n.diceGame, 'icon': Icons.casino_outlined, 'color': const Color(0xFFEC4899)},
               {'id': 'schulte_focus', 'name': l10n.schulteGame, 'icon': Icons.filter_9_plus_outlined, 'color': const Color(0xFFFB923C)},
+              {'id': 'time_estimator', 'name': l10n.timeEstimator, 'icon': Icons.timer_outlined, 'color': const Color(0xFF10B981)},
+              {'id': 'rhythm_sync', 'name': l10n.rhythmSync, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF8B5CF6)},
             ];
 
             return Padding(
@@ -192,7 +198,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
     final isLight = theme.brightness == Brightness.light;
     final primaryColor = theme.colorScheme.primary;
 
-    final categories = ['All', 'Visual', 'Audio', 'Brain', 'Numerical', 'Memory', 'Spatial'];
+    final categories = ['All', 'Visual', 'Audio', 'Brain', 'Numerical', 'Memory', 'Spatial', 'Temporal'];
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -486,6 +492,30 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               ),
                             ),
                           ]),
+
+                        if (selectedCategory == 'All' || selectedCategory == 'Temporal')
+                          _CategorySection(title: l10n.temporalGames, children: [
+                            _MenuButton(
+                              title: l10n.timeEstimator,
+                              subtitle: l10n.timeEstimatorDesc,
+                              icon: Icons.timer_outlined,
+                              gradient: const [Color(0xFF10B981), Color(0xFF059669)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const TimeEstimatorScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.rhythmSync,
+                              subtitle: l10n.rhythmSyncDesc,
+                              icon: Icons.music_note_outlined,
+                              gradient: const [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const RhythmSyncScreen()),
+                              ),
+                            ),
+                          ]),
                       ],
                     ),
                   ),
@@ -530,6 +560,10 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
             }),
             _LangTile(label: 'Japanese', isSelected: ref.read(localeProvider).languageCode == 'ja', onTap: () {
               ref.read(localeProvider.notifier).state = const Locale('ja');
+              Navigator.pop(context);
+            }),
+            _LangTile(label: 'Русский', isSelected: ref.read(localeProvider).languageCode == 'ru', onTap: () {
+              ref.read(localeProvider.notifier).state = const Locale('ru');
               Navigator.pop(context);
             }),
             const SizedBox(height: 24),

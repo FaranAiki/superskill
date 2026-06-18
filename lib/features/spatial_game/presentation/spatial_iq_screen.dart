@@ -21,7 +21,8 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
   double angleY = 0.5;
   bool isCorrect = false;
   bool submitted = false;
-  bool enableRotation = true;
+  bool enableRotation = false;
+  bool showGrid = false;
   int score = 0;
 
   @override
@@ -223,6 +224,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
                     angleX: angleX,
                     angleY: angleY,
                     gridSize: gridSize,
+                    showGrid: showGrid,
                   ),
                   child: Container(),
                 ),
@@ -278,6 +280,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
                                 angleY: 0.8 + (index * 1.2),
                                 gridSize: gridSize,
                                 isSmall: true,
+                                showGrid: showGrid,
                               ),
                               child: Container(),
                             ),
@@ -363,6 +366,17 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
                   setModalState(() {});
                 },
               ),
+              const SizedBox(height: 10),
+              SwitchListTile(
+                title: Text(l10n.showGrid, style: const TextStyle(fontWeight: FontWeight.bold)),
+                subtitle: Text(l10n.showGridDesc),
+                value: showGrid,
+                activeColor: Theme.of(context).colorScheme.primary,
+                onChanged: (v) {
+                  setState(() => showGrid = v);
+                  setModalState(() {});
+                },
+              ),
             ],
           ),
         ),
@@ -377,6 +391,7 @@ class BlockPainter extends CustomPainter {
   final double angleY;
   final int gridSize;
   final bool isSmall;
+  final bool showGrid;
 
   BlockPainter({
     required this.blocks,
@@ -384,6 +399,7 @@ class BlockPainter extends CustomPainter {
     required this.angleY,
     required this.gridSize,
     this.isSmall = false,
+    this.showGrid = false,
   });
 
   @override
@@ -457,82 +473,84 @@ class BlockPainter extends CustomPainter {
       }
     }
 
-    // 2. Generate Cage Outline (12 main edges of the bounding cube)
-    final half = gridSize / 2.0;
-    final List<v.Vector3> cageVertices = [
-      v.Vector3(-half, -half, -half),
-      v.Vector3(half, -half, -half),
-      v.Vector3(half, half, -half),
-      v.Vector3(-half, half, -half),
-      v.Vector3(-half, -half, half),
-      v.Vector3(half, -half, half),
-      v.Vector3(half, half, half),
-      v.Vector3(-half, half, half),
-    ];
-
-    List<v.Vector3> projectedCage = cageVertices.map((vtx) {
-      v.Vector3 worldPos = vtx * scale;
-      v.Vector4 v4 = v.Vector4(worldPos.x, worldPos.y, worldPos.z, 1.0);
-      v.Vector4 transformed = matrix.transform(v4);
-      return v.Vector3(transformed.x, transformed.y, transformed.z);
-    }).toList();
-
-    final List<List<int>> cageEdges = [
-      [0, 1], [1, 2], [2, 3], [3, 0], // Back
-      [4, 5], [5, 6], [6, 7], [7, 4], // Front
-      [0, 4], [1, 5], [2, 6], [3, 7], // Connections
-    ];
-
-    final cageColor = const Color(0xFF38BDF8).withOpacity(0.4);
-    for (var edge in cageEdges) {
-      v.Vector3 p1 = projectedCage[edge[0]];
-      v.Vector3 p2 = projectedCage[edge[1]];
-      double avgZ = (p1.z + p2.z) / 2;
-      renderables.add(_LineRenderable(p1, p2, cageColor, 2.0, avgZ));
-    }
-
-    // 3. Generate Cage Grid Lines
-    for (int i = 1; i < gridSize; i++) {
-      double offsetVal = -half + i;
-      final gridLineSegments = [
-        // On X faces:
-        [v.Vector3(-half, -half, offsetVal), v.Vector3(-half, half, offsetVal)],
-        [v.Vector3(-half, offsetVal, -half), v.Vector3(-half, offsetVal, half)],
-        [v.Vector3(half, -half, offsetVal), v.Vector3(half, half, offsetVal)],
-        [v.Vector3(half, offsetVal, -half), v.Vector3(half, offsetVal, half)],
-
-        // On Y faces:
-        [v.Vector3(-half, -half, offsetVal), v.Vector3(half, -half, offsetVal)],
-        [v.Vector3(offsetVal, -half, -half), v.Vector3(offsetVal, -half, half)],
-        [v.Vector3(-half, half, offsetVal), v.Vector3(half, half, offsetVal)],
-        [v.Vector3(offsetVal, half, -half), v.Vector3(offsetVal, half, half)],
-
-        // On Z faces:
-        [v.Vector3(-half, offsetVal, -half), v.Vector3(half, offsetVal, -half)],
-        [v.Vector3(offsetVal, -half, -half), v.Vector3(offsetVal, half, -half)],
-        [v.Vector3(-half, offsetVal, half), v.Vector3(half, offsetVal, half)],
-        [v.Vector3(offsetVal, -half, half), v.Vector3(offsetVal, half, half)],
+    if (showGrid) {
+      // 2. Generate Cage Outline (12 main edges of the bounding cube)
+      final half = gridSize / 2.0;
+      final List<v.Vector3> cageVertices = [
+        v.Vector3(-half, -half, -half),
+        v.Vector3(half, -half, -half),
+        v.Vector3(half, half, -half),
+        v.Vector3(-half, half, -half),
+        v.Vector3(-half, -half, half),
+        v.Vector3(half, -half, half),
+        v.Vector3(half, half, half),
+        v.Vector3(-half, half, half),
       ];
 
-      final gridLineColor = const Color(0xFF38BDF8).withOpacity(0.15);
-      for (var segment in gridLineSegments) {
-        v.Vector3 p1Local = segment[0];
-        v.Vector3 p2Local = segment[1];
+      List<v.Vector3> projectedCage = cageVertices.map((vtx) {
+        v.Vector3 worldPos = vtx * scale;
+        v.Vector4 v4 = v.Vector4(worldPos.x, worldPos.y, worldPos.z, 1.0);
+        v.Vector4 transformed = matrix.transform(v4);
+        return v.Vector3(transformed.x, transformed.y, transformed.z);
+      }).toList();
 
-        // Project p1
-        v.Vector3 p1World = p1Local * scale;
-        v.Vector4 v4_1 = v.Vector4(p1World.x, p1World.y, p1World.z, 1.0);
-        v.Vector4 t1 = matrix.transform(v4_1);
-        v.Vector3 p1Proj = v.Vector3(t1.x, t1.y, t1.z);
+      final List<List<int>> cageEdges = [
+        [0, 1], [1, 2], [2, 3], [3, 0], // Back
+        [4, 5], [5, 6], [6, 7], [7, 4], // Front
+        [0, 4], [1, 5], [2, 6], [3, 7], // Connections
+      ];
 
-        // Project p2
-        v.Vector3 p2World = p2Local * scale;
-        v.Vector4 v4_2 = v.Vector4(p2World.x, p2World.y, p2World.z, 1.0);
-        v.Vector4 t2 = matrix.transform(v4_2);
-        v.Vector3 p2Proj = v.Vector3(t2.x, t2.y, t2.z);
+      final cageColor = const Color(0xFF38BDF8).withOpacity(0.4);
+      for (var edge in cageEdges) {
+        v.Vector3 p1 = projectedCage[edge[0]];
+        v.Vector3 p2 = projectedCage[edge[1]];
+        double avgZ = (p1.z + p2.z) / 2;
+        renderables.add(_LineRenderable(p1, p2, cageColor, 2.0, avgZ));
+      }
 
-        double avgZ = (p1Proj.z + p2Proj.z) / 2;
-        renderables.add(_LineRenderable(p1Proj, p2Proj, gridLineColor, 1.0, avgZ));
+      // 3. Generate Cage Grid Lines
+      for (int i = 1; i < gridSize; i++) {
+        double offsetVal = -half + i;
+        final gridLineSegments = [
+          // On X faces:
+          [v.Vector3(-half, -half, offsetVal), v.Vector3(-half, half, offsetVal)],
+          [v.Vector3(-half, offsetVal, -half), v.Vector3(-half, offsetVal, half)],
+          [v.Vector3(half, -half, offsetVal), v.Vector3(half, half, offsetVal)],
+          [v.Vector3(half, offsetVal, -half), v.Vector3(half, offsetVal, half)],
+
+          // On Y faces:
+          [v.Vector3(-half, -half, offsetVal), v.Vector3(half, -half, offsetVal)],
+          [v.Vector3(offsetVal, -half, -half), v.Vector3(offsetVal, -half, half)],
+          [v.Vector3(-half, half, offsetVal), v.Vector3(half, half, offsetVal)],
+          [v.Vector3(offsetVal, half, -half), v.Vector3(offsetVal, half, half)],
+
+          // On Z faces:
+          [v.Vector3(-half, offsetVal, -half), v.Vector3(half, offsetVal, -half)],
+          [v.Vector3(offsetVal, -half, -half), v.Vector3(offsetVal, half, -half)],
+          [v.Vector3(-half, offsetVal, half), v.Vector3(half, offsetVal, half)],
+          [v.Vector3(offsetVal, -half, half), v.Vector3(offsetVal, half, half)],
+        ];
+
+        final gridLineColor = const Color(0xFF38BDF8).withOpacity(0.15);
+        for (var segment in gridLineSegments) {
+          v.Vector3 p1Local = segment[0];
+          v.Vector3 p2Local = segment[1];
+
+          // Project p1
+          v.Vector3 p1World = p1Local * scale;
+          v.Vector4 v4_1 = v.Vector4(p1World.x, p1World.y, p1World.z, 1.0);
+          v.Vector4 t1 = matrix.transform(v4_1);
+          v.Vector3 p1Proj = v.Vector3(t1.x, t1.y, t1.z);
+
+          // Project p2
+          v.Vector3 p2World = p2Local * scale;
+          v.Vector4 v4_2 = v.Vector4(p2World.x, p2World.y, p2World.z, 1.0);
+          v.Vector4 t2 = matrix.transform(v4_2);
+          v.Vector3 p2Proj = v.Vector3(t2.x, t2.y, t2.z);
+
+          double avgZ = (p1Proj.z + p2Proj.z) / 2;
+          renderables.add(_LineRenderable(p1Proj, p2Proj, gridLineColor, 1.0, avgZ));
+        }
       }
     }
 

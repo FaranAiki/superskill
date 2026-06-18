@@ -8,6 +8,7 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_en.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_ja.dart';
+import 'app_localizations_ru.dart';
 import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
@@ -99,6 +100,7 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('id'),
     Locale('ja'),
+    Locale('ru'),
     Locale('zh'),
   ];
 
@@ -840,6 +842,18 @@ abstract class AppLocalizations {
   /// **'Disable to prevent rotating the shapes'**
   String get allowRotationDesc;
 
+  /// No description provided for @showGrid.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Grid Boundaries'**
+  String get showGrid;
+
+  /// No description provided for @showGridDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show neon grid lines to help visualize blocks'**
+  String get showGridDesc;
+
   /// No description provided for @schulteGame.
   ///
   /// In en, this message translates to:
@@ -893,6 +907,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tap next: {number}'**
   String tapNextNumber(int number);
+
+  /// No description provided for @temporalGames.
+  ///
+  /// In en, this message translates to:
+  /// **'Temporal Control'**
+  String get temporalGames;
+
+  /// No description provided for @timeEstimator.
+  ///
+  /// In en, this message translates to:
+  /// **'Time Estimator'**
+  String get timeEstimator;
+
+  /// No description provided for @timeEstimatorDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop the clock exactly at the target time'**
+  String get timeEstimatorDesc;
+
+  /// No description provided for @rhythmSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Rhythm Sync'**
+  String get rhythmSync;
+
+  /// No description provided for @rhythmSyncDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap in perfect sync with the rhythm'**
+  String get rhythmSyncDesc;
+
+  /// No description provided for @waitTargetTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait exactly {seconds} seconds'**
+  String waitTargetTime(Object seconds);
+
+  /// No description provided for @hideTimerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop when you estimate the time has reached target!'**
+  String get hideTimerDesc;
+
+  /// No description provided for @startEstimating.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get startEstimating;
+
+  /// No description provided for @stopEstimating.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopEstimating;
+
+  /// No description provided for @tapOnBeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap!'**
+  String get tapOnBeat;
+
+  /// No description provided for @listenRhythm.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to the rhythm...'**
+  String get listenRhythm;
+
+  /// No description provided for @rhythmSyncTap.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on beats 4, 5, 6, 7, 8!'**
+  String get rhythmSyncTap;
 }
 
 class _AppLocalizationsDelegate
@@ -906,7 +992,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'id', 'ja', 'zh'].contains(locale.languageCode);
+      <String>['en', 'id', 'ja', 'ru', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -921,6 +1007,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsId();
     case 'ja':
       return AppLocalizationsJa();
+    case 'ru':
+      return AppLocalizationsRu();
     case 'zh':
       return AppLocalizationsZh();
   }

@@ -234,6 +234,8 @@
   "noScoresYet": "暂无记录！",
   "allowRotation": "允许旋转",
   "allowRotationDesc": "关闭以防止旋转形状",
+  "showGrid": "显示网格边界",
+  "showGridDesc": "显示霓虹网格线以帮助方块可视化",
   "schulteGame": "舒尔特专注力",
   "schulteGameDesc": "尽快按顺序点击数字以训练注意力",
   "schulteOrder": "数字顺序",
@@ -249,5 +251,17 @@
         "type": "int"
       }
     }
-  }
+  },
+  "temporalGames": "时间控制",
+  "timeEstimator": "时间估算",
+  "timeEstimatorDesc": "在目标时间准确停止时钟",
+  "rhythmSync": "节奏同步",
+  "rhythmSyncDesc": "与节奏完美同步地点击",
+  "waitTargetTime": "等待恰好 {seconds} 秒",
+  "hideTimerDesc": "估算时间到达目标时停止！",
+  "startEstimating": "开始",
+  "stopEstimating": "停止",
+  "tapOnBeat": "点击！",
+  "listenRhythm": "聆听节奏...",
+  "rhythmSyncTap": "在第 4, 5, 6, 7, 8 拍点击！"
 }

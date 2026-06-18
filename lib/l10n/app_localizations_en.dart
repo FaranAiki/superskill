@@ -415,6 +415,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get allowRotationDesc => 'Disable to prevent rotating the shapes';
 
   @override
+  String get showGrid => 'Show Grid Boundaries';
+
+  @override
+  String get showGridDesc => 'Show neon grid lines to help visualize blocks';
+
+  @override
   String get schulteGame => 'Schulte Focus';
 
   @override
@@ -443,4 +449,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String tapNextNumber(int number) {
     return 'Tap next: $number';
   }
+
+  @override
+  String get temporalGames => 'Temporal Control';
+
+  @override
+  String get timeEstimator => 'Time Estimator';
+
+  @override
+  String get timeEstimatorDesc => 'Stop the clock exactly at the target time';
+
+  @override
+  String get rhythmSync => 'Rhythm Sync';
+
+  @override
+  String get rhythmSyncDesc => 'Tap in perfect sync with the rhythm';
+
+  @override
+  String waitTargetTime(Object seconds) {
+    return 'Wait exactly $seconds seconds';
+  }
+
+  @override
+  String get hideTimerDesc =>
+      'Stop when you estimate the time has reached target!';
+
+  @override
+  String get startEstimating => 'Start';
+
+  @override
+  String get stopEstimating => 'Stop';
+
+  @override
+  String get tapOnBeat => 'Tap!';
+
+  @override
+  String get listenRhythm => 'Listen to the rhythm...';
+
+  @override
+  String get rhythmSyncTap => 'Tap on beats 4, 5, 6, 7, 8!';
 }

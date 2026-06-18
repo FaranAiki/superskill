@@ -234,6 +234,8 @@
   "noScoresYet": "Belum ada skor tercatat!",
   "allowRotation": "Izinkan Rotasi",
   "allowRotationDesc": "Matikan untuk mencegah bentuk berputar",
+  "showGrid": "Tampilkan Batas Kisi",
+  "showGridDesc": "Tampilkan garis kisi neon untuk membantu memvisualisasikan balok",
   "schulteGame": "Fokus Schulte",
   "schulteGameDesc": "Ketuk angka secara berurutan secepat mungkin untuk melatih fokus",
   "schulteOrder": "Urutan Angka",
@@ -249,5 +251,17 @@
         "type": "int"
       }
     }
-  }
+  },
+  "temporalGames": "Kontrol Temporal",
+  "timeEstimator": "Estimasi Waktu",
+  "timeEstimatorDesc": "Hentikan jam tepat pada waktu target",
+  "rhythmSync": "Penyelaras Irama",
+  "rhythmSyncDesc": "Ketuk selaras dengan irama",
+  "waitTargetTime": "Tunggu tepat {seconds} detik",
+  "hideTimerDesc": "Berhenti ketika Anda mengira waktu telah mencapai target!",
+  "startEstimating": "Mulai",
+  "stopEstimating": "Berhenti",
+  "tapOnBeat": "Ketuk!",
+  "listenRhythm": "Dengarkan irama...",
+  "rhythmSyncTap": "Ketuk pada ketukan 4, 5, 6, 7, 8!"
 }

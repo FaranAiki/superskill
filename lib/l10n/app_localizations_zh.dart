@@ -410,6 +410,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get allowRotationDesc => '关闭以防止旋转形状';
 
   @override
+  String get showGrid => '显示网格边界';
+
+  @override
+  String get showGridDesc => '显示霓虹网格线以帮助方块可视化';
+
+  @override
   String get schulteGame => '舒尔特专注力';
 
   @override
@@ -437,4 +443,42 @@ class AppLocalizationsZh extends AppLocalizations {
   String tapNextNumber(int number) {
     return '请点击: $number';
   }
+
+  @override
+  String get temporalGames => '时间控制';
+
+  @override
+  String get timeEstimator => '时间估算';
+
+  @override
+  String get timeEstimatorDesc => '在目标时间准确停止时钟';
+
+  @override
+  String get rhythmSync => '节奏同步';
+
+  @override
+  String get rhythmSyncDesc => '与节奏完美同步地点击';
+
+  @override
+  String waitTargetTime(Object seconds) {
+    return '等待恰好 $seconds 秒';
+  }
+
+  @override
+  String get hideTimerDesc => '估算时间到达目标时停止！';
+
+  @override
+  String get startEstimating => '开始';
+
+  @override
+  String get stopEstimating => '停止';
+
+  @override
+  String get tapOnBeat => '点击！';
+
+  @override
+  String get listenRhythm => '聆听节奏...';
+
+  @override
+  String get rhythmSyncTap => '在第 4, 5, 6, 7, 8 拍点击！';
 }

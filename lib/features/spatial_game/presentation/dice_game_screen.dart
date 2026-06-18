@@ -506,8 +506,7 @@ class DicePainter extends CustomPainter {
         final dotPaint = Paint()
           ..style = PaintingStyle.fill;
         
-        // Red dot for 1, dark slate/navy for the rest
-        final dotColor = face.value == 1 ? const Color(0xFFEF4444) : const Color(0xFF1E293B);
+        final dotColor = Colors.black;
         dotPaint.color = dotColor;
 
         double dotRadius = isSmall ? scale * 0.07 : scale * 0.1;
@@ -552,12 +551,12 @@ class DicePainter extends CustomPainter {
 
     // Faces mappings: Index to vertex indices
     final List<List<int>> faceIndices = [
-      [0, 1, 2, 3], // Back (0)
+      [1, 0, 3, 2], // Back (0)
       [4, 5, 6, 7], // Front (1)
       [0, 1, 5, 4], // Bottom (2)
-      [2, 3, 7, 6], // Top (3)
-      [0, 3, 7, 4], // Left (4)
-      [1, 2, 6, 5], // Right (5)
+      [7, 6, 2, 3], // Top (3)
+      [0, 4, 7, 3], // Left (4)
+      [5, 1, 2, 6], // Right (5)
     ];
 
     // Local face normals (pointing outwards)

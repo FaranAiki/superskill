@@ -120,6 +120,7 @@ class MyApp extends ConsumerWidget {
         Locale('id'),
         Locale('zh'),
         Locale('ja'),
+        Locale('ru'),
       ],
       home: const MenuScreen(),
     );

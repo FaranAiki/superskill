@@ -234,6 +234,8 @@
   "noScoresYet": "No scores recorded yet!",
   "allowRotation": "Allow Rotation",
   "allowRotationDesc": "Disable to prevent rotating the shapes",
+  "showGrid": "Show Grid Boundaries",
+  "showGridDesc": "Show neon grid lines to help visualize blocks",
   "schulteGame": "Schulte Focus",
   "schulteGameDesc": "Tap numbers in order as fast as possible to train focus",
   "schulteOrder": "Number Order",
@@ -249,5 +251,17 @@
         "type": "int"
       }
     }
-  }
+  },
+  "temporalGames": "Temporal Control",
+  "timeEstimator": "Time Estimator",
+  "timeEstimatorDesc": "Stop the clock exactly at the target time",
+  "rhythmSync": "Rhythm Sync",
+  "rhythmSyncDesc": "Tap in perfect sync with the rhythm",
+  "waitTargetTime": "Wait exactly {seconds} seconds",
+  "hideTimerDesc": "Stop when you estimate the time has reached target!",
+  "startEstimating": "Start",
+  "stopEstimating": "Stop",
+  "tapOnBeat": "Tap!",
+  "listenRhythm": "Listen to the rhythm...",
+  "rhythmSyncTap": "Tap on beats 4, 5, 6, 7, 8!"
 }

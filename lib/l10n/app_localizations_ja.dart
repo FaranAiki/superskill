@@ -411,6 +411,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get allowRotationDesc => '形状の回転を防止するために無効にする';
 
   @override
+  String get showGrid => 'グリッド境界を表示';
+
+  @override
+  String get showGridDesc => 'ブロックを視覚化しやすくするためにネオングリッド線を表示する';
+
+  @override
   String get schulteGame => 'シュルテフォーカス';
 
   @override
@@ -438,4 +444,42 @@ class AppLocalizationsJa extends AppLocalizations {
   String tapNextNumber(int number) {
     return '次をタップ: $number';
   }
+
+  @override
+  String get temporalGames => '時間コントロール';
+
+  @override
+  String get timeEstimator => '時間推定';
+
+  @override
+  String get timeEstimatorDesc => '目標時間で時計を正確に止めます';
+
+  @override
+  String get rhythmSync => 'リズム同期';
+
+  @override
+  String get rhythmSyncDesc => 'リズムに合わせて正確にタップします';
+
+  @override
+  String waitTargetTime(Object seconds) {
+    return '正確に$seconds秒待つ';
+  }
+
+  @override
+  String get hideTimerDesc => '目標時間に達したと推測したら停止してください！';
+
+  @override
+  String get startEstimating => 'スタート';
+
+  @override
+  String get stopEstimating => 'ストップ';
+
+  @override
+  String get tapOnBeat => 'タップ！';
+
+  @override
+  String get listenRhythm => 'リズムを聴いて...';
+
+  @override
+  String get rhythmSyncTap => '4、5、6、7、8拍目でタップ！';
 }

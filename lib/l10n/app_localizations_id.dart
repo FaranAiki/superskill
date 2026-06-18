@@ -419,6 +419,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get allowRotationDesc => 'Matikan untuk mencegah bentuk berputar';
 
   @override
+  String get showGrid => 'Tampilkan Batas Kisi';
+
+  @override
+  String get showGridDesc =>
+      'Tampilkan garis kisi neon untuk membantu memvisualisasikan balok';
+
+  @override
   String get schulteGame => 'Fokus Schulte';
 
   @override
@@ -447,4 +454,43 @@ class AppLocalizationsId extends AppLocalizations {
   String tapNextNumber(int number) {
     return 'Ketuk berikutnya: $number';
   }
+
+  @override
+  String get temporalGames => 'Kontrol Temporal';
+
+  @override
+  String get timeEstimator => 'Estimasi Waktu';
+
+  @override
+  String get timeEstimatorDesc => 'Hentikan jam tepat pada waktu target';
+
+  @override
+  String get rhythmSync => 'Penyelaras Irama';
+
+  @override
+  String get rhythmSyncDesc => 'Ketuk selaras dengan irama';
+
+  @override
+  String waitTargetTime(Object seconds) {
+    return 'Tunggu tepat $seconds detik';
+  }
+
+  @override
+  String get hideTimerDesc =>
+      'Berhenti ketika Anda mengira waktu telah mencapai target!';
+
+  @override
+  String get startEstimating => 'Mulai';
+
+  @override
+  String get stopEstimating => 'Berhenti';
+
+  @override
+  String get tapOnBeat => 'Ketuk!';
+
+  @override
+  String get listenRhythm => 'Dengarkan irama...';
+
+  @override
+  String get rhythmSyncTap => 'Ketuk pada ketukan 4, 5, 6, 7, 8!';
 }

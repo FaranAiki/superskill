@@ -1,0 +1,267 @@
+{
+  "miniGamesHub": "Хаб Супернавыков",
+  "visualGames": "Визуальные Игры",
+  "audioGames": "Аудио Игры",
+  "brainGames": "Игры для Мозга",
+  "memoryGames": "Игры на Память",
+  "spatialGames": "Пространственные Игры",
+  "tebakHexRgb": "Угадай HEX/RGB",
+  "pointDiffSystem": "Система очков по разнице цветов",
+  "tebakHexCmyk": "Угадай HEX/CMYK",
+  "cmykChallenge": "Цветовой вызов CMYK",
+  "perfectPitch": "Абсолютный Слух",
+  "trainMusicPitch": "Тренируйте музыкальный слух",
+  "brainReflex": "Мозговой Рефлекс",
+  "stroopTestDesc": "Тест Струпа: Тренировка фокуса и точности",
+  "target": "Цель",
+  "yourResult": "Ваш Результат",
+  "previewActive": "Предпросмотр Активен",
+  "hidden": "Скрыто",
+  "red": "Красный",
+  "green": "Зеленый",
+  "blue": "Синий",
+  "cyan": "Циан",
+  "pink": "Розовый",
+  "yellow": "Желтый",
+  "white": "Белый",
+  "difference": "Разница",
+  "playAgain": "Играть Снова",
+  "checkScore": "Проверить Счет",
+  "gameSettings": "Настройки Игры",
+  "showUserPreview": "Показать предпросмотр вашего цвета",
+  "showTargetHex": "Показать целевой HEX-код",
+  "inputHexFor": "Введите HEX для {label}",
+  "@inputHexFor": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "hexHint": "например, FF или 80",
+  "cancel": "Отмена",
+  "ok": "ОК",
+  "perfectPitchTrainer": "Тренажер Абсолютного Слуха",
+  "listenAndGuess": "Слушайте ноту и угадывайте!",
+  "correct": "Верно!",
+  "wrongNote": "Неверно! Это была {targetNote}",
+  "@wrongNote": {
+    "placeholders": {
+      "targetNote": {
+        "type": "String"
+      }
+    }
+  },
+  "nextNote": "Следующая нота",
+  "brainReflexStroop": "Рефлекс Мозга: Струп",
+  "timeLabel": "Время: {timeLeft}",
+  "@timeLabel": {
+    "placeholders": {
+      "timeLeft": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreLabel": "Счет: {score}",
+  "@scoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "pickInkColor": "Выберите цвет чернил",
+  "pickWordMeaning": "Выберите значение слова",
+  "timeUp": "Время вышло!",
+  "yourFinalScore": "Ваш окончательный счет:",
+  "tryAgain": "Попробовать снова",
+  "backToMenu": "В меню",
+  "language": "Язык",
+  "selectLanguage": "Выберите Язык",
+  "memorySequence": "Последовательность Памяти",
+  "memorySequenceDesc": "Запомните и повторите последовательность цветов",
+  "watchSequence": "Следите за последовательностью!",
+  "yourTurn": "Ваш ход!",
+  "levelLabel": "Уровень: {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tileCount": "Количество плиток",
+  "gameSpeed": "Скорость Игры",
+  "fast": "Быстро",
+  "medium": "Средне",
+  "slow": "Медленно",
+  "superFast": "Очень быстро",
+  "spatialIq": "Пространственный IQ",
+  "spatialIqDesc": "Тренируйте мысленное вращение и 3D-пространственное мышление",
+  "gridSize": "Размер Сетки",
+  "optionsCount": "Количество Вариантов",
+  "matchRotatedShape": "Найдите правильную совпадающую фигуру!",
+  "mazeGame": "Неоновый Лабиринт",
+  "mazeGameDesc": "Найдите путь из неоновой сетки",
+  "reachTheExit": "Доберитесь до выхода!",
+  "levelComplete": "Уровень Пройден!",
+  "advancedSettings": "Расширенные Настройки",
+  "themeMode": "Режим Темы",
+  "dark": "Темная",
+  "light": "Светлая",
+  "fontStyle": "Стиль Шрифта",
+  "fontSize": "Размер шрифта: {percent}%",
+  "@fontSize": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "suddenDeath": "Внезапная смерть (касание = проигрыш)",
+  "suddenDeathDesc": "Возврат в начало при касании стены",
+  "suddenDeathMessage": "О нет! Активирована внезапная смерть - назад на старт!",
+  "memorizationMode": "Режим Запоминания",
+  "memorizationModeDesc": "Стены исчезают после обратного отсчета",
+  "memorizeMaze": "Запомните лабиринт: {seconds} с",
+  "@memorizeMaze": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resetShowAgain": "Сбросить / Показать снова",
+  "chimpGame": "Шимпанзе-Память",
+  "chimpGameDesc": "Запомните и коснитесь скрытых чисел по порядку",
+  "livesLabel": "Жизни: {count}",
+  "@livesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "numbersCount": "Числа: {count}",
+  "@numbersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chimpTestStart": "Нажмите 1, чтобы начать и скрыть числа!",
+  "chimpTestInstructions": "Нажимайте на квадраты в порядке возрастания (1, 2, 3...)",
+  "gameOverChimp": "Игра окончена! Ваш конечный уровень памяти: {level} чисел.",
+  "@gameOverChimp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "blindMode": "Слепой Режим",
+  "blindModeDesc": "Скрыть очертания после нажатия на 1",
+  "startingNumbers": "Начальные Числа",
+  "reflexGame": "Быстрый Тап",
+  "reflexGameDesc": "Нажимайте на светящиеся плитки как можно быстрее",
+  "gameOverReflex": "Игра окончена! Ваш окончательный счет: {score}.",
+  "@gameOverReflex": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "operatorGame": "Операторский Раш",
+  "operatorGameDesc": "Быстро находите пропущенные математические знаки",
+  "gameOverOperator": "Игра окончена! Ваш окончательный счет: {score}.",
+  "@gameOverOperator": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "numericalGames": "Числовые Игры",
+  "game24": "Игра 24",
+  "game24Desc": "Решите, можно ли объединить карты для получения цели",
+  "speedMath": "Быстрая Математика",
+  "speedMathDesc": "Считайте быстро мелькающие числа и операторы",
+  "hideOutlines": "Скрыть очертания",
+  "hideOutlinesDesc": "Скрыть все очертания сетки после исчезновения чисел",
+  "game24Yes": "Да",
+  "game24No": "Нет",
+  "game24CanBeMade": "Можно ли получить {target}?",
+  "@game24CanBeMade": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "game24CorrectSolvable": "Верно! Вот решение:\n{solution}",
+  "@game24CorrectSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24CorrectUnsolvable": "Верно! Решений нет.",
+  "game24WrongSolvable": "Неверно! Это возможно. Решение:\n{solution}",
+  "@game24WrongSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24WrongUnsolvable": "Неверно! Математического решения не существует.",
+  "diceGame": "Пространственный Кубик",
+  "diceGameDesc": "Найдите правильный кубик, где сумма противоположных граней равна 7",
+  "diceGameInstruction": "Вращайте кубик, чтобы осмотреть все грани. Противоположные грани должны давать в сумме 7!",
+  "all": "Все",
+  "scoreboard": "Таблица Рекордов",
+  "highScore": "Рекорд: {score}",
+  "@highScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "noScoresYet": "Рекордов пока нет!",
+  "allowRotation": "Разрешить Вращение",
+  "allowRotationDesc": "Отключите, чтобы запретить вращение фигур",
+  "showGrid": "Показывать границы сетки",
+  "showGridDesc": "Показывать неоновые линии сетки для помощи в визуализации блоков",
+  "schulteGame": "Фокус Шульте",
+  "schulteGameDesc": "Нажимайте числа по порядку как можно быстрее для тренировки фокуса",
+  "schulteOrder": "Порядок Чисел",
+  "ascending": "По возрастанию",
+  "descending": "По убыванию",
+  "gridColorMode": "Цветовой Режим",
+  "monochrome": "Монохромный",
+  "rainbow": "Радужный",
+  "tapNextNumber": "Нажмите следующее: {number}",
+  "@tapNextNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "temporalGames": "Временной Контроль",
+  "timeEstimator": "Оценка Времени",
+  "timeEstimatorDesc": "Остановите секундомер ровно на целевом времени",
+  "rhythmSync": "Синхронизация Ритма",
+  "rhythmSyncDesc": "Нажимайте в идеальный такт с ритмом",
+  "waitTargetTime": "Подождите ровно {seconds} секунд",
+  "hideTimerDesc": "Остановите, когда, по вашей оценке, время достигнет цели!",
+  "startEstimating": "Старт",
+  "stopEstimating": "Стоп",
+  "tapOnBeat": "Тап!",
+  "listenRhythm": "Слушайте ритм...",
+  "rhythmSyncTap": "Тапайте на удары 4, 5, 6, 7, 8!"
+}

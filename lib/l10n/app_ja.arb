@@ -234,6 +234,8 @@
   "noScoresYet": "まだスコアが記録されていません！",
   "allowRotation": "回転を許可",
   "allowRotationDesc": "形状の回転を防止するために無効にする",
+  "showGrid": "グリッド境界を表示",
+  "showGridDesc": "ブロックを視覚化しやすくするためにネオングリッド線を表示する",
   "schulteGame": "シュルテフォーカス",
   "schulteGameDesc": "集中力を鍛えるため、できるだけ早く数字を順番にタップしてください",
   "schulteOrder": "数字の順序",
@@ -249,5 +251,17 @@
         "type": "int"
       }
     }
-  }
+  },
+  "temporalGames": "時間コントロール",
+  "timeEstimator": "時間推定",
+  "timeEstimatorDesc": "目標時間で時計を正確に止めます",
+  "rhythmSync": "リズム同期",
+  "rhythmSyncDesc": "リズムに合わせて正確にタップします",
+  "waitTargetTime": "正確に{seconds}秒待つ",
+  "hideTimerDesc": "目標時間に達したと推測したら停止してください！",
+  "startEstimating": "スタート",
+  "stopEstimating": "ストップ",
+  "tapOnBeat": "タップ！",
+  "listenRhythm": "リズムを聴いて...",
+  "rhythmSyncTap": "4、5、6、7、8拍目でタップ！"
 }
