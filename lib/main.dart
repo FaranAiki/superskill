@@ -8,6 +8,7 @@ import 'package:superskill/l10n/app_localizations.dart';
 
 import 'features/menu/presentation/menu_screen.dart';
 import 'core/locale_provider.dart';
+import 'core/settings_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,39 +44,67 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
+  TextTheme _getTextTheme(String fontFamily, TextTheme baseTheme) {
+    switch (fontFamily) {
+      case 'Roboto':
+        return GoogleFonts.robotoTextTheme(baseTheme);
+      case 'Poppins':
+        return GoogleFonts.poppinsTextTheme(baseTheme);
+      case 'Orbitron':
+        return GoogleFonts.orbitronTextTheme(baseTheme);
+      default:
+        return GoogleFonts.interTextTheme(baseTheme);
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
+    final settings = ref.watch(settingsProvider);
+
+    final isLight = settings.themeMode == ThemeMode.light;
+
+    final baseTextTheme = ThemeData(brightness: isLight ? Brightness.light : Brightness.dark).textTheme;
+    var customTextTheme = _getTextTheme(settings.fontFamily, baseTextTheme).copyWith(
+      displayLarge: TextStyle(fontSize: 48 * settings.fontSizeMultiplier, fontWeight: FontWeight.w900),
+      displayMedium: TextStyle(fontSize: 38 * settings.fontSizeMultiplier, fontWeight: FontWeight.w800),
+      displaySmall: TextStyle(fontSize: 32 * settings.fontSizeMultiplier, fontWeight: FontWeight.w800),
+      headlineLarge: TextStyle(fontSize: 28 * settings.fontSizeMultiplier, fontWeight: FontWeight.bold),
+      headlineMedium: TextStyle(fontSize: 24 * settings.fontSizeMultiplier, fontWeight: FontWeight.bold),
+      titleLarge: TextStyle(fontSize: 22 * settings.fontSizeMultiplier, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(fontSize: 18 * settings.fontSizeMultiplier),
+      bodyMedium: TextStyle(fontSize: 16 * settings.fontSizeMultiplier),
+    ).apply(
+      bodyColor: isLight ? const Color(0xFF0F172A) : Colors.white,
+      displayColor: isLight ? const Color(0xFF0F172A) : Colors.white,
+    );
 
     return MaterialApp(
       title: 'Superskill Hub',
       debugShowCheckedModeBanner: false,
+      themeMode: settings.themeMode,
       theme: ThemeData(
         useMaterial3: true,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF0284C7),
+          primary: const Color(0xFF0284C7),
+          surface: Colors.white,
+          brightness: Brightness.light,
+        ),
+        textTheme: customTextTheme,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF030712),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF38BDF8),
           primary: const Color(0xFF38BDF8),
           surface: const Color(0xFF0F172A),
           brightness: Brightness.dark,
         ),
-        // Switch to Inter - very professional and clear
-        textTheme: GoogleFonts.interTextTheme(
-          ThemeData(brightness: Brightness.dark).textTheme,
-        ).copyWith(
-          displayLarge: const TextStyle(fontSize: 48, fontWeight: FontWeight.w900),
-          displayMedium: const TextStyle(fontSize: 38, fontWeight: FontWeight.w800),
-          displaySmall: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800),
-          headlineLarge: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          headlineMedium: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          titleLarge: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          bodyLarge: const TextStyle(fontSize: 18),
-          bodyMedium: const TextStyle(fontSize: 16),
-        ).apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-        ),
+        textTheme: customTextTheme,
       ),
       locale: locale,
       localizationsDelegates: const [

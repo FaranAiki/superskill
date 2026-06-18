@@ -42,6 +42,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
     Colors.purple,
     Colors.pink,
     Colors.teal,
+    Colors.indigo,
   ];
 
   List<Color> colors = [];
@@ -178,47 +179,48 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
           builder: (context, setDialogState) {
             final l10n = AppLocalizations.of(context)!;
             return AlertDialog(
-              backgroundColor: const Color(0xFF030712),
-              title: Text(l10n.gameSettings, style: const TextStyle(color: Color(0xFF38BDF8))),
+              backgroundColor: Theme.of(context).dialogBackgroundColor,
+              title: Text(l10n.gameSettings, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Color(0xFF38BDF8), width: 1),
+                side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('${l10n.tileCount}: $tileCount', style: const TextStyle(color: Colors.white)),
+                  Text('${l10n.tileCount}: $tileCount', style: Theme.of(context).textTheme.bodyMedium),
                   Slider(
                     value: tileCount.toDouble(),
                     min: 2,
-                    max: 8,
-                    divisions: 6,
+                    max: 9,
+                    divisions: 7,
                     onChanged: (value) {
                       setDialogState(() => tileCount = value.toInt());
                     },
                   ),
                   const SizedBox(height: 16),
-                  Text(l10n.gameSpeed, style: const TextStyle(color: Colors.white)),
+                  Text(l10n.gameSpeed, style: Theme.of(context).textTheme.bodyMedium),
                   DropdownButton<GameSpeed>(
                     value: gameSpeed,
                     isExpanded: true,
-                    dropdownColor: const Color(0xFF030712),
+                    dropdownColor: Theme.of(context).colorScheme.surface,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     items: [
                       DropdownMenuItem(
                         value: GameSpeed.slow,
-                        child: Text(l10n.slow, style: const TextStyle(color: Colors.white)),
+                        child: Text(l10n.slow),
                       ),
                       DropdownMenuItem(
                         value: GameSpeed.medium,
-                        child: Text(l10n.medium, style: const TextStyle(color: Colors.white)),
+                        child: Text(l10n.medium),
                       ),
                       DropdownMenuItem(
                         value: GameSpeed.fast,
-                        child: Text(l10n.fast, style: const TextStyle(color: Colors.white)),
+                        child: Text(l10n.fast),
                       ),
                       DropdownMenuItem(
                         value: GameSpeed.superFast,
-                        child: Text(l10n.superFast, style: const TextStyle(color: Colors.white)),
+                        child: Text(l10n.superFast),
                       ),
                     ],
                     onChanged: (value) {
@@ -236,7 +238,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
                     _updateColors();
                     _startNewGame();
                   },
-                  child: Text(l10n.ok, style: const TextStyle(color: Color(0xFF38BDF8))),
+                  child: Text(l10n.ok, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                 ),
               ],
             );
@@ -257,40 +259,39 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
     int crossAxisCount = tileCount <= 4 ? 2 : 3;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF030712),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(l10n.memorySequence, style: const TextStyle(color: Color(0xFF38BDF8))),
+        title: Text(l10n.memorySequence),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Color(0xFF38BDF8)),
+            icon: Icon(Icons.settings, color: Theme.of(context).colorScheme.primary),
             onPressed: _showSettingsDialog,
           ),
         ],
       ),
       body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
-          child: Column(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 450),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 l10n.levelLabel(sequence.length.toString()),
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               const SizedBox(height: 16),
               Text(
                 isShowingSequence ? l10n.watchSequence : l10n.yourTurn,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: isShowingSequence ? Colors.orange : const Color(0xFF38BDF8),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Inter',
-                ),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: isShowingSequence ? Colors.orange : Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 40),
               ConstrainedBox(
@@ -343,35 +344,27 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
           ),
         ),
       ),
+      ),
     );
   }
 
   Widget _buildGameOver(AppLocalizations l10n) {
     return Scaffold(
-      backgroundColor: const Color(0xFF030712),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.sentiment_very_dissatisfied, size: 80, color: Colors.redAccent),
             const SizedBox(height: 24),
-            Text(l10n.timeUp,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge
-                    ?.copyWith(color: Colors.white, fontFamily: 'Inter')),
+            Text(l10n.timeUp, style: Theme.of(context).textTheme.headlineLarge),
             const SizedBox(height: 8),
-            Text(l10n.yourFinalScore,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: Colors.white70, fontFamily: 'Inter')),
+            Text(l10n.yourFinalScore, style: Theme.of(context).textTheme.titleMedium),
             Text(
               '${sequence.isEmpty ? 0 : sequence.length - 1}',
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF38BDF8),
-                    fontFamily: 'Inter',
+                    color: Theme.of(context).colorScheme.primary,
                   ),
             ),
             const SizedBox(height: 48),
@@ -380,7 +373,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
               icon: const Icon(Icons.refresh),
               label: Text(l10n.tryAgain),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF38BDF8),
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
                 minimumSize: const Size(200, 60),
                 shape: const StadiumBorder(),
@@ -389,7 +382,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(l10n.backToMenu, style: const TextStyle(color: Color(0xFF38BDF8))),
+              child: Text(l10n.backToMenu, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
             ),
           ],
         ),
@@ -397,3 +390,4 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
     );
   }
 }
+

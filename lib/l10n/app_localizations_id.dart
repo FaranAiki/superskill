@@ -218,4 +218,88 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get matchRotatedShape => 'Temukan bentuk yang cocok!';
+
+  @override
+  String get mazeGame => 'Labirin Neon';
+
+  @override
+  String get mazeGameDesc => 'Temukan jalan keluar dari kisi-kisi neon';
+
+  @override
+  String get reachTheExit => 'Sampai ke pintu keluar!';
+
+  @override
+  String get levelComplete => 'Level Selesai!';
+
+  @override
+  String get advancedSettings => 'Pengaturan Lanjutan';
+
+  @override
+  String get themeMode => 'Mode Tema';
+
+  @override
+  String get dark => 'Gelap';
+
+  @override
+  String get light => 'Terang / Putih';
+
+  @override
+  String get fontStyle => 'Gaya Huruf';
+
+  @override
+  String fontSize(String percent) {
+    return 'Ukuran Huruf: $percent%';
+  }
+
+  @override
+  String get suddenDeath => 'Mati Mendadak (Nabrak = Mati)';
+
+  @override
+  String get suddenDeathDesc => 'Kembali ke posisi awal jika menyentuh dinding';
+
+  @override
+  String get suddenDeathMessage => 'Yah! Kena Dinding - Balik ke Awal!';
+
+  @override
+  String get memorizationMode => 'Mode Hafalan';
+
+  @override
+  String get memorizationModeDesc => 'Dinding hilang setelah hitung mundur';
+
+  @override
+  String memorizeMaze(int seconds) {
+    return 'Hafalkan Labirin: $seconds s';
+  }
+
+  @override
+  String get resetShowAgain => 'Ulang / Tampilkan Lagi';
+
+  @override
+  String get chimpGame => 'Memori Simpanse';
+
+  @override
+  String get chimpGameDesc => 'Ingat dan ketuk angka tersembunyi berurutan';
+
+  @override
+  String livesLabel(int count) {
+    return 'Nyawa: $count';
+  }
+
+  @override
+  String numbersCount(int count) {
+    return 'Jumlah Angka: $count';
+  }
+
+  @override
+  String get chimpTestStart =>
+      'Ketuk 1 untuk memulai dan menyembunyikan angka!';
+
+  @override
+  String get chimpTestInstructions =>
+      'Ketuk kotak secara berurutan (1, 2, 3...)';
+
+  @override
+  String gameOverChimp(int level) {
+    return 'Permainan Selesai! Tingkat memori akhir Anda adalah $level angka.';
+  }
 }

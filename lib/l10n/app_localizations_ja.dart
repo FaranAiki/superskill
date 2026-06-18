@@ -218,4 +218,86 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get matchRotatedShape => '正しく一致する形状を見つけてください！';
+
+  @override
+  String get mazeGame => 'ネオン迷路';
+
+  @override
+  String get mazeGameDesc => 'ネオングリッドから正しい脱出路を見つけよう';
+
+  @override
+  String get reachTheExit => '出口に到達せよ！';
+
+  @override
+  String get levelComplete => 'レベル完了！';
+
+  @override
+  String get advancedSettings => '詳細設定';
+
+  @override
+  String get themeMode => 'テーマモード';
+
+  @override
+  String get dark => 'ダーク';
+
+  @override
+  String get light => 'ホワイト / ライト';
+
+  @override
+  String get fontStyle => 'フォントスタイル';
+
+  @override
+  String fontSize(String percent) {
+    return 'フォントサイズ: $percent%';
+  }
+
+  @override
+  String get suddenDeath => 'サドンデス (壁に当たるとゲームオーバー)';
+
+  @override
+  String get suddenDeathDesc => '壁に当たると開始位置に戻ります';
+
+  @override
+  String get suddenDeathMessage => '残念！壁に当たりました - 最初からやり直し！';
+
+  @override
+  String get memorizationMode => '暗記モード';
+
+  @override
+  String get memorizationModeDesc => 'カウントダウン後に壁が消えます';
+
+  @override
+  String memorizeMaze(int seconds) {
+    return '迷路を暗記してください: $seconds 秒';
+  }
+
+  @override
+  String get resetShowAgain => 'リセット / もう一度表示';
+
+  @override
+  String get chimpGame => 'チンパンジー・テスト';
+
+  @override
+  String get chimpGameDesc => '隠された数字を順番に記憶してタップします';
+
+  @override
+  String livesLabel(int count) {
+    return 'ライフ: $count';
+  }
+
+  @override
+  String numbersCount(int count) {
+    return '数字の数: $count';
+  }
+
+  @override
+  String get chimpTestStart => '1をタップして数字を隠し、開始します！';
+
+  @override
+  String get chimpTestInstructions => '昇順（1、2、3...）に四角をタップしてください';
+
+  @override
+  String gameOverChimp(int level) {
+    return 'ゲームオーバー！あなたの最終的な記憶レベルは $level 個の数字でした。';
+  }
 }

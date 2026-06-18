@@ -100,5 +100,64 @@
   "spatialIqDesc": "メンタルローテーションと3D空間認知のトレーニング",
   "gridSize": "グリッドサイズ",
   "optionsCount": "選択肢の数",
-  "matchRotatedShape": "正しく一致する形状を見つけてください！"
+  "matchRotatedShape": "正しく一致する形状を見つけてください！",
+  "mazeGame": "ネオン迷路",
+  "mazeGameDesc": "ネオングリッドから正しい脱出路を見つけよう",
+  "reachTheExit": "出口に到達せよ！",
+  "levelComplete": "レベル完了！",
+  "advancedSettings": "詳細設定",
+  "themeMode": "テーマモード",
+  "dark": "ダーク",
+  "light": "ホワイト / ライト",
+  "fontStyle": "フォントスタイル",
+  "fontSize": "フォントサイズ: {percent}%",
+  "@fontSize": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "suddenDeath": "サドンデス (壁に当たるとゲームオーバー)",
+  "suddenDeathDesc": "壁に当たると開始位置に戻ります",
+  "suddenDeathMessage": "残念！壁に当たりました - 最初からやり直し！",
+  "memorizationMode": "暗記モード",
+  "memorizationModeDesc": "カウントダウン後に壁が消えます",
+  "memorizeMaze": "迷路を暗記してください: {seconds} 秒",
+  "@memorizeMaze": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resetShowAgain": "リセット / もう一度表示",
+  "chimpGame": "チンパンジー・テスト",
+  "chimpGameDesc": "隠された数字を順番に記憶してタップします",
+  "livesLabel": "ライフ: {count}",
+  "@livesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "numbersCount": "数字の数: {count}",
+  "@numbersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chimpTestStart": "1をタップして数字を隠し、開始します！",
+  "chimpTestInstructions": "昇順（1、2、3...）に四角をタップしてください",
+  "gameOverChimp": "ゲームオーバー！あなたの最終的な記憶レベルは {level} 個の数字でした。",
+  "@gameOverChimp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  }
 }

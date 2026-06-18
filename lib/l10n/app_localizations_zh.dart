@@ -218,4 +218,86 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get matchRotatedShape => '找到正确匹配的形状！';
+
+  @override
+  String get mazeGame => '霓虹迷宫';
+
+  @override
+  String get mazeGameDesc => '从霓虹网格中找到正确的出口';
+
+  @override
+  String get reachTheExit => '到达出口！';
+
+  @override
+  String get levelComplete => '通关成功！';
+
+  @override
+  String get advancedSettings => '高级设置';
+
+  @override
+  String get themeMode => '主题模式';
+
+  @override
+  String get dark => '深色';
+
+  @override
+  String get light => '白色 / 浅色';
+
+  @override
+  String get fontStyle => '字体样式';
+
+  @override
+  String fontSize(String percent) {
+    return '字体大小: $percent%';
+  }
+
+  @override
+  String get suddenDeath => '突然死亡 (撞墙即死)';
+
+  @override
+  String get suddenDeathDesc => '碰到墙壁返回起点';
+
+  @override
+  String get suddenDeathMessage => '哎呀！碰到墙壁了 - 回到起点！';
+
+  @override
+  String get memorizationMode => '记忆模式';
+
+  @override
+  String get memorizationModeDesc => '倒计时结束后墙壁消失';
+
+  @override
+  String memorizeMaze(int seconds) {
+    return '记住迷宫: $seconds 秒';
+  }
+
+  @override
+  String get resetShowAgain => '重置 / 再次显示';
+
+  @override
+  String get chimpGame => '黑猩猩记忆';
+
+  @override
+  String get chimpGameDesc => '记住并按顺序点击隐藏的数字';
+
+  @override
+  String livesLabel(int count) {
+    return '生命值: $count';
+  }
+
+  @override
+  String numbersCount(int count) {
+    return '数字数量: $count';
+  }
+
+  @override
+  String get chimpTestStart => '点击 1 开始并隐藏数字！';
+
+  @override
+  String get chimpTestInstructions => '按升序（1, 2, 3...）点击方块';
+
+  @override
+  String gameOverChimp(int level) {
+    return '游戏结束！您的最终记忆等级是 $level 个数字。';
+  }
 }

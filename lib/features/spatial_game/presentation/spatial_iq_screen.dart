@@ -120,8 +120,11 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 450),
+          child: Column(
+            children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(l10n.matchRotatedShape, style: Theme.of(context).textTheme.titleMedium),
@@ -138,9 +141,9 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
               child: Container(
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.02),
+                  color: Theme.of(context).brightness == Brightness.light ? Colors.black.withOpacity(0.02) : Colors.white.withOpacity(0.02),
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: Colors.white10),
+                  border: Border.all(color: Theme.of(context).brightness == Brightness.light ? Colors.black12 : Colors.white10),
                 ),
                 child: CustomPaint(
                   painter: BlockPainter(
@@ -179,12 +182,12 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B).withOpacity(0.5),
+                      color: Theme.of(context).brightness == Brightness.light ? Colors.black.withOpacity(0.05) : const Color(0xFF1E293B).withOpacity(0.5),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: submitted 
-                          ? (index == correctIndex ? Colors.green : (isCorrect ? Colors.white10 : Colors.red))
-                          : Colors.white10,
+                          ? (index == correctIndex ? Colors.green : (isCorrect ? (Theme.of(context).brightness == Brightness.light ? Colors.black12 : Colors.white10) : Colors.red))
+                          : (Theme.of(context).brightness == Brightness.light ? Colors.black12 : Colors.white10),
                         width: 2,
                       ),
                     ),
@@ -231,6 +234,8 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
             ),
         ],
       ),
+    ),
+      ),
     );
   }
 
@@ -238,7 +243,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
     final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) => StatefulBuilder(
         builder: (context, setModalState) => Padding(
           padding: const EdgeInsets.all(24.0),
@@ -247,7 +252,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
             children: [
               Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 20),
-              Text('${l10n.gridSize}: $gridSize x $gridSize x $gridSize'),
+              Text('${l10n.gridSize}: $gridSize x $gridSize x $gridSize', style: Theme.of(context).textTheme.bodyLarge),
               Slider(
                 value: gridSize.toDouble(),
                 min: 3,
@@ -260,7 +265,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
                 },
               ),
               const SizedBox(height: 10),
-              Text('${l10n.optionsCount}: $optionsCount'),
+              Text('${l10n.optionsCount}: $optionsCount', style: Theme.of(context).textTheme.bodyLarge),
               Slider(
                 value: optionsCount.toDouble(),
                 min: 3,

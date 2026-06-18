@@ -5,8 +5,11 @@ import '../../color_game/presentation/color_game_screen.dart';
 import '../../sound_game/presentation/sound_game_screen.dart';
 import '../../brain_game/presentation/stroop_game_screen.dart';
 import '../../memory_game/presentation/memory_sequence_screen.dart';
+import '../../memory_game/presentation/chimp_game_screen.dart';
 import '../../spatial_game/presentation/spatial_iq_screen.dart';
+import '../../spatial_game/presentation/maze_game_screen.dart';
 import '../../../core/locale_provider.dart';
+import '../../../core/settings_provider.dart';
 
 class MenuScreen extends ConsumerWidget {
   const MenuScreen({super.key});
@@ -23,6 +26,17 @@ class MenuScreen extends ConsumerWidget {
         elevation: 0,
         actions: [
           Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.settings, color: Color(0xFF38BDF8)),
+              onPressed: () => _showAdvancedSettings(context, ref),
+            ),
+          ),
+          Container(
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.05),
@@ -38,22 +52,23 @@ class MenuScreen extends ConsumerWidget {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: RadialGradient(
-                center: Alignment(-0.5, -0.6),
+                center: const Alignment(-0.5, -0.6),
                 radius: 1.5,
-                colors: [
-                  Color(0xFF0F172A),
-                  Color(0xFF030712),
-                ],
+                colors: Theme.of(context).brightness == Brightness.light
+                    ? [const Color(0xFFF8FAFC), const Color(0xFFE2E8F0)]
+                    : [const Color(0xFF0F172A), const Color(0xFF030712)],
               ),
             ),
           ),
           SafeArea(
             child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
-                child: Column(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 450),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
+                  child: Column(
                   children: [
                     ShaderMask(
                       shaderCallback: (bounds) => const LinearGradient(
@@ -133,6 +148,16 @@ class MenuScreen extends ConsumerWidget {
                           MaterialPageRoute(builder: (_) => const MemorySequenceScreen()),
                         ),
                       ),
+                      _MenuButton(
+                        title: l10n.chimpGame,
+                        subtitle: l10n.chimpGameDesc,
+                        icon: Icons.psychology,
+                        gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const ChimpGameScreen()),
+                        ),
+                      ),
                     ]),
 
                     _CategorySection(title: l10n.spatialGames, children: [
@@ -146,11 +171,22 @@ class MenuScreen extends ConsumerWidget {
                           MaterialPageRoute(builder: (_) => const SpatialIqScreen()),
                         ),
                       ),
+                      _MenuButton(
+                        title: l10n.mazeGame,
+                        subtitle: l10n.mazeGameDesc,
+                        icon: Icons.grid_on_outlined,
+                        gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const MazeGameScreen()),
+                        ),
+                      ),
                     ]),
                   ],
                 ),
               ),
             ),
+          ),
           ),
         ],
       ),
@@ -159,16 +195,18 @@ class MenuScreen extends ConsumerWidget {
 
   void _showLanguageSelector(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final isLight = theme.brightness == Brightness.light;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: theme.scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 12),
-            Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2))),
+            Container(width: 40, height: 4, decoration: BoxDecoration(color: isLight ? Colors.black12 : Colors.white24, borderRadius: BorderRadius.circular(2))),
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Text(l10n.selectLanguage, style: Theme.of(context).textTheme.titleLarge),
@@ -195,6 +233,120 @@ class MenuScreen extends ConsumerWidget {
       ),
     );
   }
+
+  void _showAdvancedSettings(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      builder: (context) => Consumer(
+        builder: (context, ref, child) {
+          final currentSettings = ref.watch(settingsProvider);
+          final isLight = currentSettings.themeMode == ThemeMode.light;
+          final theme = Theme.of(context);
+
+          return Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            ),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(width: 40, height: 4, decoration: BoxDecoration(color: isLight ? Colors.black12 : Colors.white24, borderRadius: BorderRadius.circular(2))),
+                    const SizedBox(height: 16),
+                    Text(l10n.advancedSettings, style: theme.textTheme.titleLarge),
+                    const SizedBox(height: 24),
+                    
+                    // Theme Selector
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(l10n.themeMode, style: theme.textTheme.bodyMedium),
+                        Row(
+                          children: [
+                            ChoiceChip(
+                              label: Text(l10n.dark),
+                              selected: !isLight,
+                              onSelected: (selected) {
+                                if (selected) {
+                                  ref.read(settingsProvider.notifier).setThemeMode(ThemeMode.dark);
+                                }
+                              },
+                            ),
+                            const SizedBox(width: 8),
+                            ChoiceChip(
+                              label: Text(l10n.light),
+                              selected: isLight,
+                              onSelected: (selected) {
+                                if (selected) {
+                                  ref.read(settingsProvider.notifier).setThemeMode(ThemeMode.light);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Font Family Selector
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(l10n.fontStyle, style: theme.textTheme.bodyMedium),
+                        DropdownButton<String>(
+                          value: currentSettings.fontFamily,
+                          dropdownColor: theme.colorScheme.surface,
+                          style: theme.textTheme.bodyMedium,
+                          items: const [
+                            DropdownMenuItem(value: 'Inter', child: Text("Inter")),
+                            DropdownMenuItem(value: 'Roboto', child: Text("Roboto")),
+                            DropdownMenuItem(value: 'Poppins', child: Text("Poppins")),
+                            DropdownMenuItem(value: 'Orbitron', child: Text("Orbitron")),
+                          ],
+                          onChanged: (val) {
+                            if (val != null) {
+                              ref.read(settingsProvider.notifier).setFontFamily(val);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Font Size Multiplier
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(l10n.fontSize((currentSettings.fontSizeMultiplier * 100).toInt().toString()), style: theme.textTheme.bodyMedium),
+                        Slider(
+                          value: currentSettings.fontSizeMultiplier,
+                          min: 0.8,
+                          max: 1.4,
+                          divisions: 6,
+                          activeColor: theme.colorScheme.primary,
+                          onChanged: (val) {
+                            ref.read(settingsProvider.notifier).setFontSize(val);
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
 
 class _CategorySection extends StatelessWidget {
@@ -204,6 +356,7 @@ class _CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -211,9 +364,10 @@ class _CategorySection extends StatelessWidget {
           padding: const EdgeInsets.only(left: 4, bottom: 12, top: 8),
           child: Text(
             title,
-            style: TextStyle(
-              color: const Color(0xFF38BDF8).withOpacity(0.7),
-              fontSize: 12,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: isLight
+                  ? const Color(0xFF0284C7).withOpacity(0.8)
+                  : const Color(0xFF38BDF8).withOpacity(0.7),
               fontWeight: FontWeight.bold,
               letterSpacing: 1.5,
             ),
@@ -234,10 +388,18 @@ class _LangTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
+    final themeColor = isLight ? const Color(0xFF0284C7) : const Color(0xFF38BDF8);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 32),
-      title: Text(label, style: TextStyle(color: isSelected ? const Color(0xFF38BDF8) : Colors.white70, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)),
-      trailing: isSelected ? const Icon(Icons.check_circle, color: Color(0xFF38BDF8)) : null,
+      title: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: isSelected ? themeColor : (isLight ? Colors.black87 : Colors.white70),
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+      trailing: isSelected ? Icon(Icons.check_circle, color: themeColor) : null,
       onTap: onTap,
     );
   }
@@ -267,6 +429,8 @@ class _MenuButtonState extends State<_MenuButton> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isLight = theme.brightness == Brightness.light;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -278,7 +442,7 @@ class _MenuButtonState extends State<_MenuButton> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: widget.gradient[0].withOpacity(0.15),
+                color: widget.gradient[0].withOpacity(isLight ? 0.08 : 0.15),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -287,7 +451,7 @@ class _MenuButtonState extends State<_MenuButton> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Material(
-              color: const Color(0xFF1E293B).withOpacity(0.6),
+              color: isLight ? Colors.white.withOpacity(0.9) : const Color(0xFF1E293B).withOpacity(0.6),
               child: InkWell(
                 onTap: widget.onTap,
                 child: Padding(
@@ -313,16 +477,21 @@ class _MenuButtonState extends State<_MenuButton> {
                           children: [
                             Text(
                               widget.title,
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: isLight ? const Color(0xFF0F172A) : Colors.white,
+                              ),
                             ),
                             Text(
                               widget.subtitle,
-                              style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.5)),
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: isLight ? const Color(0xFF475569) : Colors.white.withOpacity(0.5),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Icon(Icons.chevron_right, color: Colors.white.withOpacity(0.2), size: 20),
+                      Icon(Icons.chevron_right, color: isLight ? Colors.black26 : Colors.white.withOpacity(0.2), size: 20),
                     ],
                   ),
                 ),

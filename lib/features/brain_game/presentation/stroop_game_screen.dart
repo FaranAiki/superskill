@@ -113,18 +113,21 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 l10n.timeLabel(timeLeft),
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.orangeAccent),
               ),
             ),
           )
         ],
       ),
-      body: Column(
-        children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 450),
+          child: Column(
+            children: [
           const SizedBox(height: 20),
           LinearProgressIndicator(
             value: timeLeft / 30,
-            backgroundColor: Colors.white10,
+            backgroundColor: Theme.of(context).brightness == Brightness.light ? Colors.black12 : Colors.white10,
             color: timeLeft < 10 ? Colors.red : Colors.green,
           ),
           Expanded(
@@ -139,13 +142,12 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   decoration: BoxDecoration(
-                    color: Colors.white10,
+                    color: Theme.of(context).brightness == Brightness.light ? Colors.black.withOpacity(0.05) : Colors.white10,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     taskIsPickColor ? l10n.pickInkColor : l10n.pickWordMeaning,
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       letterSpacing: 2,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
@@ -155,12 +157,12 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
                 const SizedBox(height: 40),
                 Text(
                   displayWord['name'],
-                  style: TextStyle(
-                    fontSize: 72,
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontSize: 72 * (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 16) / 16,
                     fontWeight: FontWeight.w900,
                     color: displayColor['color'],
                     shadows: [
-                      Shadow(color: Colors.black.withOpacity(0.5), blurRadius: 10, offset: const Offset(2, 2))
+                      Shadow(color: Colors.black.withOpacity(0.3), blurRadius: 10, offset: const Offset(2, 2))
                     ],
                   ),
                 ),
@@ -175,7 +177,7 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
               alignment: WrapAlignment.center,
               children: colorData.map((data) {
                 return SizedBox(
-                  width: (MediaQuery.of(context).size.width - 72) / 3,
+                  width: (min(MediaQuery.of(context).size.width, 450.0) - 72) / 3,
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () => _checkAnswer(data),
@@ -186,14 +188,16 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
                     ),
                     child: Text(
                       data['name'],
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                 );
               }).toList(),
             ),
           ),
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

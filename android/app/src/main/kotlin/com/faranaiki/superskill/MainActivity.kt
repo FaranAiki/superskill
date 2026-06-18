@@ -1,4 +1,4 @@
-package com.example.superskill
+package com.faranaiki.superskill
 
 import io.flutter.embedding.android.FlutterActivity
 

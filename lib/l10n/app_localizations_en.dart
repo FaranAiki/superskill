@@ -218,4 +218,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get matchRotatedShape => 'Find the correct matching shape!';
+
+  @override
+  String get mazeGame => 'Neon Maze';
+
+  @override
+  String get mazeGameDesc => 'Find the correct path out of the neon grid';
+
+  @override
+  String get reachTheExit => 'Reach the exit!';
+
+  @override
+  String get levelComplete => 'Level Complete!';
+
+  @override
+  String get advancedSettings => 'Advanced Settings';
+
+  @override
+  String get themeMode => 'Theme Mode';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'White / Light';
+
+  @override
+  String get fontStyle => 'Font Style';
+
+  @override
+  String fontSize(String percent) {
+    return 'Font Size: $percent%';
+  }
+
+  @override
+  String get suddenDeath => 'Sudden Death (Hit = Die)';
+
+  @override
+  String get suddenDeathDesc => 'Return to start position if you hit a wall';
+
+  @override
+  String get suddenDeathMessage =>
+      'Bummer! Sudden Death Activated - Back to Start!';
+
+  @override
+  String get memorizationMode => 'Memorization Mode';
+
+  @override
+  String get memorizationModeDesc => 'Walls disappear after countdown';
+
+  @override
+  String memorizeMaze(int seconds) {
+    return 'Memorize the Maze: $seconds s';
+  }
+
+  @override
+  String get resetShowAgain => 'Reset / Show Again';
+
+  @override
+  String get chimpGame => 'Chimp Memory';
+
+  @override
+  String get chimpGameDesc => 'Remember and tap hidden numbers in order';
+
+  @override
+  String livesLabel(int count) {
+    return 'Lives: $count';
+  }
+
+  @override
+  String numbersCount(int count) {
+    return 'Numbers: $count';
+  }
+
+  @override
+  String get chimpTestStart => 'Tap 1 to begin and hide numbers!';
+
+  @override
+  String get chimpTestInstructions =>
+      'Tap the squares in ascending order (1, 2, 3...)';
+
+  @override
+  String gameOverChimp(int level) {
+    return 'Game Over! Your final memory level was $level numbers.';
+  }
 }

@@ -83,7 +83,6 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
         : _cmykToColor(c, m, y, k);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF030712),
       appBar: AppBar(
         title: Text(widget.mode == ColorGameMode.rgb ? l10n.tebakHexRgb : l10n.tebakHexCmyk),
         backgroundColor: Colors.transparent,
@@ -127,9 +126,9 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E293B).withOpacity(0.5),
+                    color: Theme.of(context).brightness == Brightness.light ? Colors.black.withOpacity(0.05) : const Color(0xFF1E293B).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                    border: Border.all(color: Theme.of(context).brightness == Brightness.light ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.1)),
                   ),
                   child: Column(
                     children: [
@@ -188,7 +187,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
                     ),
                     child: Text(
                       submitted ? l10n.playAgain : l10n.checkScore,
-                      style: const TextStyle(fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w800, letterSpacing: 1.5),
                     ),
                   ),
                 ),
@@ -204,7 +203,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
     final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => StatefulBuilder(
         builder: (context, setModalState) => Padding(
@@ -252,7 +251,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style: TextStyle(color: Colors.white.withOpacity(0.7), fontWeight: FontWeight.bold)),
+              Text(label, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.7), fontWeight: FontWeight.bold)),
               InkWell(
                 onTap: submitted ? null : () => _showManualInput(label, value, isCmyk, onChanged),
                 child: Container(
@@ -299,16 +298,16 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
         title: Text(l10n.inputHexFor(label)),
         content: TextField(
           controller: controller,
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
+          style: Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
             hintText: l10n.hexHint,
             prefixText: '0x ',
-            prefixStyle: const TextStyle(color: Color(0xFF38BDF8)),
+            prefixStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
             border: const OutlineInputBorder(),
           ),
           maxLength: 2,
@@ -324,7 +323,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
               _processHexInput(controller.text, isCmyk, onChanged);
               Navigator.pop(context);
             },
-            child: Text(l10n.ok, style: const TextStyle(color: Color(0xFF38BDF8))),
+            child: Text(l10n.ok, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
           ),
         ],
       ),
@@ -358,18 +357,19 @@ class _ColorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
     return Column(
       children: [
-        Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+        Text(label, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text(subLabel, style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12)),
+        Text(subLabel, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.6))),
         const SizedBox(height: 12),
         Container(
           height: 140,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.1), width: 2),
+            border: Border.all(color: isLight ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.1), width: 2),
             boxShadow: [
               BoxShadow(
                 color: color.withOpacity(0.4),

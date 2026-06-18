@@ -69,97 +69,101 @@ class _SoundGameScreenState extends State<SoundGameScreen> {
       appBar: AppBar(
         title: Text(l10n.perfectPitchTrainer),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              l10n.listenAndGuess,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 40),
-            GestureDetector(
-              onTap: isPlaying ? null : _playTargetNote,
-              child: Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: isPlaying 
-                    ? Theme.of(context).colorScheme.primaryContainer
-                    : Theme.of(context).colorScheme.primary,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                      blurRadius: 20,
-                      spreadRadius: 5,
-                    )
-                  ],
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 450),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  l10n.listenAndGuess,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-                child: Icon(
-                  isPlaying ? Icons.volume_up : Icons.play_arrow,
-                  size: 64,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-              ),
-            ),
-            const SizedBox(height: 48),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              alignment: WrapAlignment.center,
-              children: notes.map((note) {
-                final isSelected = selectedNote == note;
-                Color? btnColor;
-                if (isSelected) {
-                  btnColor = isCorrect! ? Colors.green : Colors.red;
-                } else if (isCorrect != null && note == targetNote) {
-                  btnColor = Colors.green.withOpacity(0.5);
-                }
-
-                return SizedBox(
-                  width: 70,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: () => _checkAnswer(note),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      backgroundColor: btnColor,
-                      foregroundColor: btnColor != null ? Colors.white : null,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                const SizedBox(height: 40),
+                GestureDetector(
+                  onTap: isPlaying ? null : _playTargetNote,
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: isPlaying 
+                        ? Theme.of(context).colorScheme.primaryContainer
+                        : Theme.of(context).colorScheme.primary,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        )
+                      ],
                     ),
-                    child: Text(
-                      note,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    child: Icon(
+                      isPlaying ? Icons.volume_up : Icons.play_arrow,
+                      size: 64,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
-                );
-              }).toList(),
+                ),
+                const SizedBox(height: 48),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  alignment: WrapAlignment.center,
+                  children: notes.map((note) {
+                    final isSelected = selectedNote == note;
+                    Color? btnColor;
+                    if (isSelected) {
+                      btnColor = isCorrect! ? Colors.green : Colors.red;
+                    } else if (isCorrect != null && note == targetNote) {
+                      btnColor = Colors.green.withOpacity(0.5);
+                    }
+
+                    return SizedBox(
+                      width: 70,
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: () => _checkAnswer(note),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          backgroundColor: btnColor,
+                          foregroundColor: btnColor != null ? Colors.white : null,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          note,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 48),
+                if (isCorrect != null) ...[
+                  Text(
+                    isCorrect! ? l10n.correct : l10n.wrongNote(targetNote),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: isCorrect! ? Colors.green : Colors.red,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton.icon(
+                    onPressed: _generateNewRound,
+                    icon: const Icon(Icons.refresh),
+                    label: Text(l10n.nextNote),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(200, 50),
+                    ),
+                  ),
+                ],
+              ],
             ),
-            const SizedBox(height: 48),
-            if (isCorrect != null) ...[
-              Text(
-                isCorrect! ? l10n.correct : l10n.wrongNote(targetNote),
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: isCorrect! ? Colors.green : Colors.red,
-                ),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton.icon(
-                onPressed: _generateNewRound,
-                icon: const Icon(Icons.refresh),
-                label: Text(l10n.nextNote),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(200, 50),
-                ),
-              ),
-            ],
-          ],
+          ),
         ),
       ),
     );

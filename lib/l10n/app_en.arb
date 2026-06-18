@@ -100,5 +100,64 @@
   "spatialIqDesc": "Train mental rotation and 3D space cognition",
   "gridSize": "Grid Size",
   "optionsCount": "Options Count",
-  "matchRotatedShape": "Find the correct matching shape!"
+  "matchRotatedShape": "Find the correct matching shape!",
+  "mazeGame": "Neon Maze",
+  "mazeGameDesc": "Find the correct path out of the neon grid",
+  "reachTheExit": "Reach the exit!",
+  "levelComplete": "Level Complete!",
+  "advancedSettings": "Advanced Settings",
+  "themeMode": "Theme Mode",
+  "dark": "Dark",
+  "light": "White / Light",
+  "fontStyle": "Font Style",
+  "fontSize": "Font Size: {percent}%",
+  "@fontSize": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "suddenDeath": "Sudden Death (Hit = Die)",
+  "suddenDeathDesc": "Return to start position if you hit a wall",
+  "suddenDeathMessage": "Bummer! Sudden Death Activated - Back to Start!",
+  "memorizationMode": "Memorization Mode",
+  "memorizationModeDesc": "Walls disappear after countdown",
+  "memorizeMaze": "Memorize the Maze: {seconds} s",
+  "@memorizeMaze": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resetShowAgain": "Reset / Show Again",
+  "chimpGame": "Chimp Memory",
+  "chimpGameDesc": "Remember and tap hidden numbers in order",
+  "livesLabel": "Lives: {count}",
+  "@livesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "numbersCount": "Numbers: {count}",
+  "@numbersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chimpTestStart": "Tap 1 to begin and hide numbers!",
+  "chimpTestInstructions": "Tap the squares in ascending order (1, 2, 3...)",
+  "gameOverChimp": "Game Over! Your final memory level was {level} numbers.",
+  "@gameOverChimp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  }
 }

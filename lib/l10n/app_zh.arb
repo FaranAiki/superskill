@@ -100,5 +100,64 @@
   "spatialIqDesc": "训练心理旋转和3D空间认知",
   "gridSize": "网格大小",
   "optionsCount": "选项数量",
-  "matchRotatedShape": "找到正确匹配的形状！"
+  "matchRotatedShape": "找到正确匹配的形状！",
+  "mazeGame": "霓虹迷宫",
+  "mazeGameDesc": "从霓虹网格中找到正确的出口",
+  "reachTheExit": "到达出口！",
+  "levelComplete": "通关成功！",
+  "advancedSettings": "高级设置",
+  "themeMode": "主题模式",
+  "dark": "深色",
+  "light": "白色 / 浅色",
+  "fontStyle": "字体样式",
+  "fontSize": "字体大小: {percent}%",
+  "@fontSize": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "suddenDeath": "突然死亡 (撞墙即死)",
+  "suddenDeathDesc": "碰到墙壁返回起点",
+  "suddenDeathMessage": "哎呀！碰到墙壁了 - 回到起点！",
+  "memorizationMode": "记忆模式",
+  "memorizationModeDesc": "倒计时结束后墙壁消失",
+  "memorizeMaze": "记住迷宫: {seconds} 秒",
+  "@memorizeMaze": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resetShowAgain": "重置 / 再次显示",
+  "chimpGame": "黑猩猩记忆",
+  "chimpGameDesc": "记住并按顺序点击隐藏的数字",
+  "livesLabel": "生命值: {count}",
+  "@livesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "numbersCount": "数字数量: {count}",
+  "@numbersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chimpTestStart": "点击 1 开始并隐藏数字！",
+  "chimpTestInstructions": "按升序（1, 2, 3...）点击方块",
+  "gameOverChimp": "游戏结束！您的最终记忆等级是 {level} 个数字。",
+  "@gameOverChimp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  }
 }

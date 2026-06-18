@@ -100,5 +100,64 @@
   "spatialIqDesc": "Latih rotasi mental dan kognisi ruang 3D",
   "gridSize": "Ukuran Grid",
   "optionsCount": "Jumlah Opsi",
-  "matchRotatedShape": "Temukan bentuk yang cocok!"
+  "matchRotatedShape": "Temukan bentuk yang cocok!",
+  "mazeGame": "Labirin Neon",
+  "mazeGameDesc": "Temukan jalan keluar dari kisi-kisi neon",
+  "reachTheExit": "Sampai ke pintu keluar!",
+  "levelComplete": "Level Selesai!",
+  "advancedSettings": "Pengaturan Lanjutan",
+  "themeMode": "Mode Tema",
+  "dark": "Gelap",
+  "light": "Terang / Putih",
+  "fontStyle": "Gaya Huruf",
+  "fontSize": "Ukuran Huruf: {percent}%",
+  "@fontSize": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "suddenDeath": "Mati Mendadak (Nabrak = Mati)",
+  "suddenDeathDesc": "Kembali ke posisi awal jika menyentuh dinding",
+  "suddenDeathMessage": "Yah! Kena Dinding - Balik ke Awal!",
+  "memorizationMode": "Mode Hafalan",
+  "memorizationModeDesc": "Dinding hilang setelah hitung mundur",
+  "memorizeMaze": "Hafalkan Labirin: {seconds} s",
+  "@memorizeMaze": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resetShowAgain": "Ulang / Tampilkan Lagi",
+  "chimpGame": "Memori Simpanse",
+  "chimpGameDesc": "Ingat dan ketuk angka tersembunyi berurutan",
+  "livesLabel": "Nyawa: {count}",
+  "@livesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "numbersCount": "Jumlah Angka: {count}",
+  "@numbersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chimpTestStart": "Ketuk 1 untuk memulai dan menyembunyikan angka!",
+  "chimpTestInstructions": "Ketuk kotak secara berurutan (1, 2, 3...)",
+  "gameOverChimp": "Permainan Selesai! Tingkat memori akhir Anda adalah {level} angka.",
+  "@gameOverChimp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  }
 }

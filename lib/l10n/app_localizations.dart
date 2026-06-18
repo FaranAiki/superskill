@@ -503,6 +503,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find the correct matching shape!'**
   String get matchRotatedShape;
+
+  /// No description provided for @mazeGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Neon Maze'**
+  String get mazeGame;
+
+  /// No description provided for @mazeGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the correct path out of the neon grid'**
+  String get mazeGameDesc;
+
+  /// No description provided for @reachTheExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach the exit!'**
+  String get reachTheExit;
+
+  /// No description provided for @levelComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Level Complete!'**
+  String get levelComplete;
+
+  /// No description provided for @advancedSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced Settings'**
+  String get advancedSettings;
+
+  /// No description provided for @themeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Mode'**
+  String get themeMode;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'White / Light'**
+  String get light;
+
+  /// No description provided for @fontStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Font Style'**
+  String get fontStyle;
+
+  /// No description provided for @fontSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Font Size: {percent}%'**
+  String fontSize(String percent);
+
+  /// No description provided for @suddenDeath.
+  ///
+  /// In en, this message translates to:
+  /// **'Sudden Death (Hit = Die)'**
+  String get suddenDeath;
+
+  /// No description provided for @suddenDeathDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to start position if you hit a wall'**
+  String get suddenDeathDesc;
+
+  /// No description provided for @suddenDeathMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Bummer! Sudden Death Activated - Back to Start!'**
+  String get suddenDeathMessage;
+
+  /// No description provided for @memorizationMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Memorization Mode'**
+  String get memorizationMode;
+
+  /// No description provided for @memorizationModeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Walls disappear after countdown'**
+  String get memorizationModeDesc;
+
+  /// No description provided for @memorizeMaze.
+  ///
+  /// In en, this message translates to:
+  /// **'Memorize the Maze: {seconds} s'**
+  String memorizeMaze(int seconds);
+
+  /// No description provided for @resetShowAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset / Show Again'**
+  String get resetShowAgain;
+
+  /// No description provided for @chimpGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Chimp Memory'**
+  String get chimpGame;
+
+  /// No description provided for @chimpGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember and tap hidden numbers in order'**
+  String get chimpGameDesc;
+
+  /// No description provided for @livesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lives: {count}'**
+  String livesLabel(int count);
+
+  /// No description provided for @numbersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Numbers: {count}'**
+  String numbersCount(int count);
+
+  /// No description provided for @chimpTestStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap 1 to begin and hide numbers!'**
+  String get chimpTestStart;
+
+  /// No description provided for @chimpTestInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the squares in ascending order (1, 2, 3...)'**
+  String get chimpTestInstructions;
+
+  /// No description provided for @gameOverChimp.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over! Your final memory level was {level} numbers.'**
+  String gameOverChimp(int level);
 }
 
 class _AppLocalizationsDelegate
