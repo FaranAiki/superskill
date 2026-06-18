@@ -300,4 +300,142 @@ class AppLocalizationsJa extends AppLocalizations {
   String gameOverChimp(int level) {
     return 'ゲームオーバー！あなたの最終的な記憶レベルは $level 個の数字でした。';
   }
+
+  @override
+  String get blindMode => 'ブラインドモード';
+
+  @override
+  String get blindModeDesc => '1をタップした後、タイルの枠線を隠します';
+
+  @override
+  String get startingNumbers => '開始の数字';
+
+  @override
+  String get reflexGame => 'リフレックス・タップ';
+
+  @override
+  String get reflexGameDesc => '光るタイルをできるだけ早くタップしてください';
+
+  @override
+  String gameOverReflex(int score) {
+    return 'ゲーム終了！あなたの最終スコアは $score でした。';
+  }
+
+  @override
+  String get operatorGame => '演算子ラッシュ';
+
+  @override
+  String get operatorGameDesc => '欠けている数学演算子を素早く見つけてください';
+
+  @override
+  String gameOverOperator(int score) {
+    return 'ゲーム終了！あなたの最終スコアは $score でした。';
+  }
+
+  @override
+  String get numericalGames => '計算ゲーム';
+
+  @override
+  String get game24 => 'テンパズル (24ゲーム)';
+
+  @override
+  String get game24Desc => 'カードを計算して目標値を作ることが可能か判断する';
+
+  @override
+  String get speedMath => 'フラッシュ暗算';
+
+  @override
+  String get speedMathDesc => 'フラッシュ表示される数字と記号を暗算する';
+
+  @override
+  String get hideOutlines => '枠線を非表示';
+
+  @override
+  String get hideOutlinesDesc => '数字が隠された後、グリッドの枠線をすべて非表示にする';
+
+  @override
+  String get game24Yes => 'できる (はい)';
+
+  @override
+  String get game24No => 'できない (いいえ)';
+
+  @override
+  String game24CanBeMade(int target) {
+    return '$target を作ることができますか？';
+  }
+
+  @override
+  String game24CorrectSolvable(String solution) {
+    return '正解！作り方:\n$solution';
+  }
+
+  @override
+  String get game24CorrectUnsolvable => '正解！作ることは不可能です。';
+
+  @override
+  String game24WrongSolvable(String solution) {
+    return '不正解！作ることができます。作り方:\n$solution';
+  }
+
+  @override
+  String get game24WrongUnsolvable => '不正解！作ることは不可能です。';
+
+  @override
+  String get diceGame => '空間サイコロ';
+
+  @override
+  String get diceGameDesc => '向かい合う面の和が 7 になる正しいサイコロを見つけよう';
+
+  @override
+  String get diceGameInstruction =>
+      'サイコロを回転させてすべての面を確認します。向かい合う面の和は 7 になる必要があります！';
+
+  @override
+  String get all => 'すべて';
+
+  @override
+  String get scoreboard => 'スコアボード';
+
+  @override
+  String highScore(int score) {
+    return 'ハイスコア: $score';
+  }
+
+  @override
+  String get noScoresYet => 'まだスコアが記録されていません！';
+
+  @override
+  String get allowRotation => '回転を許可';
+
+  @override
+  String get allowRotationDesc => '形状の回転を防止するために無効にする';
+
+  @override
+  String get schulteGame => 'シュルテフォーカス';
+
+  @override
+  String get schulteGameDesc => '集中力を鍛えるため、できるだけ早く数字を順番にタップしてください';
+
+  @override
+  String get schulteOrder => '数字の順序';
+
+  @override
+  String get ascending => '昇順 (1,2,3...)';
+
+  @override
+  String get descending => '降順 (9,8,7...)';
+
+  @override
+  String get gridColorMode => 'カラーモード';
+
+  @override
+  String get monochrome => 'モノクロ';
+
+  @override
+  String get rainbow => 'レインボー';
+
+  @override
+  String tapNextNumber(int number) {
+    return '次をタップ: $number';
+  }
 }

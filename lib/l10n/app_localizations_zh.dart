@@ -300,4 +300,141 @@ class AppLocalizationsZh extends AppLocalizations {
   String gameOverChimp(int level) {
     return '游戏结束！您的最终记忆等级是 $level 个数字。';
   }
+
+  @override
+  String get blindMode => '盲目模式';
+
+  @override
+  String get blindModeDesc => '点击 1 后隐藏方块边框';
+
+  @override
+  String get startingNumbers => '起始数字';
+
+  @override
+  String get reflexGame => '反射点击';
+
+  @override
+  String get reflexGameDesc => '以最快的速度点击发光的方块';
+
+  @override
+  String gameOverReflex(int score) {
+    return '游戏结束！您的最终得分是 $score。';
+  }
+
+  @override
+  String get operatorGame => '运算符冲刺';
+
+  @override
+  String get operatorGameDesc => '快速找到缺失的数学运算符';
+
+  @override
+  String gameOverOperator(int score) {
+    return '游戏结束！您的最终得分是 $score。';
+  }
+
+  @override
+  String get numericalGames => '数字游戏';
+
+  @override
+  String get game24 => '24点游戏';
+
+  @override
+  String get game24Desc => '判断卡片组合是否可以拼出目标值';
+
+  @override
+  String get speedMath => '闪电心算';
+
+  @override
+  String get speedMathDesc => '快速计算闪烁出现的数字和运算符';
+
+  @override
+  String get hideOutlines => '隐藏边框';
+
+  @override
+  String get hideOutlinesDesc => '数字隐藏后隐藏全部方块边框';
+
+  @override
+  String get game24Yes => '可以';
+
+  @override
+  String get game24No => '不可以';
+
+  @override
+  String game24CanBeMade(int target) {
+    return '你能拼出 $target 吗？';
+  }
+
+  @override
+  String game24CorrectSolvable(String solution) {
+    return '回答正确！解法:\n$solution';
+  }
+
+  @override
+  String get game24CorrectUnsolvable => '回答正确！此题无解。';
+
+  @override
+  String game24WrongSolvable(String solution) {
+    return '回答错误！其实有解。解法:\n$solution';
+  }
+
+  @override
+  String get game24WrongUnsolvable => '回答错误！此题确实无解。';
+
+  @override
+  String get diceGame => '空间骰子';
+
+  @override
+  String get diceGameDesc => '找出相对面之和为 7 的有效骰子';
+
+  @override
+  String get diceGameInstruction => '旋转骰子以检查所有面。相对的面相加必须等于 7！';
+
+  @override
+  String get all => '全部';
+
+  @override
+  String get scoreboard => '计分板';
+
+  @override
+  String highScore(int score) {
+    return '最高分: $score';
+  }
+
+  @override
+  String get noScoresYet => '暂无记录！';
+
+  @override
+  String get allowRotation => '允许旋转';
+
+  @override
+  String get allowRotationDesc => '关闭以防止旋转形状';
+
+  @override
+  String get schulteGame => '舒尔特专注力';
+
+  @override
+  String get schulteGameDesc => '尽快按顺序点击数字以训练注意力';
+
+  @override
+  String get schulteOrder => '数字顺序';
+
+  @override
+  String get ascending => '升序';
+
+  @override
+  String get descending => '降序';
+
+  @override
+  String get gridColorMode => '色彩模式';
+
+  @override
+  String get monochrome => '单色';
+
+  @override
+  String get rainbow => '彩虹色';
+
+  @override
+  String tapNextNumber(int number) {
+    return '请点击: $number';
+  }
 }

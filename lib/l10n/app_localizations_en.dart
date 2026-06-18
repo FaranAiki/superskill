@@ -302,4 +302,145 @@ class AppLocalizationsEn extends AppLocalizations {
   String gameOverChimp(int level) {
     return 'Game Over! Your final memory level was $level numbers.';
   }
+
+  @override
+  String get blindMode => 'Blind Mode';
+
+  @override
+  String get blindModeDesc => 'Hide tile outlines after tapping 1';
+
+  @override
+  String get startingNumbers => 'Starting Numbers';
+
+  @override
+  String get reflexGame => 'Reflex Tap';
+
+  @override
+  String get reflexGameDesc => 'Tap the glowing tiles as fast as you can';
+
+  @override
+  String gameOverReflex(int score) {
+    return 'Game Over! Your final score was $score.';
+  }
+
+  @override
+  String get operatorGame => 'Operator Rush';
+
+  @override
+  String get operatorGameDesc => 'Find the missing math operators quickly';
+
+  @override
+  String gameOverOperator(int score) {
+    return 'Game Over! Your final score was $score.';
+  }
+
+  @override
+  String get numericalGames => 'Numerical Games';
+
+  @override
+  String get game24 => 'Game 24';
+
+  @override
+  String get game24Desc => 'Decide if cards can be combined to reach target';
+
+  @override
+  String get speedMath => 'Speed Math';
+
+  @override
+  String get speedMathDesc => 'Calculate fast flashing numbers & operators';
+
+  @override
+  String get hideOutlines => 'Hide Outlines';
+
+  @override
+  String get hideOutlinesDesc =>
+      'Hide all grid outlines once numbers disappear';
+
+  @override
+  String get game24Yes => 'Yes';
+
+  @override
+  String get game24No => 'No';
+
+  @override
+  String game24CanBeMade(int target) {
+    return 'Can you make $target?';
+  }
+
+  @override
+  String game24CorrectSolvable(String solution) {
+    return 'Correct! Here is a solution:\n$solution';
+  }
+
+  @override
+  String get game24CorrectUnsolvable => 'Correct! No solution exists.';
+
+  @override
+  String game24WrongSolvable(String solution) {
+    return 'Wrong! It is possible. Solution:\n$solution';
+  }
+
+  @override
+  String get game24WrongUnsolvable => 'Wrong! No mathematical solution exists.';
+
+  @override
+  String get diceGame => 'Spatial Dice';
+
+  @override
+  String get diceGameDesc =>
+      'Find the valid dice where opposite faces sum to 7';
+
+  @override
+  String get diceGameInstruction =>
+      'Rotate the dice to inspect all faces. Opposite faces must sum to 7!';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get scoreboard => 'Scoreboard';
+
+  @override
+  String highScore(int score) {
+    return 'High Score: $score';
+  }
+
+  @override
+  String get noScoresYet => 'No scores recorded yet!';
+
+  @override
+  String get allowRotation => 'Allow Rotation';
+
+  @override
+  String get allowRotationDesc => 'Disable to prevent rotating the shapes';
+
+  @override
+  String get schulteGame => 'Schulte Focus';
+
+  @override
+  String get schulteGameDesc =>
+      'Tap numbers in order as fast as possible to train focus';
+
+  @override
+  String get schulteOrder => 'Number Order';
+
+  @override
+  String get ascending => 'Ascending';
+
+  @override
+  String get descending => 'Descending';
+
+  @override
+  String get gridColorMode => 'Color Mode';
+
+  @override
+  String get monochrome => 'Monochrome';
+
+  @override
+  String get rainbow => 'Rainbow';
+
+  @override
+  String tapNextNumber(int number) {
+    return 'Tap next: $number';
+  }
 }

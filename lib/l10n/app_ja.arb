@@ -159,5 +159,95 @@
         "type": "int"
       }
     }
+  },
+  "blindMode": "ブラインドモード",
+  "blindModeDesc": "1をタップした後、タイルの枠線を隠します",
+  "startingNumbers": "開始の数字",
+  "reflexGame": "リフレックス・タップ",
+  "reflexGameDesc": "光るタイルをできるだけ早くタップしてください",
+  "gameOverReflex": "ゲーム終了！あなたの最終スコアは {score} でした。",
+  "@gameOverReflex": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "operatorGame": "演算子ラッシュ",
+  "operatorGameDesc": "欠けている数学演算子を素早く見つけてください",
+  "gameOverOperator": "ゲーム終了！あなたの最終スコアは {score} でした。",
+  "@gameOverOperator": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "numericalGames": "計算ゲーム",
+  "game24": "テンパズル (24ゲーム)",
+  "game24Desc": "カードを計算して目標値を作ることが可能か判断する",
+  "speedMath": "フラッシュ暗算",
+  "speedMathDesc": "フラッシュ表示される数字と記号を暗算する",
+  "hideOutlines": "枠線を非表示",
+  "hideOutlinesDesc": "数字が隠された後、グリッドの枠線をすべて非表示にする",
+  "game24Yes": "できる (はい)",
+  "game24No": "できない (いいえ)",
+  "game24CanBeMade": "{target} を作ることができますか？",
+  "@game24CanBeMade": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "game24CorrectSolvable": "正解！作り方:\n{solution}",
+  "@game24CorrectSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24CorrectUnsolvable": "正解！作ることは不可能です。",
+  "game24WrongSolvable": "不正解！作ることができます。作り方:\n{solution}",
+  "@game24WrongSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24WrongUnsolvable": "不正解！作ることは不可能です。",
+  "diceGame": "空間サイコロ",
+  "diceGameDesc": "向かい合う面の和が 7 になる正しいサイコロを見つけよう",
+  "diceGameInstruction": "サイコロを回転させてすべての面を確認します。向かい合う面の和は 7 になる必要があります！",
+  "all": "すべて",
+  "scoreboard": "スコアボード",
+  "highScore": "ハイスコア: {score}",
+  "@highScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "noScoresYet": "まだスコアが記録されていません！",
+  "allowRotation": "回転を許可",
+  "allowRotationDesc": "形状の回転を防止するために無効にする",
+  "schulteGame": "シュルテフォーカス",
+  "schulteGameDesc": "集中力を鍛えるため、できるだけ早く数字を順番にタップしてください",
+  "schulteOrder": "数字の順序",
+  "ascending": "昇順 (1,2,3...)",
+  "descending": "降順 (9,8,7...)",
+  "gridColorMode": "カラーモード",
+  "monochrome": "モノクロ",
+  "rainbow": "レインボー",
+  "tapNextNumber": "次をタップ: {number}",
+  "@tapNextNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
   }
 }

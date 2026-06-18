@@ -302,4 +302,149 @@ class AppLocalizationsId extends AppLocalizations {
   String gameOverChimp(int level) {
     return 'Permainan Selesai! Tingkat memori akhir Anda adalah $level angka.';
   }
+
+  @override
+  String get blindMode => 'Mode Buta';
+
+  @override
+  String get blindModeDesc => 'Sembunyikan bingkai kotak setelah mengetuk 1';
+
+  @override
+  String get startingNumbers => 'Angka Awal';
+
+  @override
+  String get reflexGame => 'Ketuk Refleks';
+
+  @override
+  String get reflexGameDesc => 'Ketuk kotak menyala secepat yang Anda bisa';
+
+  @override
+  String gameOverReflex(int score) {
+    return 'Permainan Selesai! Skor akhir Anda adalah $score.';
+  }
+
+  @override
+  String get operatorGame => 'Serbuan Operator';
+
+  @override
+  String get operatorGameDesc =>
+      'Temukan operator matematika yang hilang secara cepat';
+
+  @override
+  String gameOverOperator(int score) {
+    return 'Permainan Selesai! Skor akhir Anda adalah $score.';
+  }
+
+  @override
+  String get numericalGames => 'Game Numerik';
+
+  @override
+  String get game24 => 'Game 24';
+
+  @override
+  String get game24Desc =>
+      'Tentukan apakah kartu bisa digabung untuk mencapai target';
+
+  @override
+  String get speedMath => 'Matematika Cepat';
+
+  @override
+  String get speedMathDesc =>
+      'Hitung deretan angka & operator yang berkedip cepat';
+
+  @override
+  String get hideOutlines => 'Sembunyikan Bingkai';
+
+  @override
+  String get hideOutlinesDesc =>
+      'Sembunyikan bingkai kotak setelah angka menghilang';
+
+  @override
+  String get game24Yes => 'Ya (Bisa)';
+
+  @override
+  String get game24No => 'Tidak Bisa';
+
+  @override
+  String game24CanBeMade(int target) {
+    return 'Apakah bisa dibuat $target?';
+  }
+
+  @override
+  String game24CorrectSolvable(String solution) {
+    return 'Benar! Ini solusinya:\n$solution';
+  }
+
+  @override
+  String get game24CorrectUnsolvable => 'Benar! Memang tidak ada solusi.';
+
+  @override
+  String game24WrongSolvable(String solution) {
+    return 'Salah! Sebenarnya bisa. Solusi:\n$solution';
+  }
+
+  @override
+  String get game24WrongUnsolvable =>
+      'Salah! Memang tidak ada solusi matematika.';
+
+  @override
+  String get diceGame => 'Dadu Spasial';
+
+  @override
+  String get diceGameDesc =>
+      'Temukan dadu yang valid dengan jumlah sisi berlawanan adalah 7';
+
+  @override
+  String get diceGameInstruction =>
+      'Putar dadu untuk memeriksa semua sisi. Sisi yang berlawanan harus berjumlah 7!';
+
+  @override
+  String get all => 'Semua';
+
+  @override
+  String get scoreboard => 'Papan Skor';
+
+  @override
+  String highScore(int score) {
+    return 'Skor Tertinggi: $score';
+  }
+
+  @override
+  String get noScoresYet => 'Belum ada skor tercatat!';
+
+  @override
+  String get allowRotation => 'Izinkan Rotasi';
+
+  @override
+  String get allowRotationDesc => 'Matikan untuk mencegah bentuk berputar';
+
+  @override
+  String get schulteGame => 'Fokus Schulte';
+
+  @override
+  String get schulteGameDesc =>
+      'Ketuk angka secara berurutan secepat mungkin untuk melatih fokus';
+
+  @override
+  String get schulteOrder => 'Urutan Angka';
+
+  @override
+  String get ascending => 'Naik (Ascending)';
+
+  @override
+  String get descending => 'Turun (Descending)';
+
+  @override
+  String get gridColorMode => 'Mode Warna';
+
+  @override
+  String get monochrome => 'Satu Warna';
+
+  @override
+  String get rainbow => 'Pelangi';
+
+  @override
+  String tapNextNumber(int number) {
+    return 'Ketuk berikutnya: $number';
+  }
 }

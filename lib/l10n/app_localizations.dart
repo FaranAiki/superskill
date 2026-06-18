@@ -647,6 +647,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Game Over! Your final memory level was {level} numbers.'**
   String gameOverChimp(int level);
+
+  /// No description provided for @blindMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Blind Mode'**
+  String get blindMode;
+
+  /// No description provided for @blindModeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide tile outlines after tapping 1'**
+  String get blindModeDesc;
+
+  /// No description provided for @startingNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting Numbers'**
+  String get startingNumbers;
+
+  /// No description provided for @reflexGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Reflex Tap'**
+  String get reflexGame;
+
+  /// No description provided for @reflexGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the glowing tiles as fast as you can'**
+  String get reflexGameDesc;
+
+  /// No description provided for @gameOverReflex.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over! Your final score was {score}.'**
+  String gameOverReflex(int score);
+
+  /// No description provided for @operatorGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Operator Rush'**
+  String get operatorGame;
+
+  /// No description provided for @operatorGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the missing math operators quickly'**
+  String get operatorGameDesc;
+
+  /// No description provided for @gameOverOperator.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over! Your final score was {score}.'**
+  String gameOverOperator(int score);
+
+  /// No description provided for @numericalGames.
+  ///
+  /// In en, this message translates to:
+  /// **'Numerical Games'**
+  String get numericalGames;
+
+  /// No description provided for @game24.
+  ///
+  /// In en, this message translates to:
+  /// **'Game 24'**
+  String get game24;
+
+  /// No description provided for @game24Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Decide if cards can be combined to reach target'**
+  String get game24Desc;
+
+  /// No description provided for @speedMath.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed Math'**
+  String get speedMath;
+
+  /// No description provided for @speedMathDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate fast flashing numbers & operators'**
+  String get speedMathDesc;
+
+  /// No description provided for @hideOutlines.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Outlines'**
+  String get hideOutlines;
+
+  /// No description provided for @hideOutlinesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide all grid outlines once numbers disappear'**
+  String get hideOutlinesDesc;
+
+  /// No description provided for @game24Yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get game24Yes;
+
+  /// No description provided for @game24No.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get game24No;
+
+  /// No description provided for @game24CanBeMade.
+  ///
+  /// In en, this message translates to:
+  /// **'Can you make {target}?'**
+  String game24CanBeMade(int target);
+
+  /// No description provided for @game24CorrectSolvable.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct! Here is a solution:\n{solution}'**
+  String game24CorrectSolvable(String solution);
+
+  /// No description provided for @game24CorrectUnsolvable.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct! No solution exists.'**
+  String get game24CorrectUnsolvable;
+
+  /// No description provided for @game24WrongSolvable.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong! It is possible. Solution:\n{solution}'**
+  String game24WrongSolvable(String solution);
+
+  /// No description provided for @game24WrongUnsolvable.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong! No mathematical solution exists.'**
+  String get game24WrongUnsolvable;
+
+  /// No description provided for @diceGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Spatial Dice'**
+  String get diceGame;
+
+  /// No description provided for @diceGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the valid dice where opposite faces sum to 7'**
+  String get diceGameDesc;
+
+  /// No description provided for @diceGameInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate the dice to inspect all faces. Opposite faces must sum to 7!'**
+  String get diceGameInstruction;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @scoreboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Scoreboard'**
+  String get scoreboard;
+
+  /// No description provided for @highScore.
+  ///
+  /// In en, this message translates to:
+  /// **'High Score: {score}'**
+  String highScore(int score);
+
+  /// No description provided for @noScoresYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No scores recorded yet!'**
+  String get noScoresYet;
+
+  /// No description provided for @allowRotation.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Rotation'**
+  String get allowRotation;
+
+  /// No description provided for @allowRotationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable to prevent rotating the shapes'**
+  String get allowRotationDesc;
+
+  /// No description provided for @schulteGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Schulte Focus'**
+  String get schulteGame;
+
+  /// No description provided for @schulteGameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap numbers in order as fast as possible to train focus'**
+  String get schulteGameDesc;
+
+  /// No description provided for @schulteOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Number Order'**
+  String get schulteOrder;
+
+  /// No description provided for @ascending.
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending'**
+  String get ascending;
+
+  /// No description provided for @descending.
+  ///
+  /// In en, this message translates to:
+  /// **'Descending'**
+  String get descending;
+
+  /// No description provided for @gridColorMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Color Mode'**
+  String get gridColorMode;
+
+  /// No description provided for @monochrome.
+  ///
+  /// In en, this message translates to:
+  /// **'Monochrome'**
+  String get monochrome;
+
+  /// No description provided for @rainbow.
+  ///
+  /// In en, this message translates to:
+  /// **'Rainbow'**
+  String get rainbow;
+
+  /// No description provided for @tapNextNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap next: {number}'**
+  String tapNextNumber(int number);
 }
 
 class _AppLocalizationsDelegate

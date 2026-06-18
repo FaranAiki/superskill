@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
+import 'package:superskill/core/high_score_service.dart';
 
 class ChimpGameScreen extends StatefulWidget {
   const ChimpGameScreen({super.key});
@@ -15,6 +16,8 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
   int lives = 3;
   bool isShowingNumbers = true;
   bool isGameOver = false;
+  bool blindMode = false;
+  bool hideOutlines = false;
   
   // Board representation: contains number if tile has a number, else null
   late List<int?> board;
@@ -39,7 +42,7 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(_shakeController);
         
-    _successControllers = List.generate(40, (index) => AnimationController(
+    _successControllers = List.generate(200, (index) => AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     ));
@@ -70,7 +73,9 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
       final random = Random();
       final List<int> availableIndices = List.generate(totalCells, (i) => i);
       
-      for (int i = 1; i <= totalNumbers; i++) {
+      // Make sure totalNumbers does not exceed available grid cells
+      int numCount = min(totalNumbers, totalCells - 1);
+      for (int i = 1; i <= numCount; i++) {
         int index = availableIndices.removeAt(random.nextInt(availableIndices.length));
         board[index] = i;
       }
@@ -101,8 +106,13 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
           if (mounted) {
             setState(() {
               totalNumbers++;
-              if (totalNumbers > 12 && gridSize == 5) {
-                gridSize = 6;
+              int maxNumbers = (gridSize * gridSize) - 5;
+              if (totalNumbers > maxNumbers) {
+                if (gridSize < 8) {
+                  gridSize++;
+                } else {
+                  totalNumbers = maxNumbers;
+                }
               }
               _generateLevel();
             });
@@ -116,6 +126,7 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
         lives--;
         if (lives <= 0) {
           isGameOver = true;
+          HighScoreService.instance.saveScore("chimp_memory", totalNumbers);
         } else {
           // Restart level
           Future.delayed(const Duration(milliseconds: 800), () {
@@ -128,12 +139,103 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
 
   void _restartGame() {
     setState(() {
-      gridSize = 5;
-      totalNumbers = 4;
       lives = 3;
       isGameOver = false;
       _generateLevel();
     });
+  }
+
+  void _showSettingsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            final l10n = AppLocalizations.of(context)!;
+            int maxNumbers = (gridSize * gridSize) - 5;
+            
+            return AlertDialog(
+              backgroundColor: Theme.of(context).dialogBackgroundColor,
+              title: Text(l10n.gameSettings, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1),
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Grid Size Selector
+                    Text('${l10n.gridSize}: ${gridSize}x${gridSize}', style: Theme.of(context).textTheme.bodyMedium),
+                    Slider(
+                      value: gridSize.toDouble(),
+                      min: 4,
+                      max: 9,
+                      divisions: 5,
+                      onChanged: (value) {
+                        setDialogState(() {
+                          gridSize = value.toInt();
+                          int newMax = (gridSize * gridSize) - 5;
+                          if (totalNumbers > newMax) {
+                            totalNumbers = newMax;
+                          }
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Starting Numbers Selector
+                    Text('${l10n.startingNumbers}: $totalNumbers', style: Theme.of(context).textTheme.bodyMedium),
+                    Slider(
+                      value: totalNumbers.toDouble(),
+                      min: 3,
+                      max: maxNumbers.toDouble(),
+                      divisions: maxNumbers - 3 > 0 ? maxNumbers - 3 : 1,
+                      onChanged: (value) {
+                        setDialogState(() => totalNumbers = value.toInt());
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Blind Mode Toggle
+                    SwitchListTile(
+                      title: Text(l10n.blindMode, style: Theme.of(context).textTheme.bodyMedium),
+                      subtitle: Text(l10n.blindModeDesc, style: Theme.of(context).textTheme.bodySmall),
+                      value: blindMode,
+                      activeColor: Theme.of(context).colorScheme.primary,
+                      onChanged: (value) {
+                        setDialogState(() => blindMode = value);
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Hide Outlines Toggle
+                    SwitchListTile(
+                      title: Text(l10n.hideOutlines, style: Theme.of(context).textTheme.bodyMedium),
+                      subtitle: Text(l10n.hideOutlinesDesc, style: Theme.of(context).textTheme.bodySmall),
+                      value: hideOutlines,
+                      activeColor: Theme.of(context).colorScheme.primary,
+                      onChanged: (value) {
+                        setDialogState(() => hideOutlines = value);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _restartGame();
+                  },
+                  child: Text(l10n.ok, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -186,6 +288,12 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.chimpGame),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings, color: primaryColor),
+            onPressed: _showSettingsDialog,
+          ),
+        ],
       ),
       body: Center(
         child: ConstrainedBox(
@@ -259,13 +367,17 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
                                 color: hasNumber
                                     ? (isShowingNumbers 
                                         ? primaryColor.withOpacity(0.15) 
-                                        : primaryColor.withOpacity(0.8))
+                                        : (blindMode ? Colors.transparent : primaryColor.withOpacity(0.8)))
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
                                   color: hasNumber
-                                      ? primaryColor
-                                      : primaryColor.withOpacity(0.05),
+                                      ? (isShowingNumbers 
+                                          ? primaryColor 
+                                          : (hideOutlines 
+                                              ? Colors.transparent 
+                                              : (blindMode ? primaryColor.withOpacity(0.05) : primaryColor)))
+                                      : (hideOutlines && !isShowingNumbers ? Colors.transparent : primaryColor.withOpacity(0.05)),
                                   width: 1.5,
                                 ),
                               ),

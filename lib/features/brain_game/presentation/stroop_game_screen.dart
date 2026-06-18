@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
+import 'package:superskill/core/high_score_service.dart';
 
 class StroopGameScreen extends StatefulWidget {
   const StroopGameScreen({super.key});
@@ -61,6 +62,7 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
             timeLeft--;
           } else {
             isGameOver = true;
+            HighScoreService.instance.saveScore("brain_reflex", score);
             timer?.cancel();
           }
         });

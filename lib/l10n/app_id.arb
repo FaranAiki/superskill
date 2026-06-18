@@ -159,5 +159,95 @@
         "type": "int"
       }
     }
+  },
+  "blindMode": "Mode Buta",
+  "blindModeDesc": "Sembunyikan bingkai kotak setelah mengetuk 1",
+  "startingNumbers": "Angka Awal",
+  "reflexGame": "Ketuk Refleks",
+  "reflexGameDesc": "Ketuk kotak menyala secepat yang Anda bisa",
+  "gameOverReflex": "Permainan Selesai! Skor akhir Anda adalah {score}.",
+  "@gameOverReflex": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "operatorGame": "Serbuan Operator",
+  "operatorGameDesc": "Temukan operator matematika yang hilang secara cepat",
+  "gameOverOperator": "Permainan Selesai! Skor akhir Anda adalah {score}.",
+  "@gameOverOperator": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "numericalGames": "Game Numerik",
+  "game24": "Game 24",
+  "game24Desc": "Tentukan apakah kartu bisa digabung untuk mencapai target",
+  "speedMath": "Matematika Cepat",
+  "speedMathDesc": "Hitung deretan angka & operator yang berkedip cepat",
+  "hideOutlines": "Sembunyikan Bingkai",
+  "hideOutlinesDesc": "Sembunyikan bingkai kotak setelah angka menghilang",
+  "game24Yes": "Ya (Bisa)",
+  "game24No": "Tidak Bisa",
+  "game24CanBeMade": "Apakah bisa dibuat {target}?",
+  "@game24CanBeMade": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "game24CorrectSolvable": "Benar! Ini solusinya:\n{solution}",
+  "@game24CorrectSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24CorrectUnsolvable": "Benar! Memang tidak ada solusi.",
+  "game24WrongSolvable": "Salah! Sebenarnya bisa. Solusi:\n{solution}",
+  "@game24WrongSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24WrongUnsolvable": "Salah! Memang tidak ada solusi matematika.",
+  "diceGame": "Dadu Spasial",
+  "diceGameDesc": "Temukan dadu yang valid dengan jumlah sisi berlawanan adalah 7",
+  "diceGameInstruction": "Putar dadu untuk memeriksa semua sisi. Sisi yang berlawanan harus berjumlah 7!",
+  "all": "Semua",
+  "scoreboard": "Papan Skor",
+  "highScore": "Skor Tertinggi: {score}",
+  "@highScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "noScoresYet": "Belum ada skor tercatat!",
+  "allowRotation": "Izinkan Rotasi",
+  "allowRotationDesc": "Matikan untuk mencegah bentuk berputar",
+  "schulteGame": "Fokus Schulte",
+  "schulteGameDesc": "Ketuk angka secara berurutan secepat mungkin untuk melatih fokus",
+  "schulteOrder": "Urutan Angka",
+  "ascending": "Naik (Ascending)",
+  "descending": "Turun (Descending)",
+  "gridColorMode": "Mode Warna",
+  "monochrome": "Satu Warna",
+  "rainbow": "Pelangi",
+  "tapNextNumber": "Ketuk berikutnya: {number}",
+  "@tapNextNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
   }
 }

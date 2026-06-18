@@ -159,5 +159,95 @@
         "type": "int"
       }
     }
+  },
+  "blindMode": "Blind Mode",
+  "blindModeDesc": "Hide tile outlines after tapping 1",
+  "startingNumbers": "Starting Numbers",
+  "reflexGame": "Reflex Tap",
+  "reflexGameDesc": "Tap the glowing tiles as fast as you can",
+  "gameOverReflex": "Game Over! Your final score was {score}.",
+  "@gameOverReflex": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "operatorGame": "Operator Rush",
+  "operatorGameDesc": "Find the missing math operators quickly",
+  "gameOverOperator": "Game Over! Your final score was {score}.",
+  "@gameOverOperator": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "numericalGames": "Numerical Games",
+  "game24": "Game 24",
+  "game24Desc": "Decide if cards can be combined to reach target",
+  "speedMath": "Speed Math",
+  "speedMathDesc": "Calculate fast flashing numbers & operators",
+  "hideOutlines": "Hide Outlines",
+  "hideOutlinesDesc": "Hide all grid outlines once numbers disappear",
+  "game24Yes": "Yes",
+  "game24No": "No",
+  "game24CanBeMade": "Can you make {target}?",
+  "@game24CanBeMade": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "game24CorrectSolvable": "Correct! Here is a solution:\n{solution}",
+  "@game24CorrectSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24CorrectUnsolvable": "Correct! No solution exists.",
+  "game24WrongSolvable": "Wrong! It is possible. Solution:\n{solution}",
+  "@game24WrongSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24WrongUnsolvable": "Wrong! No mathematical solution exists.",
+  "diceGame": "Spatial Dice",
+  "diceGameDesc": "Find the valid dice where opposite faces sum to 7",
+  "diceGameInstruction": "Rotate the dice to inspect all faces. Opposite faces must sum to 7!",
+  "all": "All",
+  "scoreboard": "Scoreboard",
+  "highScore": "High Score: {score}",
+  "@highScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "noScoresYet": "No scores recorded yet!",
+  "allowRotation": "Allow Rotation",
+  "allowRotationDesc": "Disable to prevent rotating the shapes",
+  "schulteGame": "Schulte Focus",
+  "schulteGameDesc": "Tap numbers in order as fast as possible to train focus",
+  "schulteOrder": "Number Order",
+  "ascending": "Ascending",
+  "descending": "Descending",
+  "gridColorMode": "Color Mode",
+  "monochrome": "Monochrome",
+  "rainbow": "Rainbow",
+  "tapNextNumber": "Tap next: {number}",
+  "@tapNextNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
   }
 }

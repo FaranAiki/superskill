@@ -159,5 +159,95 @@
         "type": "int"
       }
     }
+  },
+  "blindMode": "盲目模式",
+  "blindModeDesc": "点击 1 后隐藏方块边框",
+  "startingNumbers": "起始数字",
+  "reflexGame": "反射点击",
+  "reflexGameDesc": "以最快的速度点击发光的方块",
+  "gameOverReflex": "游戏结束！您的最终得分是 {score}。",
+  "@gameOverReflex": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "operatorGame": "运算符冲刺",
+  "operatorGameDesc": "快速找到缺失的数学运算符",
+  "gameOverOperator": "游戏结束！您的最终得分是 {score}。",
+  "@gameOverOperator": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "numericalGames": "数字游戏",
+  "game24": "24点游戏",
+  "game24Desc": "判断卡片组合是否可以拼出目标值",
+  "speedMath": "闪电心算",
+  "speedMathDesc": "快速计算闪烁出现的数字和运算符",
+  "hideOutlines": "隐藏边框",
+  "hideOutlinesDesc": "数字隐藏后隐藏全部方块边框",
+  "game24Yes": "可以",
+  "game24No": "不可以",
+  "game24CanBeMade": "你能拼出 {target} 吗？",
+  "@game24CanBeMade": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "game24CorrectSolvable": "回答正确！解法:\n{solution}",
+  "@game24CorrectSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24CorrectUnsolvable": "回答正确！此题无解。",
+  "game24WrongSolvable": "回答错误！其实有解。解法:\n{solution}",
+  "@game24WrongSolvable": {
+    "placeholders": {
+      "solution": {
+        "type": "String"
+      }
+    }
+  },
+  "game24WrongUnsolvable": "回答错误！此题确实无解。",
+  "diceGame": "空间骰子",
+  "diceGameDesc": "找出相对面之和为 7 的有效骰子",
+  "diceGameInstruction": "旋转骰子以检查所有面。相对的面相加必须等于 7！",
+  "all": "全部",
+  "scoreboard": "计分板",
+  "highScore": "最高分: {score}",
+  "@highScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "noScoresYet": "暂无记录！",
+  "allowRotation": "允许旋转",
+  "allowRotationDesc": "关闭以防止旋转形状",
+  "schulteGame": "舒尔特专注力",
+  "schulteGameDesc": "尽快按顺序点击数字以训练注意力",
+  "schulteOrder": "数字顺序",
+  "ascending": "升序",
+  "descending": "降序",
+  "gridColorMode": "色彩模式",
+  "monochrome": "单色",
+  "rainbow": "彩虹色",
+  "tapNextNumber": "请点击: {number}",
+  "@tapNextNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
   }
 }

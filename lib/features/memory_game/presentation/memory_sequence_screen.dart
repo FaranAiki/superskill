@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:superskill/l10n/app_localizations.dart';
+import 'package:superskill/core/high_score_service.dart';
 
 enum GameSpeed {
   slow,
@@ -165,7 +166,10 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
     await _lightUpTile(index);
 
     if (userSequence.last != sequence[userSequence.length - 1]) {
-      setState(() => isGameOver = true);
+      setState(() {
+        isGameOver = true;
+        HighScoreService.instance.saveScore("memory_sequence", sequence.isEmpty ? 0 : sequence.length - 1);
+      });
     } else if (userSequence.length == sequence.length) {
       Future.delayed(const Duration(milliseconds: 500), _nextLevel);
     }

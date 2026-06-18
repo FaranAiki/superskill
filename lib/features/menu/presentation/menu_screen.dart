@@ -4,20 +4,195 @@ import 'package:superskill/l10n/app_localizations.dart';
 import '../../color_game/presentation/color_game_screen.dart';
 import '../../sound_game/presentation/sound_game_screen.dart';
 import '../../brain_game/presentation/stroop_game_screen.dart';
+import '../../brain_game/presentation/reflex_game_screen.dart';
+import '../../brain_game/presentation/operator_game_screen.dart';
+import '../../brain_game/presentation/game_24_screen.dart';
+import '../../brain_game/presentation/speed_math_screen.dart';
+import '../../brain_game/presentation/schulte_game_screen.dart';
 import '../../memory_game/presentation/memory_sequence_screen.dart';
 import '../../memory_game/presentation/chimp_game_screen.dart';
 import '../../spatial_game/presentation/spatial_iq_screen.dart';
 import '../../spatial_game/presentation/maze_game_screen.dart';
+import '../../spatial_game/presentation/dice_game_screen.dart';
 import '../../../core/locale_provider.dart';
 import '../../../core/settings_provider.dart';
+import '../../../core/high_score_service.dart';
 
-class MenuScreen extends ConsumerWidget {
+class MenuScreen extends ConsumerStatefulWidget {
   const MenuScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends ConsumerState<MenuScreen> {
+  String selectedCategory = "All"; // All, Visual, Audio, Brain, Numerical, Memory, Spatial
+
+  String _getCategoryName(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'Visual':
+        return l10n.visualGames;
+      case 'Audio':
+        return l10n.audioGames;
+      case 'Brain':
+        return l10n.brainGames;
+      case 'Numerical':
+        return l10n.numericalGames;
+      case 'Memory':
+        return l10n.memoryGames;
+      case 'Spatial':
+        return l10n.spatialGames;
+      default:
+        return l10n.all;
+    }
+  }
+
+  void _showScoreboard(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    final isLight = theme.brightness == Brightness.light;
+    final primaryColor = theme.colorScheme.primary;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: theme.scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      isScrollControlled: true,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.7,
+          minChildSize: 0.5,
+          maxChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) {
+            final scores = HighScoreService.instance.getAllScores();
+            
+            final trackedGames = [
+              {'id': 'brain_reflex', 'name': l10n.brainReflex, 'icon': Icons.psychology_outlined, 'color': const Color(0xFF2DD4BF)},
+              {'id': 'reflex_tap', 'name': l10n.reflexGame, 'icon': Icons.touch_app_outlined, 'color': const Color(0xFFFACC15)},
+              {'id': 'operator_rush', 'name': l10n.operatorGame, 'icon': Icons.calculate_outlined, 'color': const Color(0xFF38BDF8)},
+              {'id': 'game_24', 'name': l10n.game24, 'icon': Icons.filter_4, 'color': const Color(0xFF818CF8)},
+              {'id': 'speed_math', 'name': l10n.speedMath, 'icon': Icons.flash_on_outlined, 'color': const Color(0xFFFACC15)},
+              {'id': 'memory_sequence', 'name': l10n.memorySequence, 'icon': Icons.memory, 'color': const Color(0xFF38BDF8)},
+              {'id': 'chimp_memory', 'name': l10n.chimpGame, 'icon': Icons.psychology, 'color': const Color(0xFF818CF8)},
+              {'id': 'spatial_iq', 'name': l10n.spatialIq, 'icon': Icons.view_in_ar, 'color': const Color(0xFFF43F5E)},
+              {'id': 'spatial_dice', 'name': l10n.diceGame, 'icon': Icons.casino_outlined, 'color': const Color(0xFFEC4899)},
+              {'id': 'schulte_focus', 'name': l10n.schulteGame, 'icon': Icons.filter_9_plus_outlined, 'color': const Color(0xFFFB923C)},
+            ];
+
+            return Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: isLight ? Colors.black12 : Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.emoji_events_outlined, color: Colors.amber, size: 28),
+                      const SizedBox(width: 8),
+                      Text(
+                        l10n.scoreboard,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  Expanded(
+                    child: scores.isEmpty
+                        ? Center(
+                            child: Text(
+                              l10n.noScoresYet,
+                              style: theme.textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                            ),
+                          )
+                        : ListView.builder(
+                            controller: scrollController,
+                            itemCount: trackedGames.length,
+                            itemBuilder: (context, index) {
+                              final game = trackedGames[index];
+                              final gameId = game['id'] as String;
+                              final gameName = game['name'] as String;
+                              final gameIcon = game['icon'] as IconData;
+                              final gameColor = game['color'] as Color;
+                              final highScore = scores[gameId] ?? 0;
+
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: isLight 
+                                      ? Colors.black.withOpacity(0.02) 
+                                      : const Color(0xFF1E293B).withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: isLight ? Colors.black12 : Colors.white10,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: gameColor.withOpacity(0.15),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(gameIcon, color: gameColor, size: 24),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Text(
+                                        gameName,
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.emoji_events, color: Colors.amber.shade600, size: 20),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          '$highScore',
+                                          style: theme.textTheme.titleMedium?.copyWith(
+                                            fontWeight: FontWeight.w900,
+                                            color: primaryColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final isLight = theme.brightness == Brightness.light;
+    final primaryColor = theme.colorScheme.primary;
+
+    final categories = ['All', 'Visual', 'Audio', 'Brain', 'Numerical', 'Memory', 'Spatial'];
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -25,6 +200,18 @@ class MenuScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.emoji_events, color: Colors.amber),
+              tooltip: l10n.scoreboard,
+              onPressed: () => _showScoreboard(context),
+            ),
+          ),
           Container(
             margin: const EdgeInsets.only(right: 8),
             decoration: BoxDecoration(
@@ -66,127 +253,245 @@ class MenuScreen extends ConsumerWidget {
             child: Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 450),
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
-                  child: Column(
-                  children: [
-                    ShaderMask(
-                      shaderCallback: (bounds) => const LinearGradient(
-                        colors: [Color(0xFF38BDF8), Color(0xFF818CF8)],
-                      ).createShader(bounds),
-                      child: Text(
-                        l10n.miniGamesHub,
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 2,
-                          color: Colors.white,
+                child: ScrollConfiguration(
+                  behavior: NoScrollbarScrollBehavior(),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+                    child: Column(
+                      children: [
+                        ShaderMask(
+                          shaderCallback: (bounds) => const LinearGradient(
+                            colors: [Color(0xFF38BDF8), Color(0xFF818CF8)],
+                          ).createShader(bounds),
+                          child: Text(
+                            l10n.miniGamesHub,
+                            textAlign: TextAlign.center,
+                            style: theme.textTheme.displaySmall?.copyWith(
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 2,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 8),
+                        Container(height: 2, width: 60, color: const Color(0xFF38BDF8).withOpacity(0.3)),
+                        const SizedBox(height: 24),
+                        
+                        // Category selection dropdown
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: isLight 
+                                ? Colors.white.withOpacity(0.9) 
+                                : const Color(0xFF1E293B).withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: primaryColor.withOpacity(0.4),
+                              width: 1.5,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryColor.withOpacity(0.08),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: selectedCategory,
+                              isExpanded: true,
+                              dropdownColor: isLight ? Colors.white : const Color(0xFF0F172A),
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: isLight ? const Color(0xFF0F172A) : Colors.white,
+                              ),
+                              icon: Icon(Icons.arrow_drop_down, color: primaryColor, size: 28),
+                              items: categories.map((cat) {
+                                return DropdownMenuItem<String>(
+                                  value: cat,
+                                  child: Text(_getCategoryName(cat, l10n)),
+                                );
+                              }).toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  setState(() => selectedCategory = val);
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        
+                        if (selectedCategory == 'All' || selectedCategory == 'Visual')
+                          _CategorySection(title: l10n.visualGames, children: [
+                            _MenuButton(
+                              title: l10n.tebakHexRgb,
+                              subtitle: l10n.pointDiffSystem,
+                              icon: Icons.palette_outlined,
+                              gradient: const [Color(0xFF0EA5E9), Color(0xFF2563EB)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.rgb)),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.tebakHexCmyk,
+                              subtitle: l10n.cmykChallenge,
+                              icon: Icons.color_lens_outlined,
+                              gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.cmyk)),
+                              ),
+                            ),
+                          ]),
+                        
+                        if (selectedCategory == 'All' || selectedCategory == 'Audio')
+                          _CategorySection(title: l10n.audioGames, children: [
+                            _MenuButton(
+                              title: l10n.perfectPitch,
+                              subtitle: l10n.trainMusicPitch,
+                              icon: Icons.music_note_outlined,
+                              gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SoundGameScreen()),
+                              ),
+                            ),
+                          ]),
+
+                        if (selectedCategory == 'All' || selectedCategory == 'Brain')
+                          _CategorySection(title: l10n.brainGames, children: [
+                            _MenuButton(
+                              title: l10n.brainReflex,
+                              subtitle: l10n.stroopTestDesc,
+                              icon: Icons.psychology_outlined,
+                              gradient: const [Color(0xFF2DD4BF), Color(0xFF0D9488)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const StroopGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.reflexGame,
+                              subtitle: l10n.reflexGameDesc,
+                              icon: Icons.touch_app_outlined,
+                              gradient: const [Color(0xFFFACC15), Color(0xFFD97706)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ReflexGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.schulteGame,
+                              subtitle: l10n.schulteGameDesc,
+                              icon: Icons.filter_9_plus_outlined,
+                              gradient: const [Color(0xFFFB923C), Color(0xFFEA580C)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SchulteGameScreen()),
+                              ),
+                            ),
+                          ]),
+
+                        if (selectedCategory == 'All' || selectedCategory == 'Numerical')
+                          _CategorySection(title: l10n.numericalGames, children: [
+                            _MenuButton(
+                              title: l10n.operatorGame,
+                              subtitle: l10n.operatorGameDesc,
+                              icon: Icons.calculate_outlined,
+                              gradient: const [Color(0xFF38BDF8), Color(0xFF0284C7)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const OperatorGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.game24,
+                              subtitle: l10n.game24Desc,
+                              icon: Icons.filter_4,
+                              gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const Game24Screen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.speedMath,
+                              subtitle: l10n.speedMathDesc,
+                              icon: Icons.flash_on_outlined,
+                              gradient: const [Color(0xFFFACC15), Color(0xFFD97706)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SpeedMathScreen()),
+                              ),
+                            ),
+                          ]),
+
+                        if (selectedCategory == 'All' || selectedCategory == 'Memory')
+                          _CategorySection(title: l10n.memoryGames, children: [
+                            _MenuButton(
+                              title: l10n.memorySequence,
+                              subtitle: l10n.memorySequenceDesc,
+                              icon: Icons.memory,
+                              gradient: const [Color(0xFF38BDF8), Color(0xFF0284C7)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const MemorySequenceScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.chimpGame,
+                              subtitle: l10n.chimpGameDesc,
+                              icon: Icons.psychology,
+                              gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ChimpGameScreen()),
+                              ),
+                            ),
+                          ]),
+
+                        if (selectedCategory == 'All' || selectedCategory == 'Spatial')
+                          _CategorySection(title: l10n.spatialGames, children: [
+                            _MenuButton(
+                              title: l10n.spatialIq,
+                              subtitle: l10n.spatialIqDesc,
+                              icon: Icons.view_in_ar,
+                              gradient: const [Color(0xFFF43F5E), Color(0xFFE11D48)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SpatialIqScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.mazeGame,
+                              subtitle: l10n.mazeGameDesc,
+                              icon: Icons.grid_on_outlined,
+                              gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const MazeGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.diceGame,
+                              subtitle: l10n.diceGameDesc,
+                              icon: Icons.casino_outlined,
+                              gradient: const [Color(0xFFEC4899), Color(0xFFBE185D)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const DiceGameScreen()),
+                              ),
+                            ),
+                          ]),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Container(height: 2, width: 60, color: const Color(0xFF38BDF8).withOpacity(0.3)),
-                    const SizedBox(height: 40),
-                    
-                    _CategorySection(title: l10n.visualGames, children: [
-                      _MenuButton(
-                        title: l10n.tebakHexRgb,
-                        subtitle: l10n.pointDiffSystem,
-                        icon: Icons.palette_outlined,
-                        gradient: const [Color(0xFF0EA5E9), Color(0xFF2563EB)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.rgb)),
-                        ),
-                      ),
-                      _MenuButton(
-                        title: l10n.tebakHexCmyk,
-                        subtitle: l10n.cmykChallenge,
-                        icon: Icons.color_lens_outlined,
-                        gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.cmyk)),
-                        ),
-                      ),
-                    ]),
-                    
-                    _CategorySection(title: l10n.audioGames, children: [
-                      _MenuButton(
-                        title: l10n.perfectPitch,
-                        subtitle: l10n.trainMusicPitch,
-                        icon: Icons.music_note_outlined,
-                        gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const SoundGameScreen()),
-                        ),
-                      ),
-                    ]),
-
-                    _CategorySection(title: l10n.brainGames, children: [
-                      _MenuButton(
-                        title: l10n.brainReflex,
-                        subtitle: l10n.stroopTestDesc,
-                        icon: Icons.psychology_outlined,
-                        gradient: const [Color(0xFF2DD4BF), Color(0xFF0D9488)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const StroopGameScreen()),
-                        ),
-                      ),
-                    ]),
-
-                    _CategorySection(title: l10n.memoryGames, children: [
-                      _MenuButton(
-                        title: l10n.memorySequence,
-                        subtitle: l10n.memorySequenceDesc,
-                        icon: Icons.memory,
-                        gradient: const [Color(0xFF38BDF8), Color(0xFF0284C7)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const MemorySequenceScreen()),
-                        ),
-                      ),
-                      _MenuButton(
-                        title: l10n.chimpGame,
-                        subtitle: l10n.chimpGameDesc,
-                        icon: Icons.psychology,
-                        gradient: const [Color(0xFF818CF8), Color(0xFF4F46E5)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const ChimpGameScreen()),
-                        ),
-                      ),
-                    ]),
-
-                    _CategorySection(title: l10n.spatialGames, children: [
-                      _MenuButton(
-                        title: l10n.spatialIq,
-                        subtitle: l10n.spatialIqDesc,
-                        icon: Icons.view_in_ar,
-                        gradient: const [Color(0xFFF43F5E), Color(0xFFE11D48)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const SpatialIqScreen()),
-                        ),
-                      ),
-                      _MenuButton(
-                        title: l10n.mazeGame,
-                        subtitle: l10n.mazeGameDesc,
-                        icon: Icons.grid_on_outlined,
-                        gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const MazeGameScreen()),
-                        ),
-                      ),
-                    ]),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
           ),
         ],
       ),
@@ -501,5 +806,12 @@ class _MenuButtonState extends State<_MenuButton> {
         ),
       ),
     );
+  }
+}
+
+class NoScrollbarScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }

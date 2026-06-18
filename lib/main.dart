@@ -9,9 +9,11 @@ import 'package:superskill/l10n/app_localizations.dart';
 import 'features/menu/presentation/menu_screen.dart';
 import 'core/locale_provider.dart';
 import 'core/settings_provider.dart';
+import 'core/high_score_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await HighScoreService.instance.init();
   
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await windowManager.ensureInitialized();

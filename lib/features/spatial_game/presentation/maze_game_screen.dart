@@ -39,6 +39,7 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
   bool hideWalls = false;
   Timer? _countdownTimer;
 
+  final FocusNode _focusNode = FocusNode();
   late AnimationController _pulseController;
 
   @override
@@ -55,6 +56,7 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
   void dispose() {
     _pulseController.dispose();
     _countdownTimer?.cancel();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -152,6 +154,11 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
     });
 
     _startCountdown();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _focusNode.requestFocus();
+      }
+    });
   }
 
   List<Point<int>> _generatePrimaryPath() {
@@ -269,22 +276,36 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
           ),
         ],
       ),
-      body: Shortcuts(
-        shortcuts: <LogicalKeySet, Intent>{
-          LogicalKeySet(LogicalKeyboardKey.arrowUp): const DirectionalIntent(dr: -1, dc: 0),
-          LogicalKeySet(LogicalKeyboardKey.arrowDown): const DirectionalIntent(dr: 1, dc: 0),
-          LogicalKeySet(LogicalKeyboardKey.arrowLeft): const DirectionalIntent(dr: 0, dc: -1),
-          LogicalKeySet(LogicalKeyboardKey.arrowRight): const DirectionalIntent(dr: 0, dc: 1),
-        },
-        child: Actions(
-          actions: <Type, Action<Intent>>{
-            DirectionalIntent: CallbackAction<DirectionalIntent>(
-              onInvoke: (intent) => _move(intent.dr, intent.dc),
-            ),
+      body: GestureDetector(
+        onTap: () => _focusNode.requestFocus(),
+        behavior: HitTestBehavior.opaque,
+        child: Shortcuts(
+          shortcuts: <LogicalKeySet, Intent>{
+            LogicalKeySet(LogicalKeyboardKey.arrowUp): const DirectionalIntent(dr: -1, dc: 0),
+            LogicalKeySet(LogicalKeyboardKey.arrowDown): const DirectionalIntent(dr: 1, dc: 0),
+            LogicalKeySet(LogicalKeyboardKey.arrowLeft): const DirectionalIntent(dr: 0, dc: -1),
+            LogicalKeySet(LogicalKeyboardKey.arrowRight): const DirectionalIntent(dr: 0, dc: 1),
+            LogicalKeySet(LogicalKeyboardKey.enter): const ContinueIntent(),
+            LogicalKeySet(LogicalKeyboardKey.space): const ContinueIntent(),
           },
-          child: Focus(
-            autofocus: true,
-            child: Center(
+          child: Actions(
+            actions: <Type, Action<Intent>>{
+              DirectionalIntent: CallbackAction<DirectionalIntent>(
+                onInvoke: (intent) => _move(intent.dr, intent.dc),
+              ),
+              ContinueIntent: CallbackAction<ContinueIntent>(
+                onInvoke: (intent) {
+                  if (hasWon) {
+                    _generateNewMaze();
+                  }
+                  return null;
+                },
+              ),
+            },
+            child: Focus(
+              focusNode: _focusNode,
+              autofocus: true,
+              child: Center(
               child: SingleChildScrollView(
                 child: Container(
                   constraints: const BoxConstraints(maxWidth: 450),
@@ -440,6 +461,7 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -554,6 +576,10 @@ class DirectionalIntent extends Intent {
   final int dr;
   final int dc;
   const DirectionalIntent({required this.dr, required this.dc});
+}
+
+class ContinueIntent extends Intent {
+  const ContinueIntent();
 }
 
 class MazePainter extends CustomPainter {
