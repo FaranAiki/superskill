@@ -1,0 +1,104 @@
+{
+  "miniGamesHub": "Superskill Hub",
+  "visualGames": "Game Visual",
+  "audioGames": "Game Audio",
+  "brainGames": "Game Otak",
+  "memoryGames": "Game Memori",
+  "spatialGames": "Game Spasial",
+  "tebakHexRgb": "Tebak HEX/RGB",
+  "pointDiffSystem": "Sistem poin selisih warna",
+  "tebakHexCmyk": "Tebak HEX/CMYK",
+  "cmykChallenge": "Tantangan warna CMYK",
+  "perfectPitch": "Perfect Pitch",
+  "trainMusicPitch": "Latih pendengaran nada musik",
+  "brainReflex": "Brain Reflex",
+  "stroopTestDesc": "Stroop Test: Latih fokus & akurasi",
+  "target": "Target",
+  "yourResult": "Hasil Kamu",
+  "previewActive": "Preview Aktif",
+  "hidden": "Hidden",
+  "red": "Merah",
+  "green": "Hijau",
+  "blue": "Biru",
+  "cyan": "Sian",
+  "pink": "Merah Muda",
+  "yellow": "Kuning",
+  "white": "Putih",
+  "difference": "Selisih",
+  "playAgain": "Main Lagi",
+  "checkScore": "Cek Skor",
+  "gameSettings": "Pengaturan Game",
+  "showUserPreview": "Tampilkan Preview Warna Kamu",
+  "showTargetHex": "Tampilkan Kode HEX Target",
+  "inputHexFor": "Input HEX untuk {label}",
+  "@inputHexFor": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "hexHint": "misal: FF atau 80",
+  "cancel": "Batal",
+  "ok": "Ok",
+  "perfectPitchTrainer": "Pelatih Perfect Pitch",
+  "listenAndGuess": "Dengarkan nada dan tebak!",
+  "correct": "Benar!",
+  "wrongNote": "Salah! Itu adalah nada {targetNote}",
+  "@wrongNote": {
+    "placeholders": {
+      "targetNote": {
+        "type": "String"
+      }
+    }
+  },
+  "nextNote": "Nada selanjutnya",
+  "brainReflexStroop": "Brain Reflex: Stroop",
+  "timeLabel": "Waktu: {timeLeft}",
+  "@timeLabel": {
+    "placeholders": {
+      "timeLeft": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreLabel": "Skor: {score}",
+  "@scoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "pickInkColor": "Pilih warna tinta",
+  "pickWordMeaning": "Pilih arti kata",
+  "timeUp": "Waktu habis!",
+  "yourFinalScore": "Skor Akhir Kamu:",
+  "tryAgain": "Coba lagi",
+  "backToMenu": "Kembali ke menu",
+  "language": "Bahasa",
+  "selectLanguage": "Pilih Bahasa",
+  "memorySequence": "Urutan Memori",
+  "memorySequenceDesc": "Ingat dan ulangi urutan warna",
+  "watchSequence": "Perhatikan urutannya!",
+  "yourTurn": "Giliranmu!",
+  "levelLabel": "Level: {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tileCount": "Jumlah Kotak",
+  "gameSpeed": "Kecepatan Game",
+  "fast": "Cepat",
+  "medium": "Sedang",
+  "slow": "Lambat",
+  "superFast": "Sangat Cepat",
+  "spatialIq": "IQ Spasial",
+  "spatialIqDesc": "Latih rotasi mental dan kognisi ruang 3D",
+  "gridSize": "Ukuran Grid",
+  "optionsCount": "Jumlah Opsi",
+  "matchRotatedShape": "Temukan bentuk yang cocok!"
+}

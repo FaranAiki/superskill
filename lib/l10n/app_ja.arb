@@ -1,0 +1,104 @@
+{
+  "miniGamesHub": "Superskill Hub",
+  "visualGames": "視覚ゲーム",
+  "audioGames": "オーディオゲーム",
+  "brainGames": "脳トレゲーム",
+  "memoryGames": "記憶ゲーム",
+  "spatialGames": "空間ゲーム",
+  "tebakHexRgb": "HEX/RGBを当てる",
+  "pointDiffSystem": "色差ポイントシステム",
+  "tebakHexCmyk": "HEX/CMYKを当てる",
+  "cmykChallenge": "CMYKカラーチャレンジ",
+  "perfectPitch": "絶対音感",
+  "trainMusicPitch": "音感トレーニング",
+  "brainReflex": "脳トレ反射",
+  "stroopTestDesc": "ストループテスト：集中力と正確さを鍛える",
+  "target": "ターゲット",
+  "yourResult": "あなたの結果",
+  "previewActive": "プレビュー有効",
+  "hidden": "非表示",
+  "red": "赤",
+  "green": "緑",
+  "blue": "青",
+  "cyan": "シアン",
+  "pink": "マゼンタ",
+  "yellow": "イエロー",
+  "white": "ブラック",
+  "difference": "差分",
+  "playAgain": "もう一度遊ぶ",
+  "checkScore": "スコアを確認",
+  "gameSettings": "ゲーム設定",
+  "showUserPreview": "カラープレビューを表示",
+  "showTargetHex": "ターゲットのHEXコードを表示",
+  "inputHexFor": "{label} のHEXを入力",
+  "@inputHexFor": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "hexHint": "例：FF または 80",
+  "cancel": "キャンセル",
+  "ok": "OK",
+  "perfectPitchTrainer": "絶対音感トレーナー",
+  "listenAndGuess": "音を聴いて当てよう！",
+  "correct": "正解！",
+  "wrongNote": "不正解！正解は {targetNote} でした",
+  "@wrongNote": {
+    "placeholders": {
+      "targetNote": {
+        "type": "String"
+      }
+    }
+  },
+  "nextNote": "次の音へ",
+  "brainReflexStroop": "脳トレ反射：ストループ",
+  "timeLabel": "残り時間：{timeLeft}",
+  "@timeLabel": {
+    "placeholders": {
+      "timeLeft": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreLabel": "スコア：{score}",
+  "@scoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "pickInkColor": "インクの色を選んでください",
+  "pickWordMeaning": "言葉の意味を選んでください",
+  "timeUp": "時間切れ！",
+  "yourFinalScore": "最終スコア：",
+  "tryAgain": "もう一度挑戦",
+  "backToMenu": "メニューに戻る",
+  "language": "言語",
+  "selectLanguage": "言語を選択",
+  "memorySequence": "記憶シーケンス",
+  "memorySequenceDesc": "色の順番を覚えて繰り返す",
+  "watchSequence": "順番を覚えてください！",
+  "yourTurn": "あなたの番です！",
+  "levelLabel": "レベル: {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tileCount": "タイル数",
+  "gameSpeed": "ゲーム速度",
+  "fast": "速い",
+  "medium": "普通",
+  "slow": "遅い",
+  "superFast": "超速い",
+  "spatialIq": "空間IQ",
+  "spatialIqDesc": "メンタルローテーションと3D空間認知のトレーニング",
+  "gridSize": "グリッドサイズ",
+  "optionsCount": "選択肢の数",
+  "matchRotatedShape": "正しく一致する形状を見つけてください！"
+}

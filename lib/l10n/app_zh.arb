@@ -1,0 +1,104 @@
+{
+  "miniGamesHub": "Superskill Hub",
+  "visualGames": "视觉游戏",
+  "audioGames": "音频游戏",
+  "brainGames": "益智游戏",
+  "memoryGames": "记忆游戏",
+  "spatialGames": "空间游戏",
+  "tebakHexRgb": "猜 HEX/RGB",
+  "pointDiffSystem": "颜色色差积分系统",
+  "tebakHexCmyk": "猜 HEX/CMYK",
+  "cmykChallenge": "CMYK 颜色挑战",
+  "perfectPitch": "绝对音感",
+  "trainMusicPitch": "练习音乐音高听力",
+  "brainReflex": "大脑反射术",
+  "stroopTestDesc": "斯特鲁普测试：训练专注力与准确性",
+  "target": "目标",
+  "yourResult": "你的结果",
+  "previewActive": "预览已启用",
+  "hidden": "已隐藏",
+  "red": "红",
+  "green": "绿",
+  "blue": "蓝",
+  "cyan": "青",
+  "pink": "洋红",
+  "yellow": "黄",
+  "white": "黑",
+  "difference": "差异",
+  "playAgain": "再玩一次",
+  "checkScore": "查看分数",
+  "gameSettings": "游戏设置",
+  "showUserPreview": "显示你的颜色预览",
+  "showTargetHex": "显示目标 HEX 代码",
+  "inputHexFor": "输入 {label} 的 HEX",
+  "@inputHexFor": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "hexHint": "例如：FF 或 80",
+  "cancel": "取消",
+  "ok": "确定",
+  "perfectPitchTrainer": "绝对音感训练器",
+  "listenAndGuess": "听音并猜测！",
+  "correct": "正确！",
+  "wrongNote": "错误！那是 {targetNote}",
+  "@wrongNote": {
+    "placeholders": {
+      "targetNote": {
+        "type": "String"
+      }
+    }
+  },
+  "nextNote": "下一个音符",
+  "brainReflexStroop": "大脑反射：斯特鲁普",
+  "timeLabel": "时间：{timeLeft}",
+  "@timeLabel": {
+    "placeholders": {
+      "timeLeft": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreLabel": "分数：{score}",
+  "@scoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "pickInkColor": "选择墨水颜色",
+  "pickWordMeaning": "选择字义",
+  "timeUp": "时间到！",
+  "yourFinalScore": "你的最终分数：",
+  "tryAgain": "再试一次",
+  "backToMenu": "返回菜单",
+  "language": "语言",
+  "selectLanguage": "选择语言",
+  "memorySequence": "记忆序列",
+  "memorySequenceDesc": "记住并重复颜色序列",
+  "watchSequence": "观察序列！",
+  "yourTurn": "轮到你了！",
+  "levelLabel": "等级: {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tileCount": "瓷砖数量",
+  "gameSpeed": "游戏速度",
+  "fast": "快",
+  "medium": "中",
+  "slow": "慢",
+  "superFast": "极快",
+  "spatialIq": "空间智商",
+  "spatialIqDesc": "训练心理旋转和3D空间认知",
+  "gridSize": "网格大小",
+  "optionsCount": "选项数量",
+  "matchRotatedShape": "找到正确匹配的形状！"
+}

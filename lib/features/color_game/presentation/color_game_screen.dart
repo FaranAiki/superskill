@@ -1,0 +1,395 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:superskill/l10n/app_localizations.dart';
+
+enum ColorGameMode { rgb, cmyk }
+
+class ColorGameScreen extends ConsumerStatefulWidget {
+  final ColorGameMode mode;
+  const ColorGameScreen({super.key, required this.mode});
+
+  @override
+  ConsumerState<ColorGameScreen> createState() => _ColorGameScreenState();
+}
+
+class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
+  late Color targetColor;
+  double r = 0, g = 0, b = 0;
+  double c = 0, m = 0, y = 0, k = 0;
+  double? score;
+  bool submitted = false;
+
+  bool showTargetHex = false;
+  bool showUserPreview = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _generateNewColor();
+  }
+
+  void _generateNewColor() {
+    setState(() {
+      final random = Random();
+      targetColor = Color.fromARGB(
+        255,
+        random.nextInt(256),
+        random.nextInt(256),
+        random.nextInt(256),
+      );
+      submitted = false;
+      score = null;
+      
+      r = g = b = 128;
+      c = m = y = k = 0;
+      showTargetHex = false;
+    });
+  }
+
+  void _calculateScore() {
+    double distance = 0;
+    if (widget.mode == ColorGameMode.rgb) {
+      distance = sqrt(
+        pow(targetColor.red - r, 2) +
+        pow(targetColor.green - g, 2) +
+        pow(targetColor.blue - b, 2)
+      );
+    } else {
+      double userR = 255 * (1 - c / 100) * (1 - k / 100);
+      double userG = 255 * (1 - m / 100) * (1 - k / 100);
+      double userB = 255 * (1 - y / 100) * (1 - k / 100);
+      
+      distance = sqrt(
+        pow(targetColor.red - userR, 2) +
+        pow(targetColor.green - userG, 2) +
+        pow(targetColor.blue - userB, 2)
+      );
+    }
+    
+    setState(() {
+      score = distance;
+      submitted = true;
+      showTargetHex = true;
+      showUserPreview = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final userColor = widget.mode == ColorGameMode.rgb 
+        ? Color.fromARGB(255, r.toInt(), g.toInt(), b.toInt())
+        : _cmykToColor(c, m, y, k);
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF030712),
+      appBar: AppBar(
+        title: Text(widget.mode == ColorGameMode.rgb ? l10n.tebakHexRgb : l10n.tebakHexCmyk),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings, color: Color(0xFF38BDF8)),
+            onPressed: () => _showSettings(context),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: _ColorBox(
+                        label: l10n.target,
+                        subLabel: showTargetHex 
+                            ? 'HEX: #${targetColor.value.toRadixString(16).substring(2).toUpperCase()}'
+                            : '???',
+                        color: targetColor,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _ColorBox(
+                        label: l10n.yourResult,
+                        subLabel: showUserPreview ? l10n.previewActive : l10n.hidden,
+                        color: showUserPreview ? userColor : Colors.grey.withOpacity(0.1),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 40),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: Column(
+                    children: [
+                      if (widget.mode == ColorGameMode.rgb) ...[
+                        _buildSlider(l10n.red, r, 0, 255, (v) => setState(() => r = v), const Color(0xFFEF4444)),
+                        _buildSlider(l10n.green, g, 0, 255, (v) => setState(() => g = v), const Color(0xFF10B981)),
+                        _buildSlider(l10n.blue, b, 0, 255, (v) => setState(() => b = v), const Color(0xFF3B82F6)),
+                      ] else ...[
+                        _buildSlider(l10n.cyan, c, 0, 100, (v) => setState(() => c = v), const Color(0xFF22D3EE), isCmyk: true),
+                        _buildSlider(l10n.pink, m, 0, 100, (v) => setState(() => m = v), const Color(0xFFF472B6), isCmyk: true),
+                        _buildSlider(l10n.yellow, y, 0, 100, (v) => setState(() => y = v), const Color(0xFFFACC15), isCmyk: true),
+                        _buildSlider(l10n.white, k, 0, 100, (v) => setState(() => k = v), Colors.grey, isCmyk: true),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                if (submitted)
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.elasticOut,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: ((score ?? 100) < 30 ? Colors.green : Colors.orange).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: (score ?? 100) < 30 ? Colors.green : Colors.orange),
+                    ),
+                    child: Text(
+                      '${l10n.difference}: ${score?.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: (score ?? 100) < 30 ? Colors.greenAccent : Colors.orangeAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 32),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF38BDF8).withOpacity(0.3),
+                        blurRadius: 20,
+                        offset: const Offset(0, 4),
+                      )
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: submitted ? _generateNewColor : _calculateScore,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 60),
+                      backgroundColor: const Color(0xFF0284C7),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      submitted ? l10n.playAgain : l10n.checkScore,
+                      style: const TextStyle(fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showSettings(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0F172A),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setModalState) => Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 16),
+              SwitchListTile(
+                title: Text(l10n.showUserPreview),
+                activeColor: const Color(0xFF38BDF8),
+                value: showUserPreview,
+                onChanged: (v) {
+                  setState(() => showUserPreview = v);
+                  setModalState(() {});
+                },
+              ),
+              SwitchListTile(
+                title: Text(l10n.showTargetHex),
+                activeColor: const Color(0xFF38BDF8),
+                value: showTargetHex,
+                onChanged: (v) {
+                  setState(() => showTargetHex = v);
+                  setModalState(() {});
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSlider(String label, double value, double min, double max, ValueChanged<double> onChanged, Color activeColor, {bool isCmyk = false}) {
+    int hexVal = isCmyk ? (value * 2.55).toInt() : value.toInt();
+    String hexString = '0x${hexVal.toRadixString(16).padLeft(2, '0').toUpperCase()}';
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(label, style: TextStyle(color: Colors.white.withOpacity(0.7), fontWeight: FontWeight.bold)),
+              InkWell(
+                onTap: submitted ? null : () => _showManualInput(label, value, isCmyk, onChanged),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: activeColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: activeColor.withOpacity(0.3)),
+                  ),
+                  child: Text(
+                    hexString,
+                    style: TextStyle(fontFamily: 'monospace', fontWeight: FontWeight.bold, color: activeColor),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SliderTheme(
+            data: SliderThemeData(
+              activeTrackColor: activeColor,
+              inactiveTrackColor: activeColor.withOpacity(0.1),
+              thumbColor: Colors.white,
+              overlayColor: activeColor.withOpacity(0.2),
+              trackHeight: 4,
+            ),
+            child: Slider(
+              value: value,
+              min: min,
+              max: max,
+              onChanged: submitted ? null : onChanged,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showManualInput(String label, double currentVal, bool isCmyk, ValueChanged<double> onChanged) {
+    final l10n = AppLocalizations.of(context)!;
+    final controller = TextEditingController();
+    int hexVal = isCmyk ? (currentVal * 2.55).toInt() : currentVal.toInt();
+    controller.text = hexVal.toRadixString(16).toUpperCase();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1E293B),
+        title: Text(l10n.inputHexFor(label)),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: l10n.hexHint,
+            prefixText: '0x ',
+            prefixStyle: const TextStyle(color: Color(0xFF38BDF8)),
+            border: const OutlineInputBorder(),
+          ),
+          maxLength: 2,
+          onSubmitted: (val) {
+            _processHexInput(val, isCmyk, onChanged);
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancel)),
+          TextButton(
+            onPressed: () {
+              _processHexInput(controller.text, isCmyk, onChanged);
+              Navigator.pop(context);
+            },
+            child: Text(l10n.ok, style: const TextStyle(color: Color(0xFF38BDF8))),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _processHexInput(String val, bool isCmyk, ValueChanged<double> onChanged) {
+    try {
+      int? parsed = int.tryParse(val, radix: 16);
+      if (parsed != null && parsed >= 0 && parsed <= 255) {
+        double finalVal = isCmyk ? parsed / 2.55 : parsed.toDouble();
+        onChanged(finalVal);
+      }
+    } catch (_) {}
+  }
+
+  Color _cmykToColor(double c, double m, double y, double k) {
+    double r = 255 * (1 - c / 100) * (1 - k / 100);
+    double g = 255 * (1 - m / 100) * (1 - k / 100);
+    double b = 255 * (1 - y / 100) * (1 - k / 100);
+    return Color.fromARGB(255, r.toInt(), g.toInt(), b.toInt());
+  }
+}
+
+class _ColorBox extends StatelessWidget {
+  final String label;
+  final String subLabel;
+  final Color color;
+
+  const _ColorBox({required this.label, required this.subLabel, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+        const SizedBox(height: 4),
+        Text(subLabel, style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12)),
+        const SizedBox(height: 12),
+        Container(
+          height: 140,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white.withOpacity(0.1), width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: color.withOpacity(0.4),
+                blurRadius: 20,
+                spreadRadius: 2,
+              )
+            ],
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.white.withOpacity(0.1), Colors.transparent],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

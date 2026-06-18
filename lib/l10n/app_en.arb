@@ -1,0 +1,104 @@
+{
+  "miniGamesHub": "Superskill Hub",
+  "visualGames": "Visual Games",
+  "audioGames": "Audio Games",
+  "brainGames": "Brain Games",
+  "memoryGames": "Memory Games",
+  "spatialGames": "Spatial Games",
+  "tebakHexRgb": "Guess HEX/RGB",
+  "pointDiffSystem": "Color difference point system",
+  "tebakHexCmyk": "Guess HEX/CMYK",
+  "cmykChallenge": "CMYK color challenge",
+  "perfectPitch": "Perfect Pitch",
+  "trainMusicPitch": "Train your music pitch hearing",
+  "brainReflex": "Brain Reflex",
+  "stroopTestDesc": "Stroop Test: Train focus & accuracy",
+  "target": "Target",
+  "yourResult": "Your Result",
+  "previewActive": "Preview Active",
+  "hidden": "Hidden",
+  "red": "Red",
+  "green": "Green",
+  "blue": "Blue",
+  "cyan": "Cyan",
+  "pink": "Pink",
+  "yellow": "Yellow",
+  "white": "White",
+  "difference": "Difference",
+  "playAgain": "Play Again",
+  "checkScore": "Check Score",
+  "gameSettings": "Game Settings",
+  "showUserPreview": "Show Your Color Preview",
+  "showTargetHex": "Show Target HEX Code",
+  "inputHexFor": "Input HEX for {label}",
+  "@inputHexFor": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "hexHint": "e.g. FF or 80",
+  "cancel": "Cancel",
+  "ok": "Ok",
+  "perfectPitchTrainer": "Perfect Pitch Trainer",
+  "listenAndGuess": "Listen to the note and guess!",
+  "correct": "Correct!",
+  "wrongNote": "Wrong! It was {targetNote}",
+  "@wrongNote": {
+    "placeholders": {
+      "targetNote": {
+        "type": "String"
+      }
+    }
+  },
+  "nextNote": "Next note",
+  "brainReflexStroop": "Brain Reflex: Stroop",
+  "timeLabel": "Time: {timeLeft}",
+  "@timeLabel": {
+    "placeholders": {
+      "timeLeft": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreLabel": "Score: {score}",
+  "@scoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "pickInkColor": "Pick ink color",
+  "pickWordMeaning": "Pick word meaning",
+  "timeUp": "Time's up!",
+  "yourFinalScore": "Your Final Score:",
+  "tryAgain": "Try again",
+  "backToMenu": "Back to menu",
+  "language": "Language",
+  "selectLanguage": "Select Language",
+  "memorySequence": "Memory Sequence",
+  "memorySequenceDesc": "Remember and repeat the color sequence",
+  "watchSequence": "Watch the sequence!",
+  "yourTurn": "Your turn!",
+  "levelLabel": "Level: {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "tileCount": "Tile Count",
+  "gameSpeed": "Game Speed",
+  "fast": "Fast",
+  "medium": "Medium",
+  "slow": "Slow",
+  "superFast": "Super Fast",
+  "spatialIq": "Spatial IQ",
+  "spatialIqDesc": "Train mental rotation and 3D space cognition",
+  "gridSize": "Grid Size",
+  "optionsCount": "Options Count",
+  "matchRotatedShape": "Find the correct matching shape!"
+}
