@@ -285,7 +285,7 @@ class _Game24ScreenState extends State<Game24Screen> {
       return Scaffold(
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -333,7 +333,7 @@ class _Game24ScreenState extends State<Game24Screen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(

@@ -308,7 +308,7 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
               child: Center(
               child: SingleChildScrollView(
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 450),
+                  constraints: const BoxConstraints(maxWidth: 600),
                   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -366,17 +366,17 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
                           ),
                           child: AspectRatio(
                             aspectRatio: 1,
-                            child: AnimatedBuilder(
-                              animation: _pulseController,
-                              builder: (context, child) {
-                                return TweenAnimationBuilder<Offset>(
-                                  tween: Tween<Offset>(
-                                    begin: Offset(playerC.toDouble(), playerR.toDouble()),
-                                    end: Offset(playerC.toDouble(), playerR.toDouble()),
-                                  ),
-                                  duration: const Duration(milliseconds: 150),
-                                  curve: Curves.easeOutQuad,
-                                  builder: (context, animatedOffset, child) {
+                            child: TweenAnimationBuilder<Offset>(
+                              tween: Tween<Offset>(
+                                begin: Offset(playerC.toDouble(), playerR.toDouble()),
+                                end: Offset(playerC.toDouble(), playerR.toDouble()),
+                              ),
+                              duration: const Duration(milliseconds: 150),
+                              curve: Curves.easeOutQuad,
+                              builder: (context, animatedOffset, child) {
+                                return AnimatedBuilder(
+                                  animation: _pulseController,
+                                  builder: (context, child) {
                                     return CustomPaint(
                                       painter: MazePainter(
                                         cells: cells,
@@ -508,62 +508,70 @@ class _MazeGameScreenState extends State<MazeGameScreen> with SingleTickerProvid
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    showModalBottomSheet(
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(height: 24),
-                Text('${l10n.gridSize}: $gridSize x $gridSize', style: theme.textTheme.bodyLarge),
-                const SizedBox(height: 8),
-                Slider(
-                  value: gridSize.toDouble(),
-                  min: 5,
-                  max: 15,
-                  divisions: 10,
-                  activeColor: theme.colorScheme.primary,
-                  inactiveColor: Colors.white10,
-                  onChanged: (v) {
-                    setState(() => gridSize = v.toInt());
-                    setModalState(() {});
-                    _generateNewMaze();
-                  },
-                ),
-                const SizedBox(height: 16),
-                
-                // Sudden Death Toggle
-                SwitchListTile(
-                  title: Text(l10n.suddenDeath, style: Theme.of(context).textTheme.bodyLarge),
-                  subtitle: Text(l10n.suddenDeathDesc, style: Theme.of(context).textTheme.bodyMedium),
-                  value: suddenDeath,
-                  activeColor: Theme.of(context).colorScheme.primary,
-                  onChanged: (v) {
-                    setState(() => suddenDeath = v);
-                    setModalState(() {});
-                  },
-                ),
-                
-                // Memorization Mode Toggle
-                SwitchListTile(
-                  title: Text(l10n.memorizationMode, style: Theme.of(context).textTheme.bodyLarge),
-                  subtitle: Text(l10n.memorizationModeDesc, style: Theme.of(context).textTheme.bodyMedium),
-                  value: memorizationMode,
-                  activeColor: Theme.of(context).colorScheme.primary,
-                  onChanged: (v) {
-                    setState(() => memorizationMode = v);
-                    setModalState(() {});
-                    _generateNewMaze();
-                  },
-                ),
-                const SizedBox(height: 24),
-              ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                  const SizedBox(height: 24),
+                  Text('${l10n.gridSize}: $gridSize x $gridSize', style: theme.textTheme.bodyLarge),
+                  const SizedBox(height: 8),
+                  Slider(
+                    value: gridSize.toDouble(),
+                    min: 5,
+                    max: 15,
+                    divisions: 10,
+                    activeColor: primaryColor,
+                    inactiveColor: Colors.white10,
+                    onChanged: (v) {
+                      setState(() => gridSize = v.toInt());
+                      setModalState(() {});
+                      _generateNewMaze();
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  // Sudden Death Toggle
+                  SwitchListTile(
+                    title: Text(l10n.suddenDeath, style: theme.textTheme.bodyLarge),
+                    subtitle: Text(l10n.suddenDeathDesc, style: theme.textTheme.bodyMedium),
+                    value: suddenDeath,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => suddenDeath = v);
+                      setModalState(() {});
+                    },
+                  ),
+                  
+                  // Memorization Mode Toggle
+                  SwitchListTile(
+                    title: Text(l10n.memorizationMode, style: theme.textTheme.bodyLarge),
+                    subtitle: Text(l10n.memorizationModeDesc, style: theme.textTheme.bodyMedium),
+                    value: memorizationMode,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => memorizationMode = v);
+                      setModalState(() {});
+                      _generateNewMaze();
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                ],
+              ),
             ),
           ),
         ),
@@ -680,6 +688,13 @@ class MazePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant MazePainter oldDelegate) => true;
+  bool shouldRepaint(covariant MazePainter oldDelegate) {
+    return oldDelegate.playerR != playerR ||
+        oldDelegate.playerC != playerC ||
+        oldDelegate.pulseValue != pulseValue ||
+        oldDelegate.hideWalls != hideWalls ||
+        oldDelegate.gridSize != gridSize ||
+        oldDelegate.cells != cells;
+  }
 }
 

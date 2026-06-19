@@ -263,5 +263,156 @@
   "stopEstimating": "停止",
   "tapOnBeat": "点击！",
   "listenRhythm": "聆听节奏...",
-  "rhythmSyncTap": "在第 4, 5, 6, 7, 8 拍点击！"
+  "rhythmSyncTap": "在第 4, 5, 6, 7, 8 拍点击！",
+  "gradientSort": "渐变排序",
+  "gradientSortDesc": "排列颜色以形成平滑的渐变过渡",
+  "oddOneOut": "找不同",
+  "oddOneOutDesc": "在时间耗尽前，找到颜色稍微不同的方块",
+  "shadowMatching": "影子匹配",
+  "shadowMatchingDesc": "匹配3D物体的正确2D投影",
+  "movesCount": "步数: {count}",
+  "@movesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shadowLightSource": "光源位置: {source}",
+  "@shadowLightSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "shadowTop": "顶部",
+  "shadowFront": "前面",
+  "shadowSide": "侧面",
+  "colorMemory": "颜色记忆",
+  "colorMemoryDesc": "记住颜色顺序，并在相似的选项中找回它们",
+  "memorizeColors": "请记住这些颜色！",
+  "selectColorForSlot": "选择第 {slot} 个位置的颜色",
+  "@selectColorForSlot": {
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  "numberOfOptions": "选项数量",
+  "optionsConfig": "{count} 个选项",
+  "@optionsConfig": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "submitAnswer": "提交答案",
+  "inspectingDiceOption": "正在检查选项 #{index}",
+  "@inspectingDiceOption": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "brainTrainingCategory": "大脑训练：{category}",
+  "@brainTrainingCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "highLevel": "最高关卡：{level}",
+  "@highLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "optionLabel": "选项 {name}",
+  "@optionLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finalScorePoints": "您的最终得分：{score} 分",
+  "@finalScorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameOver": "游戏结束！",
+  "wrong": "错误！",
+  "wrongWithCorrect": "错误！正确答案：{answer}",
+  "@wrongWithCorrect": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidNumber": "请输入有效的数字！",
+  "enterFinalResult": "输入最终结果",
+  "mentalFlashArithmetic": "心算闪现",
+  "speedMathInstruction": "数字和运算符将快速闪现。计算总和！",
+  "numberDigits": "数字位数：{digits}",
+  "@numberDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "int"
+      }
+    }
+  },
+  "flashSpeed": "闪现速度",
+  "speedSlow": "慢速 ({time}s)",
+  "@speedSlow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedNormal": "中速 ({time}s)",
+  "@speedNormal": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedFast": "快速 ({time}s)",
+  "@speedFast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedExtreme": "极速 ({time}s)",
+  "@speedExtreme": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "startGame": "开始游戏",
+  "getReady": "准备！",
+  "tempoLabel": "节拍: {bpm} BPM",
+  "@tempoLabel": {
+    "placeholders": {
+      "bpm": {
+        "type": "int"
+      }
+    }
+  }
 }

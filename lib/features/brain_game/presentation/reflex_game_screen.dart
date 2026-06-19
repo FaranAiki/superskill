@@ -31,6 +31,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
   int _floaterIdCounter = 0;
   
   late List<AnimationController> _tapControllers;
+  late List<Animation<double>> _tapAnimations;
 
   @override
   void initState() {
@@ -39,6 +40,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
       duration: const Duration(milliseconds: 200),
       vsync: this,
     ));
+    _tapAnimations = _tapControllers.map((controller) {
+      return Tween<double>(begin: 1.0, end: 0.9).animate(controller);
+    }).toList();
     _startNewGame();
   }
 
@@ -123,7 +127,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
       return Scaffold(
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -179,7 +183,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -219,15 +223,8 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                         
                         return GestureDetector(
                           onTapUp: (details) => _onTileTap(idx, context, details),
-                          child: AnimatedBuilder(
-                            animation: _tapControllers[idx],
-                            builder: (context, child) {
-                              double scale = 1.0 - 0.1 * _tapControllers[idx].value;
-                              return Transform.scale(
-                                scale: scale,
-                                child: child,
-                              );
-                            },
+                          child: ScaleTransition(
+                            scale: _tapAnimations[idx],
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -264,6 +261,13 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                                         _floaters.removeWhere((f) => f.id == floater.id);
                                       });
                                     },
+                                    child: Text(
+                                      "+10",
+                                      style: theme.textTheme.bodyMedium?.copyWith(
+                                        color: Colors.greenAccent,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     builder: (context, val, child) {
                                       return Positioned(
                                         left: 0,
@@ -272,13 +276,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                                         child: Opacity(
                                           opacity: 1.0 - val, // fade out
                                           child: Center(
-                                            child: Text(
-                                              "+10",
-                                              style: theme.textTheme.bodyMedium?.copyWith(
-                                                color: Colors.greenAccent,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
+                                            child: child,
                                           ),
                                         ),
                                       );

@@ -263,5 +263,156 @@
   "stopEstimating": "Стоп",
   "tapOnBeat": "Тап!",
   "listenRhythm": "Слушайте ритм...",
-  "rhythmSyncTap": "Тапайте на удары 4, 5, 6, 7, 8!"
+  "rhythmSyncTap": "Тапайте на удары 4, 5, 6, 7, 8!",
+  "gradientSort": "Сортировка градиента",
+  "gradientSortDesc": "Разложите цвета, чтобы получился плавный переход",
+  "oddOneOut": "Найди лишнее",
+  "oddOneOutDesc": "Найдите плитку с немного отличающимся цветом, пока не вышло время",
+  "shadowMatching": "Сопоставление теней",
+  "shadowMatchingDesc": "Угадайте правильную 2D-тень от парящего 3D-объекта",
+  "movesCount": "Ходы: {count}",
+  "@movesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shadowLightSource": "Источник света: {source}",
+  "@shadowLightSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "shadowTop": "Сверху",
+  "shadowFront": "Спереди",
+  "shadowSide": "Сбоку",
+  "colorMemory": "Память на цвета",
+  "colorMemoryDesc": "Запомните последовательность цветов и найдите их среди похожих вариантов",
+  "memorizeColors": "Запомните цвета!",
+  "selectColorForSlot": "Выберите цвет для ячейки {slot}",
+  "@selectColorForSlot": {
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  "numberOfOptions": "Количество вариантов",
+  "optionsConfig": "Вариантов: {count}",
+  "@optionsConfig": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "submitAnswer": "Отправить ответ",
+  "inspectingDiceOption": "Осмотр варианта №{index}",
+  "@inspectingDiceOption": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "brainTrainingCategory": "Тренировка мозга: {category}",
+  "@brainTrainingCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "highLevel": "Максимальный уровень: {level}",
+  "@highLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "optionLabel": "Вариант {name}",
+  "@optionLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finalScorePoints": "Ваш окончательный счет: {score} очков",
+  "@finalScorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameOver": "Игра окончена!",
+  "wrong": "Неправильно!",
+  "wrongWithCorrect": "Неправильно! Правильный ответ: {answer}",
+  "@wrongWithCorrect": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidNumber": "Пожалуйста, введите корректное число!",
+  "enterFinalResult": "Введите окончательный результат",
+  "mentalFlashArithmetic": "Быстрая ментальная арифметика",
+  "speedMathInstruction": "Числа и операторы будут быстро вспыхивать. Вычислите сумму!",
+  "numberDigits": "Количество цифр: {digits}",
+  "@numberDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "int"
+      }
+    }
+  },
+  "flashSpeed": "Скорость вспышки",
+  "speedSlow": "Медленно ({time}с)",
+  "@speedSlow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedNormal": "Нормально ({time}с)",
+  "@speedNormal": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedFast": "Быстро ({time}с)",
+  "@speedFast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedExtreme": "Экстремально ({time}с)",
+  "@speedExtreme": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "startGame": "Начать игру",
+  "getReady": "Приготовьтесь!",
+  "tempoLabel": "Темп: {bpm} BPM",
+  "@tempoLabel": {
+    "placeholders": {
+      "bpm": {
+        "type": "int"
+      }
+    }
+  }
 }

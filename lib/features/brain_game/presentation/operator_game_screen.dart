@@ -284,7 +284,7 @@ class _OperatorGameScreenState extends State<OperatorGameScreen> with SingleTick
       return Scaffold(
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -391,7 +391,7 @@ class _OperatorGameScreenState extends State<OperatorGameScreen> with SingleTick
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Column(
             children: [
               const SizedBox(height: 20),
@@ -421,21 +421,23 @@ class _OperatorGameScreenState extends State<OperatorGameScreen> with SingleTick
                       const SizedBox(height: 64),
                       
                       // Equation display
-                      AnimatedBuilder(
-                        animation: _fadeAnimation,
-                        builder: (context, child) {
-                          return Opacity(
-                            opacity: _fadeAnimation.value,
-                            child: Transform.translate(
+                      FadeTransition(
+                        opacity: _fadeAnimation,
+                        child: AnimatedBuilder(
+                          animation: _fadeAnimation,
+                          builder: (context, child) {
+                            return Transform.translate(
                               offset: Offset(0, 20 * (1 - _fadeAnimation.value)),
                               child: child,
+                            );
+                          },
+                          child: RepaintBoundary(
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: equationWidgets,
                             ),
-                          );
-                        },
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: equationWidgets,
+                          ),
                         ),
                       ),
                       

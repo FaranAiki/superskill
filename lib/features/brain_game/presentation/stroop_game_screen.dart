@@ -123,7 +123,7 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Column(
             children: [
           const SizedBox(height: 20),

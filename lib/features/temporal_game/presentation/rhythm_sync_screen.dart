@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
@@ -30,13 +31,17 @@ class _RhythmSyncScreenState extends State<RhythmSyncScreen> with TickerProvider
 
   // Pulse animation controller
   late AnimationController _pulseController;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
     _pulseController = AnimationController(
-      duration: const Duration(milliseconds: 150),
       vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeOut),
     );
   }
 
@@ -191,7 +196,7 @@ class _RhythmSyncScreenState extends State<RhythmSyncScreen> with TickerProvider
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -234,9 +239,7 @@ class _RhythmSyncScreenState extends State<RhythmSyncScreen> with TickerProvider
                 GestureDetector(
                   onTap: (isTappingPhase && !isFinished) ? _handleTap : null,
                   child: ScaleTransition(
-                    scale: Tween<double>(begin: 1.0, end: 1.1).animate(
-                      CurvedAnimation(parent: _pulseController, curve: Curves.easeOut),
-                    ),
+                    scale: _scaleAnimation,
                     child: Container(
                       height: 180,
                       width: 180,
@@ -384,33 +387,44 @@ class _RhythmSyncScreenState extends State<RhythmSyncScreen> with TickerProvider
 
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 20),
-              Text(
-                'Tempo: $bpm BPM',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Slider(
-                value: bpm.toDouble(),
-                min: 60,
-                max: 150,
-                divisions: 6,
-                onChanged: (v) {
-                  setState(() => bpm = v.toInt());
-                  setModalState(() {});
-                },
-              ),
-              const SizedBox(height: 24),
-            ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                const SizedBox(height: 20),
+                Text(
+                  l10n.tempoLabel(bpm),
+                  style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                Slider(
+                  value: bpm.toDouble(),
+                  min: 60,
+                  max: 150,
+                  divisions: 6,
+                  activeColor: primaryColor,
+                  onChanged: (v) {
+                    setState(() => bpm = v.toInt());
+                    setModalState(() {});
+                  },
+                ),
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
       ),
@@ -486,5 +500,9 @@ class TimelinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant TimelinePainter oldDelegate) {
+    return oldDelegate.beatInterval != beatInterval ||
+        !listEquals(oldDelegate.idealBeats, idealBeats) ||
+        !listEquals(oldDelegate.userTaps, userTaps);
+  }
 }

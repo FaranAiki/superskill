@@ -1,68 +1,71 @@
-# 🌌 Superskill: Ultimate Cognitive & Brain Training Hub
+# Superskill: Ultimate Cognitive & Brain Training Hub
 
-A state-of-the-art Flutter cognitive training application designed with a sleek, vertical-first **Glossy Neon Blue** aesthetic. Challenge and measure your visual, audio, numerical, memory, spatial, and temporal capabilities with highly refined mini-games.
-
----
-
-## 🎨 Design Theme & Experience
-* **Glossy Neon Blue Aesthetic**: High-fidelity styling featuring deep slate-gray and dark backgrounds (`#030712`), glowing cyan and blue highlights (`#38BDF8`), translucent glassmorphism borders, and smooth animations.
-* **Vertical / Mobile-First Layout**: Carefully structured layouts restricted to standard mobile dimensions on desktop and web, preventing visual stretch and layout overflows.
-* **Advanced Customization**: Support for dark/light themes, custom typography (e.g., Inter, Roboto, Poppins, Orbitron), dynamic font scaling, and global scoreboard.
-* **Multilingual Translation (i18n)**: Fully translated into five major languages:
-  * 🇬🇧 English (English)
-  * 🇮🇩 Indonesian (Bahasa Indonesia)
-  * 🇨🇳 Mandarin (中文)
-  * 🇯🇵 Japanese (日本語)
-  * 🇷🇺 Russian (Русский)
+Superskill is a professional, high-fidelity Flutter cognitive training application designed with a sleek, vertical-first Dark/Neon-Blue aesthetic. The application allows users to challenge and measure their visual, audio, numerical, memory, spatial, and temporal capabilities with 18 highly refined mini-games.
 
 ---
 
-## 🎮 Game Categories & Challenges
-
-Superskill features 14 immersive mini-games categorized across 7 cognitive domains:
-
-### 1. 👁️ Visual Games (Визуальные Игры / Game Visual)
-* **Tebak HEX/RGB**: Identify the matching color block corresponding to the given hex code.
-* **Tebak CMYK**: A professional-grade CMYK color match challenge.
-
-### 2. 🎵 Audio Games (Аудио Игры / Game Audio)
-* **Perfect Pitch (Абсолютный Слух)**: Train your ear by listening to notes and guessing the exact musical pitch.
-
-### 3. 🧠 Brain Games (Игры для Мозга / Game Otak)
-* **Stroop Reflex (Мозговой Рефлекс)**: Test your focus and reaction speed under conflicting cognitive interference (color vs. word text).
-* **Reflex Tap (Быстрый Клик)**: Tap fast when the signal flashes to measure your reaction time in milliseconds.
-* **Schulte Focus (Таблицы Шульте)**: Find and tap numbers in ascending order from a grid to test search speed and focus.
-
-### 4. 🔢 Numerical Games (Числовые Игры / Game Angka)
-* **Operator Rush (Оператор)**: Speed-solve basic arithmetic equations by inserting the correct operator.
-* **Game 24 (Игра 24)**: Given four numbers, determine if they can mathematically be manipulated to equal exactly 24.
-* **Speed Math (Быстрая Математика)**: Rapidly answer true/false math statements that scale in complexity as levels advance.
-
-### 5. 🧠 Memory Games (Игры на Память / Game Memori)
-* **Memory Sequence (Последовательность)**: Remember and replicate an expanding sequence of flashing grid squares.
-* **Chimp Memory (Шимпанзе)**: Tap hidden tiles in consecutive numeric order, testing short-term visual memory inspired by cognitive primate studies.
-
-### 6. 📐 Spatial Games (Пространственные Игры / Game Spasial)
-* **Spatial IQ (Пространственный IQ)**: Mental rotation challenge utilizing 3D perspective projection and isometric cubes. Features a grid-toggle helper and rotation lock.
-* **Maze Escape (Лабиринт)**: Guide your way out of custom procedural grid-based mazes.
-* **Spatial Dice (Игра в Кости)**: Spatial logic matching dice faces where opposite sides always sum up to 7.
-
-### 7. ⏱️ Temporal Control (Временной Контроль / Kontrol Temporal) `NEW!`
-* **Time Estimator**: Estimate a target duration (e.g., 8.0 seconds). The timer vanishes after 3 seconds, requiring accurate internal timing.
-* **Rhythm Sync**: Synchronize tapping to a given BPM tempo. Listen/watch the visual pulse for 3 beats, then tap accurately on beats 4 to 8.
+## Design Theme & Core Features
+* **Neon Blue Design System**: High-fidelity styling featuring deep slate-gray backgrounds (`#030712`), glowing cyan/blue highlights (`#38BDF8`), glassmorphic containers, and responsive micro-animations.
+* **Vertical / Mobile-First Layout**: Carefully structured layouts restricted to standard mobile dimensions (maximum width of 400-500px) on desktop and web, preventing visual stretching and layout overflows.
+* **Localization (i18n)**: Out-of-the-box support for five languages with fallback templates:
+  * English (EN)
+  * Indonesian (ID)
+  * Japanese (JA)
+  * Russian (RU)
+  * Chinese (ZH)
+* **High Score Tracking**: Local persistence of user statistics and levels achieved across different games.
 
 ---
 
-## 📈 Scoring & High Score System
-Every game connects to a localized global high-score system. 
-For temporal challenges, scores are calculated using a precise mathematical penalty system based on error offset $d$:
+## Game Categories & Challenges
+
+Superskill features 18 immersive mini-games categorized across 7 cognitive domains:
+
+### 1. Visual Games
+* **Guess HEX/RGB**: Identify the matching color block corresponding to the given hexadecimal color code.
+* **Guess CMYK**: A professional-grade CMYK color match challenge using slider adjustments.
+* **Gradient Sort**: Drag and drop color blocks to arrange them into a smooth, seamless gradient transition between two locked endpoints.
+* **Odd One Out**: Find the single grid tile that has a slightly different RGB color before the countdown timer runs out.
+
+### 2. Audio Games
+* **Perfect Pitch**: Train note identification by listening to musical pitches and guessing the correct key.
+
+### 3. Brain Games
+* **Stroop Reflex**: Test cognitive focus and reaction speed under conflicting cognitive interference (color name word text vs. actual color ink).
+* **Reflex Tap**: Tap as fast as possible when the visual signal flashes to measure reaction time in milliseconds.
+* **Schulte Focus**: Find and tap numbers in ascending order from a randomized grid to test search speed and focus.
+
+### 4. Numerical Games
+* **Operator Rush**: Speed-solve arithmetic equations by selecting the correct mathematical operator.
+* **Game 24**: Given four numbers, determine if they can be mathematically manipulated using basic arithmetic to equal exactly 24.
+* **Speed Math**: Rapidly answer true/false math statements that scale in complexity as levels advance.
+
+### 5. Memory Games
+* **Memory Sequence**: Replicate an expanding sequence of flashing grid squares.
+* **Chimp Memory**: Memorize consecutive numbers and tap their hidden tiles in order, inspired by primate short-term visual memory studies.
+* **Color Memory**: Memorize a sequence of target colors and recall them by choosing from options containing highly similar hues.
+
+### 6. Spatial Games
+* **Spatial IQ**: Mental rotation challenge using 3D perspective projection and isometric cubes, featuring a grid outline helper and rotation lock.
+* **Maze Escape**: Navigate and guide your way out of procedurally generated grid-based mazes.
+* **Spatial Dice**: Match spatial dice faces where opposite sides always sum up to 7.
+* **Shadow Matching**: Match a rotating 3D block figure to its correct 2D shadow projection (Top, Front, Side) with interactive manual drag controls and coordinate axes indicators.
+
+### 7. Temporal Control
+* **Time Estimator**: Estimate a target duration. The visual clock vanishes after 3 seconds, requiring accurate internal timing.
+* **Rhythm Sync**: Synchronize tapping to a given BPM tempo. Listen to the visual pulse for 3 beats, then tap accurately on beats 4 to 8.
+
+---
+
+## Scoring & High Score System
+Every game integrates with a localized high-score system. For temporal challenges, scores are calculated using a precise mathematical penalty system based on error offset $d$:
 * If the absolute difference $d > 1$: $\text{Penalty} = d^2$
 * If the absolute difference $d < 1$: $\text{Penalty} = \sqrt{d}$
 * The score scales up to a maximum of 1,000: $\text{Score} = \max(0, 1000 - (\text{Penalty} \times 200))$
 
 ---
 
-## 🛠️ Getting Started & Build
+## Getting Started & Build
 
 ### Prerequisites
 * Flutter SDK (3.22.x or newer recommended)

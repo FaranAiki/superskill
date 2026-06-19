@@ -96,7 +96,7 @@ class _TimeEstimatorScreenState extends State<TimeEstimatorScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -333,33 +333,44 @@ class _TimeEstimatorScreenState extends State<TimeEstimatorScreen> {
 
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 20),
-              Text(
-                'Target Duration: ${targetTime.toStringAsFixed(1)} seconds',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Slider(
-                value: targetTime,
-                min: 5,
-                max: 15,
-                divisions: 10,
-                onChanged: (v) {
-                  setState(() => targetTime = v);
-                  setModalState(() {});
-                },
-              ),
-              const SizedBox(height: 24),
-            ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                const SizedBox(height: 20),
+                Text(
+                  l10n.targetDurationLabel(targetTime.toStringAsFixed(1)),
+                  style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                Slider(
+                  value: targetTime,
+                  min: 5,
+                  max: 15,
+                  divisions: 10,
+                  activeColor: primaryColor,
+                  onChanged: (v) {
+                    setState(() => targetTime = v);
+                    setModalState(() {});
+                  },
+                ),
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
       ),

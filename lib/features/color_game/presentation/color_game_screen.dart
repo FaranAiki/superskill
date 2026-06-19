@@ -96,7 +96,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
       ),
       body: Center(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 500),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -201,38 +201,47 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
 
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 16),
-              SwitchListTile(
-                title: Text(l10n.showUserPreview),
-                activeColor: const Color(0xFF38BDF8),
-                value: showUserPreview,
-                onChanged: (v) {
-                  setState(() => showUserPreview = v);
-                  setModalState(() {});
-                },
-              ),
-              SwitchListTile(
-                title: Text(l10n.showTargetHex),
-                activeColor: const Color(0xFF38BDF8),
-                value: showTargetHex,
-                onChanged: (v) {
-                  setState(() => showTargetHex = v);
-                  setModalState(() {});
-                },
-              ),
-            ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: Text(l10n.showUserPreview),
+                  activeColor: const Color(0xFF38BDF8),
+                  value: showUserPreview,
+                  onChanged: (v) {
+                    setState(() => showUserPreview = v);
+                    setModalState(() {});
+                  },
+                ),
+                SwitchListTile(
+                  title: Text(l10n.showTargetHex),
+                  activeColor: const Color(0xFF38BDF8),
+                  value: showTargetHex,
+                  onChanged: (v) {
+                    setState(() => showTargetHex = v);
+                    setModalState(() {});
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

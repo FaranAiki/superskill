@@ -277,7 +277,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: Column(
@@ -299,7 +299,7 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
               ),
               const SizedBox(height: 40),
               ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 500),
+                constraints: const BoxConstraints(maxWidth: 600),
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

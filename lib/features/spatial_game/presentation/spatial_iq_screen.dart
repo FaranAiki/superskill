@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as v;
 import 'package:superskill/l10n/app_localizations.dart';
@@ -194,7 +195,7 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Column(
             children: [
           Padding(
@@ -319,65 +320,79 @@ class _SpatialIqScreenState extends State<SpatialIqScreen> {
 
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 20),
-              Text('${l10n.gridSize}: $gridSize x $gridSize x $gridSize', style: Theme.of(context).textTheme.bodyLarge),
-              Slider(
-                value: gridSize.toDouble(),
-                min: 3,
-                max: 5,
-                divisions: 2,
-                onChanged: (v) {
-                  setState(() => gridSize = v.toInt());
-                  setModalState(() {});
-                  _generateLevel();
-                },
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                  const SizedBox(height: 20),
+                  Text('${l10n.gridSize}: $gridSize x $gridSize x $gridSize', style: theme.textTheme.bodyLarge),
+                  Slider(
+                    value: gridSize.toDouble(),
+                    min: 3,
+                    max: 5,
+                    divisions: 2,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => gridSize = v.toInt());
+                      setModalState(() {});
+                      _generateLevel();
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  Text('${l10n.optionsCount}: $optionsCount', style: theme.textTheme.bodyLarge),
+                  Slider(
+                    value: optionsCount.toDouble(),
+                    min: 3,
+                    max: 9,
+                    divisions: 6,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => optionsCount = v.toInt());
+                      setModalState(() {});
+                      _generateLevel();
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  SwitchListTile(
+                    title: Text(l10n.allowRotation, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(l10n.allowRotationDesc),
+                    value: enableRotation,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => enableRotation = v);
+                      setModalState(() {});
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  SwitchListTile(
+                    title: Text(l10n.showGrid, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(l10n.showGridDesc),
+                    value: showGrid,
+                    activeColor: primaryColor,
+                    onChanged: (v) {
+                      setState(() => showGrid = v);
+                      setModalState(() {});
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text('${l10n.optionsCount}: $optionsCount', style: Theme.of(context).textTheme.bodyLarge),
-              Slider(
-                value: optionsCount.toDouble(),
-                min: 3,
-                max: 9,
-                divisions: 6,
-                onChanged: (v) {
-                  setState(() => optionsCount = v.toInt());
-                  setModalState(() {});
-                  _generateLevel();
-                },
-              ),
-              const SizedBox(height: 10),
-              SwitchListTile(
-                title: Text(l10n.allowRotation, style: const TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(l10n.allowRotationDesc),
-                value: enableRotation,
-                activeColor: Theme.of(context).colorScheme.primary,
-                onChanged: (v) {
-                  setState(() => enableRotation = v);
-                  setModalState(() {});
-                },
-              ),
-              const SizedBox(height: 10),
-              SwitchListTile(
-                title: Text(l10n.showGrid, style: const TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(l10n.showGridDesc),
-                value: showGrid,
-                activeColor: Theme.of(context).colorScheme.primary,
-                onChanged: (v) {
-                  setState(() => showGrid = v);
-                  setModalState(() {});
-                },
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -564,7 +579,14 @@ class BlockPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant BlockPainter oldDelegate) {
+    return oldDelegate.angleX != angleX ||
+        oldDelegate.angleY != angleY ||
+        oldDelegate.gridSize != gridSize ||
+        oldDelegate.isSmall != isSmall ||
+        oldDelegate.showGrid != showGrid ||
+        !listEquals(oldDelegate.blocks, blocks);
+  }
 }
 
 abstract class _Renderable {

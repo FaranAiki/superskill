@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as v;
 import 'package:superskill/l10n/app_localizations.dart';
@@ -144,7 +145,7 @@ class _DiceGameScreenState extends State<DiceGameScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Column(
             children: [
               Padding(
@@ -204,7 +205,7 @@ class _DiceGameScreenState extends State<DiceGameScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  "Inspecting Dice Option #${selectedOptionIndex + 1}",
+                  l10n.inspectingDiceOption(selectedOptionIndex + 1),
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: primaryColor,
@@ -342,7 +343,7 @@ class _DiceGameScreenState extends State<DiceGameScreen> {
                               borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                          child: const Text("Submit Answer", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          child: Text(l10n.submitAnswer, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                   ],
@@ -357,41 +358,51 @@ class _DiceGameScreenState extends State<DiceGameScreen> {
 
   void _showSettings(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.gameSettings, style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 20),
-              Text('${l10n.optionsCount}: $optionsCount', style: Theme.of(context).textTheme.bodyLarge),
-              Slider(
-                value: optionsCount.toDouble(),
-                min: 3,
-                max: 9,
-                divisions: 6,
-                onChanged: (v) {
-                  setState(() => optionsCount = v.toInt());
-                  setModalState(() {});
-                  _generateLevel();
-                },
-              ),
-              const SizedBox(height: 10),
-              SwitchListTile(
-                title: Text(l10n.allowRotation, style: const TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(l10n.allowRotationDesc),
-                value: enableRotation,
-                activeColor: Theme.of(context).colorScheme.primary,
-                onChanged: (v) {
-                  setState(() => enableRotation = v);
-                  setModalState(() {});
-                },
-              ),
-            ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                const SizedBox(height: 20),
+                Text('${l10n.optionsCount}: $optionsCount', style: theme.textTheme.bodyLarge),
+                Slider(
+                  value: optionsCount.toDouble(),
+                  min: 3,
+                  max: 9,
+                  divisions: 6,
+                  onChanged: (v) {
+                    setState(() => optionsCount = v.toInt());
+                    setModalState(() {});
+                    _generateLevel();
+                  },
+                ),
+                const SizedBox(height: 10),
+                SwitchListTile(
+                  title: Text(l10n.allowRotation, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text(l10n.allowRotationDesc),
+                  value: enableRotation,
+                  activeColor: primaryColor,
+                  onChanged: (v) {
+                    setState(() => enableRotation = v);
+                    setModalState(() {});
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -595,7 +606,7 @@ class DicePainter extends CustomPainter {
 
       // Calculate camera normal direction
       v.Vector3 normalCam = rotationMatrix.transform3(localNormals[i]);
-      bool isFacingCamera = normalCam.z > 0;
+      bool isFacingCamera = normalCam.z < 0;
 
       diceFaces.add(_DiceFace(
         points: points,
@@ -611,7 +622,14 @@ class DicePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant DicePainter oldDelegate) {
+    return oldDelegate.angleX != angleX ||
+        oldDelegate.angleY != angleY ||
+        oldDelegate.primaryColor != primaryColor ||
+        oldDelegate.isLight != isLight ||
+        oldDelegate.isSmall != isSmall ||
+        !listEquals(oldDelegate.faceValues, faceValues);
+  }
 }
 
 class _DiceFace {

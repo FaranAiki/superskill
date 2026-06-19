@@ -71,7 +71,7 @@ class _SoundGameScreenState extends State<SoundGameScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
             child: Column(

@@ -30,6 +30,7 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
   
   // Success animation controllers for each tile
   late List<AnimationController> _successControllers;
+  late List<Animation<double>> _successAnimations;
 
   @override
   void initState() {
@@ -46,6 +47,9 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
       duration: const Duration(milliseconds: 300),
       vsync: this,
     ));
+    _successAnimations = _successControllers.map((controller) {
+      return ChimpSuccessScaleTween().animate(controller);
+    }).toList();
 
     _generateLevel();
   }
@@ -249,7 +253,7 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
       return Scaffold(
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -297,7 +301,7 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Column(
@@ -330,69 +334,64 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
                       child: child,
                     );
                   },
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isLight ? Colors.black.withOpacity(0.02) : const Color(0xFF1E293B).withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: primaryColor.withOpacity(0.15), width: 1.5),
-                    ),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: gridSize,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
+                  child: RepaintBoundary(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isLight ? Colors.black.withOpacity(0.02) : const Color(0xFF1E293B).withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: primaryColor.withOpacity(0.15), width: 1.5),
                       ),
-                      itemCount: gridSize * gridSize,
-                      itemBuilder: (context, idx) {
-                        final number = board[idx];
-                        final hasNumber = number != null;
-                        
-                        return GestureDetector(
-                          onTap: hasNumber ? () => _onTileTap(idx) : null,
-                          child: AnimatedBuilder(
-                            animation: _successControllers[idx],
-                            builder: (context, child) {
-                              double scale = 1.0 + 0.15 * sin(_successControllers[idx].value * pi);
-                              return Transform.scale(
-                                scale: scale,
-                                child: child,
-                              );
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              decoration: BoxDecoration(
-                                color: hasNumber
-                                    ? (isShowingNumbers 
-                                        ? primaryColor.withOpacity(0.15) 
-                                        : (blindMode ? Colors.transparent : primaryColor.withOpacity(0.8)))
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: gridSize,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: gridSize * gridSize,
+                        itemBuilder: (context, idx) {
+                          final number = board[idx];
+                          final hasNumber = number != null;
+                          
+                          return GestureDetector(
+                            onTap: hasNumber ? () => _onTileTap(idx) : null,
+                            child: ScaleTransition(
+                              scale: _successAnimations[idx],
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                decoration: BoxDecoration(
                                   color: hasNumber
                                       ? (isShowingNumbers 
-                                          ? primaryColor 
-                                          : (hideOutlines 
-                                              ? Colors.transparent 
-                                              : (blindMode ? primaryColor.withOpacity(0.05) : primaryColor)))
-                                      : (hideOutlines && !isShowingNumbers ? Colors.transparent : primaryColor.withOpacity(0.05)),
-                                  width: 1.5,
+                                          ? primaryColor.withOpacity(0.15) 
+                                          : (blindMode ? Colors.transparent : primaryColor.withOpacity(0.8)))
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: hasNumber
+                                        ? (isShowingNumbers 
+                                            ? primaryColor 
+                                            : (hideOutlines 
+                                                ? Colors.transparent 
+                                                : (blindMode ? primaryColor.withOpacity(0.05) : primaryColor)))
+                                        : (hideOutlines && !isShowingNumbers ? Colors.transparent : primaryColor.withOpacity(0.05)),
+                                    width: 1.5,
+                                  ),
                                 ),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                hasNumber && isShowingNumbers ? number.toString() : "",
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  hasNumber && isShowingNumbers ? number.toString() : "",
+                                  style: theme.textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: primaryColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -402,5 +401,12 @@ class _ChimpGameScreenState extends State<ChimpGameScreen> with TickerProviderSt
         ),
       ),
     );
+  }
+}
+
+class ChimpSuccessScaleTween extends Animatable<double> {
+  @override
+  double transform(double t) {
+    return 1.0 + 0.15 * sin(t * pi);
   }
 }

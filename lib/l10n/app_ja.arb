@@ -263,5 +263,156 @@
   "stopEstimating": "ストップ",
   "tapOnBeat": "タップ！",
   "listenRhythm": "リズムを聴いて...",
-  "rhythmSyncTap": "4、5、6、7、8拍目でタップ！"
+  "rhythmSyncTap": "4、5、6、7、8拍目でタップ！",
+  "gradientSort": "グラデーション整列",
+  "gradientSortDesc": "色のブロックを並び替えて、滑らかなグラデーションを作成します",
+  "oddOneOut": "仲間外れ探し",
+  "oddOneOutDesc": "制限時間内に、少しだけ色が異なるボックスを見つけます",
+  "shadowMatching": "影合わせ",
+  "shadowMatchingDesc": "3Dオブジェクトの形に合う2Dの影を当てます",
+  "movesCount": "手数: {count}",
+  "@movesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shadowLightSource": "光源: {source}",
+  "@shadowLightSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "shadowTop": "上",
+  "shadowFront": "前",
+  "shadowSide": "横",
+  "colorMemory": "色の記憶",
+  "colorMemoryDesc": "色の順序を記憶し、似たような選択肢から一致させます",
+  "memorizeColors": "色を記憶してください！",
+  "selectColorForSlot": "スロット {slot} の色を選択",
+  "@selectColorForSlot": {
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  "numberOfOptions": "選択肢の数",
+  "optionsConfig": "{count} 個の選択肢",
+  "@optionsConfig": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "submitAnswer": "回答を送信",
+  "inspectingDiceOption": "オプション #{index} を検査中",
+  "@inspectingDiceOption": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "brainTrainingCategory": "脳トレ: {category}",
+  "@brainTrainingCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "highLevel": "最高レベル: {level}",
+  "@highLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "optionLabel": "選択肢 {name}",
+  "@optionLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finalScorePoints": "最終スコア: {score} ポイント",
+  "@finalScorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameOver": "ゲームオーバー！",
+  "wrong": "不正解！",
+  "wrongWithCorrect": "不正解！正しい回答: {answer}",
+  "@wrongWithCorrect": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidNumber": "有効な数値を入力してください！",
+  "enterFinalResult": "最終結果を入力してください",
+  "mentalFlashArithmetic": "暗算フラッシュ",
+  "speedMathInstruction": "数字と記号が素早く点滅します。合計を計算してください！",
+  "numberDigits": "桁数: {digits}",
+  "@numberDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "int"
+      }
+    }
+  },
+  "flashSpeed": "フラッシュ速度",
+  "speedSlow": "遅い ({time}s)",
+  "@speedSlow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedNormal": "普通 ({time}s)",
+  "@speedNormal": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedFast": "速い ({time}s)",
+  "@speedFast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedExtreme": "超高速 ({time}s)",
+  "@speedExtreme": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "startGame": "ゲーム開始",
+  "getReady": "準備して！",
+  "tempoLabel": "テンポ: {bpm} BPM",
+  "@tempoLabel": {
+    "placeholders": {
+      "bpm": {
+        "type": "int"
+      }
+    }
+  }
 }

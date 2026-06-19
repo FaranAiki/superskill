@@ -263,5 +263,156 @@
   "stopEstimating": "Berhenti",
   "tapOnBeat": "Ketuk!",
   "listenRhythm": "Dengarkan irama...",
-  "rhythmSyncTap": "Ketuk pada ketukan 4, 5, 6, 7, 8!"
+  "rhythmSyncTap": "Ketuk pada ketukan 4, 5, 6, 7, 8!",
+  "gradientSort": "Ujian Gradien",
+  "gradientSortDesc": "Geser kotak warna agar membentuk gradien transisi yang mulus",
+  "oddOneOut": "Cari yang Beda",
+  "oddOneOutDesc": "Cari satu kotak yang warnanya sedikit berbeda sebelum waktu habis",
+  "shadowMatching": "Cocok Bayangan",
+  "shadowMatchingDesc": "Tebak bayangan 2D yang jatuh ke lantai dari objek 3D",
+  "movesCount": "Langkah: {count}",
+  "@movesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shadowLightSource": "Arah Lampu: {source}",
+  "@shadowLightSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "shadowTop": "Atas",
+  "shadowFront": "Depan",
+  "shadowSide": "Samping",
+  "colorMemory": "Ingatan Warna",
+  "colorMemoryDesc": "Ingat urutan warna yang ditampilkan dan tebak kembali dari pilihan warna yang mirip",
+  "memorizeColors": "Ingat warna-warna ini!",
+  "selectColorForSlot": "Pilih warna untuk kotak #{slot}",
+  "@selectColorForSlot": {
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  "numberOfOptions": "Jumlah Pilihan",
+  "optionsConfig": "{count} Pilihan",
+  "@optionsConfig": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "submitAnswer": "Kirim Jawaban",
+  "inspectingDiceOption": "Memeriksa Opsi #{index}",
+  "@inspectingDiceOption": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "brainTrainingCategory": "Pelatihan Otak: {category}",
+  "@brainTrainingCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "highLevel": "Level Tertinggi: {level}",
+  "@highLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "optionLabel": "Pilihan {name}",
+  "@optionLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finalScorePoints": "Skor Akhir: {score} poin",
+  "@finalScorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameOver": "Permainan Berakhir!",
+  "wrong": "Salah!",
+  "wrongWithCorrect": "Salah! Jawaban benar: {answer}",
+  "@wrongWithCorrect": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidNumber": "Harap masukkan angka yang valid!",
+  "enterFinalResult": "Masukkan Hasil Akhir",
+  "mentalFlashArithmetic": "Aritmatika Kilat Mental",
+  "speedMathInstruction": "Angka dan operator akan berkedip dengan cepat. Hitung jumlahnya!",
+  "numberDigits": "Digit Angka: {digits}",
+  "@numberDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "int"
+      }
+    }
+  },
+  "flashSpeed": "Kecepatan Kedip",
+  "speedSlow": "Lambat ({time}s)",
+  "@speedSlow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedNormal": "Normal ({time}s)",
+  "@speedNormal": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedFast": "Cepat ({time}s)",
+  "@speedFast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedExtreme": "Ekstrim ({time}s)",
+  "@speedExtreme": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "startGame": "Mulai Game",
+  "getReady": "Bersiaplah!",
+  "tempoLabel": "Tempo: {bpm} BPM",
+  "@tempoLabel": {
+    "placeholders": {
+      "bpm": {
+        "type": "int"
+      }
+    }
+  }
 }

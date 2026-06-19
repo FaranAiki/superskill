@@ -188,7 +188,7 @@ class _SchulteGameScreenState extends State<SchulteGameScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -373,89 +373,95 @@ class _SchulteGameScreenState extends State<SchulteGameScreen> {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
 
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      backgroundColor: theme.scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => StatefulBuilder(
-        builder: (context, setModalState) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
-              ),
-              const SizedBox(height: 24),
-              
-              // Grid Size selector
-              Text("${l10n.gridSize}: ${gridSize}x$gridSize", style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
-              Slider(
-                value: gridSize.toDouble(),
-                min: 3,
-                max: 5,
-                divisions: 2,
-                activeColor: primaryColor,
-                onChanged: (v) {
-                  setState(() => gridSize = v.toInt());
-                  setModalState(() {});
-                },
-              ),
-              const SizedBox(height: 16),
-              
-              // Order selector
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(l10n.schulteOrder, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                  ToggleButtons(
-                    isSelected: [isAscending, !isAscending],
-                    onPressed: (index) {
-                      setState(() {
-                        isAscending = index == 0;
-                      });
-                      setModalState(() {});
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    selectedColor: Colors.white,
-                    fillColor: primaryColor,
-                    constraints: const BoxConstraints(minWidth: 90, minHeight: 36),
-                    children: [
-                      Text(l10n.ascending),
-                      Text(l10n.descending),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              
-              // Color selector
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(l10n.gridColorMode, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                  ToggleButtons(
-                    isSelected: [colorMode == 'monochrome', colorMode == 'rainbow'],
-                    onPressed: (index) {
-                      setState(() {
-                        colorMode = index == 0 ? 'monochrome' : 'rainbow';
-                      });
-                      setModalState(() {});
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    selectedColor: Colors.white,
-                    fillColor: primaryColor,
-                    constraints: const BoxConstraints(minWidth: 90, minHeight: 36),
-                    children: [
-                      Text(l10n.monochrome),
-                      Text(l10n.rainbow),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-            ],
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                ),
+                const SizedBox(height: 24),
+                
+                // Grid Size selector
+                Text("${l10n.gridSize}: ${gridSize}x$gridSize", style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+                Slider(
+                  value: gridSize.toDouble(),
+                  min: 3,
+                  max: 5,
+                  divisions: 2,
+                  activeColor: primaryColor,
+                  onChanged: (v) {
+                    setState(() => gridSize = v.toInt());
+                    setModalState(() {});
+                  },
+                ),
+                const SizedBox(height: 16),
+                
+                // Order selector
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(l10n.schulteOrder, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    ToggleButtons(
+                      isSelected: [isAscending, !isAscending],
+                      onPressed: (index) {
+                        setState(() {
+                          isAscending = index == 0;
+                        });
+                        setModalState(() {});
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      selectedColor: Colors.white,
+                      fillColor: primaryColor,
+                      constraints: const BoxConstraints(minWidth: 90, minHeight: 36),
+                      children: [
+                        Text(l10n.ascending),
+                        Text(l10n.descending),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                
+                // Color selector
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(l10n.gridColorMode, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    ToggleButtons(
+                      isSelected: [colorMode == 'monochrome', colorMode == 'rainbow'],
+                      onPressed: (index) {
+                        setState(() {
+                          colorMode = index == 0 ? 'monochrome' : 'rainbow';
+                        });
+                        setModalState(() {});
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      selectedColor: Colors.white,
+                      fillColor: primaryColor,
+                      constraints: const BoxConstraints(minWidth: 90, minHeight: 36),
+                      children: [
+                        Text(l10n.monochrome),
+                        Text(l10n.rainbow),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
       ),

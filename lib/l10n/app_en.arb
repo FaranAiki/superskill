@@ -263,5 +263,164 @@
   "stopEstimating": "Stop",
   "tapOnBeat": "Tap!",
   "listenRhythm": "Listen to the rhythm...",
-  "rhythmSyncTap": "Tap on beats 4, 5, 6, 7, 8!"
+  "rhythmSyncTap": "Tap on beats 4, 5, 6, 7, 8!",
+  "gradientSort": "Gradient Sort",
+  "gradientSortDesc": "Arrange colors to form a smooth transition",
+  "oddOneOut": "Odd One Out",
+  "oddOneOutDesc": "Find the box with a slightly different color",
+  "shadowMatching": "Shadow Matching",
+  "shadowMatchingDesc": "Match the 3D object to its correct 2D shadow",
+  "movesCount": "Moves: {count}",
+  "@movesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shadowLightSource": "Light Source: {source}",
+  "@shadowLightSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "shadowTop": "Top",
+  "shadowFront": "Front",
+  "shadowSide": "Side",
+  "colorMemory": "Color Memory",
+  "colorMemoryDesc": "Memorize the sequence of colors and match them from similar options",
+  "memorizeColors": "Memorize the colors!",
+  "selectColorForSlot": "Select color for slot {slot}",
+  "@selectColorForSlot": {
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  "numberOfOptions": "Number of Options",
+  "optionsConfig": "{count} Options",
+  "@optionsConfig": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "submitAnswer": "Submit Answer",
+  "inspectingDiceOption": "Inspecting Option #{index}",
+  "@inspectingDiceOption": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "brainTrainingCategory": "Brain Training: {category}",
+  "@brainTrainingCategory": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "highLevel": "High Level: {level}",
+  "@highLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "optionLabel": "Option {name}",
+  "@optionLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finalScorePoints": "Final Score: {score} points",
+  "@finalScorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameOver": "Game Over!",
+  "wrong": "Wrong!",
+  "wrongWithCorrect": "Wrong! Correct answer: {answer}",
+  "@wrongWithCorrect": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidNumber": "Please enter a valid number!",
+  "enterFinalResult": "Enter the Final Result",
+  "mentalFlashArithmetic": "Mental Flash Arithmetic",
+  "speedMathInstruction": "Numbers and operators will flash rapidly. Calculate the sum!",
+  "numberDigits": "Number Digits: {digits}",
+  "@numberDigits": {
+    "placeholders": {
+      "digits": {
+        "type": "int"
+      }
+    }
+  },
+  "flashSpeed": "Flash Speed",
+  "speedSlow": "Slow ({time}s)",
+  "@speedSlow": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedNormal": "Normal ({time}s)",
+  "@speedNormal": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedFast": "Fast ({time}s)",
+  "@speedFast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "speedExtreme": "Extreme ({time}s)",
+  "@speedExtreme": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "startGame": "Start Game",
+  "getReady": "Get Ready!",
+  "tempoLabel": "Tempo: {bpm} BPM",
+  "@tempoLabel": {
+    "placeholders": {
+      "bpm": {
+        "type": "int"
+      }
+    }
+  },
+  "targetDurationLabel": "Target Duration: {seconds} seconds",
+  "@targetDurationLabel": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  }
 }

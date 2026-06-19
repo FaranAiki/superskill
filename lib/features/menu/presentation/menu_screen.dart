@@ -11,9 +11,13 @@ import '../../brain_game/presentation/speed_math_screen.dart';
 import '../../brain_game/presentation/schulte_game_screen.dart';
 import '../../memory_game/presentation/memory_sequence_screen.dart';
 import '../../memory_game/presentation/chimp_game_screen.dart';
+import '../../memory_game/presentation/color_memory_screen.dart';
 import '../../spatial_game/presentation/spatial_iq_screen.dart';
 import '../../spatial_game/presentation/maze_game_screen.dart';
 import '../../spatial_game/presentation/dice_game_screen.dart';
+import '../../spatial_game/presentation/shadow_matching_screen.dart';
+import '../../color_game/presentation/gradient_sort_screen.dart';
+import '../../color_game/presentation/odd_one_out_screen.dart';
 import '../../temporal_game/presentation/time_estimator_screen.dart';
 import '../../temporal_game/presentation/rhythm_sync_screen.dart';
 import '../../../core/locale_provider.dart';
@@ -57,135 +61,147 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
     final isLight = theme.brightness == Brightness.light;
     final primaryColor = theme.colorScheme.primary;
 
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      backgroundColor: theme.scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
-      isScrollControlled: true,
       builder: (context) {
-        return DraggableScrollableSheet(
-          initialChildSize: 0.7,
-          minChildSize: 0.5,
-          maxChildSize: 0.9,
-          expand: false,
-          builder: (context, scrollController) {
-            final scores = HighScoreService.instance.getAllScores();
-            
-            final trackedGames = [
-              {'id': 'brain_reflex', 'name': l10n.brainReflex, 'icon': Icons.psychology_outlined, 'color': const Color(0xFF2DD4BF)},
-              {'id': 'reflex_tap', 'name': l10n.reflexGame, 'icon': Icons.touch_app_outlined, 'color': const Color(0xFFFACC15)},
-              {'id': 'operator_rush', 'name': l10n.operatorGame, 'icon': Icons.calculate_outlined, 'color': const Color(0xFF38BDF8)},
-              {'id': 'game_24', 'name': l10n.game24, 'icon': Icons.filter_4, 'color': const Color(0xFF818CF8)},
-              {'id': 'speed_math', 'name': l10n.speedMath, 'icon': Icons.flash_on_outlined, 'color': const Color(0xFFFACC15)},
-              {'id': 'memory_sequence', 'name': l10n.memorySequence, 'icon': Icons.memory, 'color': const Color(0xFF38BDF8)},
-              {'id': 'chimp_memory', 'name': l10n.chimpGame, 'icon': Icons.psychology, 'color': const Color(0xFF818CF8)},
-              {'id': 'spatial_iq', 'name': l10n.spatialIq, 'icon': Icons.view_in_ar, 'color': const Color(0xFFF43F5E)},
-              {'id': 'spatial_dice', 'name': l10n.diceGame, 'icon': Icons.casino_outlined, 'color': const Color(0xFFEC4899)},
-              {'id': 'schulte_focus', 'name': l10n.schulteGame, 'icon': Icons.filter_9_plus_outlined, 'color': const Color(0xFFFB923C)},
-              {'id': 'time_estimator', 'name': l10n.timeEstimator, 'icon': Icons.timer_outlined, 'color': const Color(0xFF10B981)},
-              {'id': 'rhythm_sync', 'name': l10n.rhythmSync, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF8B5CF6)},
-            ];
+        final scores = HighScoreService.instance.getAllScores();
+        
+        final trackedGames = [
+          {'id': 'brain_reflex', 'name': l10n.brainReflex, 'icon': Icons.psychology_outlined, 'color': const Color(0xFF2DD4BF)},
+          {'id': 'reflex_tap', 'name': l10n.reflexGame, 'icon': Icons.touch_app_outlined, 'color': const Color(0xFFFACC15)},
+          {'id': 'operator_rush', 'name': l10n.operatorGame, 'icon': Icons.calculate_outlined, 'color': const Color(0xFF38BDF8)},
+          {'id': 'game_24', 'name': l10n.game24, 'icon': Icons.filter_4, 'color': const Color(0xFF818CF8)},
+          {'id': 'speed_math', 'name': l10n.speedMath, 'icon': Icons.flash_on_outlined, 'color': const Color(0xFFFACC15)},
+          {'id': 'memory_sequence', 'name': l10n.memorySequence, 'icon': Icons.memory, 'color': const Color(0xFF38BDF8)},
+          {'id': 'chimp_memory', 'name': l10n.chimpGame, 'icon': Icons.psychology, 'color': const Color(0xFF818CF8)},
+          {'id': 'spatial_iq', 'name': l10n.spatialIq, 'icon': Icons.view_in_ar, 'color': const Color(0xFFF43F5E)},
+          {'id': 'spatial_dice', 'name': l10n.diceGame, 'icon': Icons.casino_outlined, 'color': const Color(0xFFEC4899)},
+          {'id': 'schulte_focus', 'name': l10n.schulteGame, 'icon': Icons.filter_9_plus_outlined, 'color': const Color(0xFFFB923C)},
+          {'id': 'time_estimator', 'name': l10n.timeEstimator, 'icon': Icons.timer_outlined, 'color': const Color(0xFF10B981)},
+          {'id': 'rhythm_sync', 'name': l10n.rhythmSync, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF8B5CF6)},
+        ];
 
-            return Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: isLight ? Colors.black12 : Colors.white24,
-                      borderRadius: BorderRadius.circular(2),
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: 500,
+              maxHeight: MediaQuery.of(context).size.height * 0.75,
+            ),
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.emoji_events_outlined, color: Colors.amber, size: 28),
+                    const SizedBox(width: 8),
+                    Text(
+                      l10n.scoreboard,
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: scores.isEmpty
+                      ? Center(
+                          child: Text(
+                            l10n.noScoresYet,
+                            style: theme.textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: trackedGames.length,
+                          itemBuilder: (context, index) {
+                            final game = trackedGames[index];
+                            final gameId = game['id'] as String;
+                            final gameName = game['name'] as String;
+                            final gameIcon = game['icon'] as IconData;
+                            final gameColor = game['color'] as Color;
+                            final highScore = scores[gameId] ?? 0;
+
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: isLight 
+                                    ? Colors.black.withOpacity(0.02) 
+                                    : const Color(0xFF1E293B).withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: isLight ? Colors.black12 : Colors.white10,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: gameColor.withOpacity(0.15),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(gameIcon, color: gameColor, size: 24),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      gameName,
+                                      style: theme.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.emoji_events, color: Colors.amber.shade600, size: 20),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        '$highScore',
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w900,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      l10n.ok,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.emoji_events_outlined, color: Colors.amber, size: 28),
-                      const SizedBox(width: 8),
-                      Text(
-                        l10n.scoreboard,
-                        style: theme.textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Expanded(
-                    child: scores.isEmpty
-                        ? Center(
-                            child: Text(
-                              l10n.noScoresYet,
-                              style: theme.textTheme.bodyLarge?.copyWith(color: Colors.grey),
-                            ),
-                          )
-                        : ListView.builder(
-                            controller: scrollController,
-                            itemCount: trackedGames.length,
-                            itemBuilder: (context, index) {
-                              final game = trackedGames[index];
-                              final gameId = game['id'] as String;
-                              final gameName = game['name'] as String;
-                              final gameIcon = game['icon'] as IconData;
-                              final gameColor = game['color'] as Color;
-                              final highScore = scores[gameId] ?? 0;
-
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: isLight 
-                                      ? Colors.black.withOpacity(0.02) 
-                                      : const Color(0xFF1E293B).withOpacity(0.4),
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: isLight ? Colors.black12 : Colors.white10,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        color: gameColor.withOpacity(0.15),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(gameIcon, color: gameColor, size: 24),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Text(
-                                        gameName,
-                                        style: theme.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.emoji_events, color: Colors.amber.shade600, size: 20),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          '$highScore',
-                                          style: theme.textTheme.titleMedium?.copyWith(
-                                            fontWeight: FontWeight.w900,
-                                            color: primaryColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                ],
-              ),
-            );
-          },
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -258,7 +274,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
           SafeArea(
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 450),
+                constraints: const BoxConstraints(maxWidth: 600),
                 child: ScrollConfiguration(
                   behavior: NoScrollbarScrollBehavior(),
                   child: SingleChildScrollView(
@@ -349,6 +365,26 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.cmyk)),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.gradientSort,
+                              subtitle: l10n.gradientSortDesc,
+                              icon: Icons.filter_hdr_outlined,
+                              gradient: const [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const GradientSortScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.oddOneOut,
+                              subtitle: l10n.oddOneOutDesc,
+                              icon: Icons.grain_outlined,
+                              gradient: const [Color(0xFFEC4899), Color(0xFFD946EF)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const OddOneOutScreen()),
                               ),
                             ),
                           ]),
@@ -457,6 +493,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const ChimpGameScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.colorMemory,
+                              subtitle: l10n.colorMemoryDesc,
+                              icon: Icons.brightness_high_outlined,
+                              gradient: const [Color(0xFF0EA5E9), Color(0xFF10B981)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ColorMemoryScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Spatial')
@@ -489,6 +535,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const DiceGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.shadowMatching,
+                              subtitle: l10n.shadowMatchingDesc,
+                              icon: Icons.brightness_6_outlined,
+                              gradient: const [Color(0xFF8B5CF6), Color(0xFFD946EF)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ShadowMatchingScreen()),
                               ),
                             ),
                           ]),
@@ -531,43 +587,45 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
   void _showLanguageSelector(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    final isLight = theme.brightness == Brightness.light;
-    showModalBottomSheet(
+    final primaryColor = theme.colorScheme.primary;
+    showDialog(
       context: context,
-      backgroundColor: theme.scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 12),
-            Container(width: 40, height: 4, decoration: BoxDecoration(color: isLight ? Colors.black12 : Colors.white24, borderRadius: BorderRadius.circular(2))),
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Text(l10n.selectLanguage, style: Theme.of(context).textTheme.titleLarge),
-            ),
-            _LangTile(label: 'English', isSelected: ref.read(localeProvider).languageCode == 'en', onTap: () {
-              ref.read(localeProvider.notifier).state = const Locale('en');
-              Navigator.pop(context);
-            }),
-            _LangTile(label: 'Indonesia', isSelected: ref.read(localeProvider).languageCode == 'id', onTap: () {
-              ref.read(localeProvider.notifier).state = const Locale('id');
-              Navigator.pop(context);
-            }),
-            _LangTile(label: 'Mandarin', isSelected: ref.read(localeProvider).languageCode == 'zh', onTap: () {
-              ref.read(localeProvider.notifier).state = const Locale('zh');
-              Navigator.pop(context);
-            }),
-            _LangTile(label: 'Japanese', isSelected: ref.read(localeProvider).languageCode == 'ja', onTap: () {
-              ref.read(localeProvider.notifier).state = const Locale('ja');
-              Navigator.pop(context);
-            }),
-            _LangTile(label: 'Русский', isSelected: ref.read(localeProvider).languageCode == 'ru', onTap: () {
-              ref.read(localeProvider.notifier).state = const Locale('ru');
-              Navigator.pop(context);
-            }),
-            const SizedBox(height: 24),
-          ],
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            color: theme.scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+          ),
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l10n.selectLanguage, style: theme.textTheme.titleLarge),
+              const SizedBox(height: 20),
+              _LangTile(label: 'English', isSelected: ref.read(localeProvider).languageCode == 'en', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('en');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Indonesia', isSelected: ref.read(localeProvider).languageCode == 'id', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('id');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Mandarin', isSelected: ref.read(localeProvider).languageCode == 'zh', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('zh');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Japanese', isSelected: ref.read(localeProvider).languageCode == 'ja', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('ja');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Русский', isSelected: ref.read(localeProvider).languageCode == 'ru', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('ru');
+                Navigator.pop(context);
+              }),
+            ],
+          ),
         ),
       ),
     );
@@ -575,30 +633,29 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
 
   void _showAdvancedSettings(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
 
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) => Consumer(
         builder: (context, ref, child) {
           final currentSettings = ref.watch(settingsProvider);
           final isLight = currentSettings.themeMode == ThemeMode.light;
-          final theme = Theme.of(context);
 
-          return Container(
-            decoration: BoxDecoration(
-              color: theme.scaffoldBackgroundColor,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-            ),
-            child: SafeArea(
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+              ),
+              padding: const EdgeInsets.all(24.0),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(width: 40, height: 4, decoration: BoxDecoration(color: isLight ? Colors.black12 : Colors.white24, borderRadius: BorderRadius.circular(2))),
-                    const SizedBox(height: 16),
                     Text(l10n.advancedSettings, style: theme.textTheme.titleLarge),
                     const SizedBox(height: 24),
                     

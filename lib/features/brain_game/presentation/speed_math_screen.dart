@@ -177,10 +177,11 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
   }
 
   void _submitAnswer() {
+    final l10n = AppLocalizations.of(context)!;
     int? userAns = int.tryParse(_inputController.text);
     if (userAns == null) {
       setState(() {
-        feedbackMessage = "Please enter a valid number!";
+        feedbackMessage = l10n.pleaseEnterValidNumber;
       });
       return;
     }
@@ -191,10 +192,10 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
       gameState = SpeedMathState.result;
       if (correct) {
         score += 10 * currentLevel;
-        feedbackMessage = "Correct!";
+        feedbackMessage = l10n.correct;
       } else {
         lives--;
-        feedbackMessage = "Wrong! Correct: $correctResult";
+        feedbackMessage = l10n.wrongWithCorrect(correctResult.toString());
       }
     });
   }
@@ -243,7 +244,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
       return Scaffold(
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -252,7 +253,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                   Icon(Icons.sentiment_very_dissatisfied, size: 80, color: theme.colorScheme.error),
                   const SizedBox(height: 24),
                   Text(
-                    "Game Over!\nYou reached Level $currentLevel.\nFinal Score: $score",
+                    "${l10n.gameOver}\n${l10n.levelLabel(currentLevel.toString())}\n${l10n.finalScorePoints(score)}",
                     style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
@@ -267,7 +268,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                       });
                     },
                     icon: const Icon(Icons.refresh),
-                    label: const Text("Play Again"),
+                    label: Text(l10n.playAgain),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(200, 60),
                       shape: const StadiumBorder(),
@@ -288,11 +289,11 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Speed Math"),
+        title: Text(l10n.speedMath),
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
             child: Column(
@@ -303,20 +304,20 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                   Icon(Icons.flash_on, size: 80, color: primaryColor),
                   const SizedBox(height: 24),
                   Text(
-                    "Mental Flash Arithmetic",
+                    l10n.mentalFlashArithmetic,
                     style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Numbers and operators will flash rapidly. Calculate the sum!",
+                    l10n.speedMathInstruction,
                     style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 48),
                   
                   // Digits selector
-                  Text("Number Digits: $maxDigits", style: theme.textTheme.titleMedium),
+                  Text(l10n.numberDigits(maxDigits), style: theme.textTheme.titleMedium),
                   Slider(
                     value: maxDigits.toDouble(),
                     min: 1,
@@ -330,15 +331,15 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                   const SizedBox(height: 20),
                   
                   // Speed Mode selector
-                  Text("Flash Speed", style: theme.textTheme.titleMedium),
+                  Text(l10n.flashSpeed, style: theme.textTheme.titleMedium),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildSpeedChip("slow", "Slow (0.8s)"),
-                      _buildSpeedChip("normal", "Normal (0.5s)"),
-                      _buildSpeedChip("fast", "Fast (0.3s)"),
-                      _buildSpeedChip("very_fast", "Extreme (0.15s)"),
+                      _buildSpeedChip("slow", l10n.speedSlow("0.8")),
+                      _buildSpeedChip("normal", l10n.speedNormal("0.5")),
+                      _buildSpeedChip("fast", l10n.speedFast("0.3")),
+                      _buildSpeedChip("very_fast", l10n.speedExtreme("0.15")),
                     ],
                   ),
                   
@@ -349,7 +350,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                       minimumSize: const Size(double.infinity, 60),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
-                    child: const Text("Start Game", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    child: Text(l10n.startGame, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -358,7 +359,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                 if (gameState == SpeedMathState.countdown) ...[
                   const Spacer(),
                   Text(
-                    "Get Ready!",
+                    l10n.getReady,
                     style: theme.textTheme.headlineMedium?.copyWith(color: Colors.grey),
                   ),
                   const SizedBox(height: 32),
@@ -397,9 +398,9 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Level $currentLevel", style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: primaryColor)),
-                      Text("Lives: $lives", style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
-                      Text("Score: $score", style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                      Text(l10n.levelLabel(currentLevel.toString()), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: primaryColor)),
+                      Text(l10n.livesLabel(lives), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
+                      Text(l10n.scoreLabel(score), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -410,7 +411,7 @@ class _SpeedMathScreenState extends State<SpeedMathScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Enter the Final Result", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+                          Text(l10n.enterFinalResult, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
                           const SizedBox(height: 16),
                           
                           // Input box (with physical keyboard integration)
