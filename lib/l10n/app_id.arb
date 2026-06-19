@@ -452,5 +452,91 @@
     }
   },
   "whatIsResult": "Berapakah hasil akhirnya?",
-  "activeRules": "Aturan Warna Aktif"
+  "activeRules": "Aturan Warna Aktif",
+
+  "nBack": "N-Back",
+  "nBackDesc": "Uji memori kerja dengan mengenali apakah posisi saat ini cocok dengan N langkah yang lalu",
+  "nBackLevel": "Level N-Back",
+  "nBackHowTo": "Setiap ronde, sebuah kotak menyala di grid. Tekan 'Cocok' jika posisi saat ini sama dengan {n} langkah yang lalu.",
+  "@nBackHowTo": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackMatch": "Cocok!",
+  "nBackHint": "Tekan 'Cocok' jika posisi berulang dari N langkah yang lalu",
+  "nBackWaiting": "Lihat {n} posisi lagi sebelum bisa menjawab",
+  "@nBackWaiting": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackAccuracy": "Akurasi {percent}%",
+  "@nBackAccuracy": {
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
+  "typingSprint": "Ketik Cepat",
+  "typingSprintDesc": "Ketik kata secepat dan seakurat mungkin sebelum waktu habis",
+  "gameDuration": "Durasi Permainan",
+  "typingSprintType": "Ketik Kata Ini",
+  "typingSprintHint": "Tekan Spasi setelah setiap kata untuk mengirim",
+  "difficulty": "Kesulitan",
+
+  "baseDecoder": "Dekoder Basis",
+  "baseDecoderDesc": "Konversi bilangan di antara berbagai basis (biner, oktal, heksadesimal) sebelum waktu habis",
+  "baseDecoderMode": "Mode Konversi",
+  "baseDecoderSelectBase": "Pilih Basis",
+  "baseToDec": "Basis X → Desimal",
+  "decToBase": "Desimal → Basis X",
+  "baseDecoderConvertToDecimal": "Konversi ke Desimal",
+  "baseDecoderConvertToBase": "Konversi ke Basis {base}",
+  "@baseDecoderConvertToBase": {
+    "placeholders": {
+      "base": { "type": "String" }
+    }
+  },
+  "mixed": "Campuran",
+
+  "primeFactor": "Faktor Prima",
+  "primeFactorDesc": "Uraikan bilangan menjadi faktor primanya sebelum waktu habis",
+  "primeFactorMaxPrime": "Prima yang Diizinkan",
+  "primeFactorFound": "Faktor Ditemukan: ",
+  "primeFactorStart": "Mulai Faktorisasi",
+
+  "wordMemory": "Memori Kata",
+  "wordMemoryDesc": "Hafal daftar kata, lalu identifikasi mana yang sudah kamu lihat",
+  "memorizeTime": "Waktu Menghafal",
+  "wordMemoryMemorizeHint": "Ingat kata-kata ini! Mereka akan segera hilang.",
+  "wordMemoryRecallHint": "Kata mana yang kamu lihat?",
+  "wordMemoryResults": "Hasil",
+  "wordMemoryRecallDesc": "Pilih {count} kata yang kamu hafal",
+  "@wordMemoryRecallDesc": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "patternFold": "Lipat Pola",
+  "patternFoldDesc": "Tentukan kubus 3D mana yang terbentuk dari melipat jaring 2D yang ditampilkan",
+  "patternFoldHowTo": "Jaring kubus berwarna (kubus yang dibuka) ditampilkan. Pilih kubus 3D yang cocok saat dilipat. Perhatikan wajah berwarna mana yang ada di mana!",
+  "patternFoldInstruction": "Kubus mana yang terbentuk dari jaring ini?",
+  "patternFoldNet": "Jaring Kubus (Dibuka)",
+  "patternFoldPickCube": "Pilih kubus 3D yang benar:",
+
+  "speedCount": "Hitung Cepat",
+  "speedCountDesc": "Hitung berapa banyak titik yang berkedip di layar sebelum menghilang",
+  "speedCountWatch": "Perhatikan baik-baik!",
+  "speedCountHowMany": "Berapa banyak titiknya?",
+  "speedCountEasy": "Mudah",
+  "speedCountNormal": "Normal",
+  "speedCountHard": "Sulit",
+  "speedCountFlashTime": "Durasi kilat: {ms}ms",
+  "@speedCountFlashTime": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  }
 }

@@ -452,5 +452,91 @@
     }
   },
   "whatIsResult": "最终结果是多少？",
-  "activeRules": "当前颜色规则"
+  "activeRules": "当前颜色规则",
+
+  "nBack": "N-Back记忆",
+  "nBackDesc": "通过判断当前位置是否与N步前相同来测试工作记忆",
+  "nBackLevel": "N-Back等级",
+  "nBackHowTo": "每轮网格中一个方格会亮起。如果当前位置与{n}步前相同则按「匹配」。",
+  "@nBackHowTo": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackMatch": "匹配！",
+  "nBackHint": "如果位置与N步前重复则按「匹配」",
+  "nBackWaiting": "再看{n}个位置后才能回答",
+  "@nBackWaiting": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackAccuracy": "准确率 {percent}%",
+  "@nBackAccuracy": {
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
+  "typingSprint": "打字冲刺",
+  "typingSprintDesc": "在时间结束前尽可能快速准确地打出单词",
+  "gameDuration": "游戏时长",
+  "typingSprintType": "输入这个词",
+  "typingSprintHint": "每个词后按空格提交",
+  "difficulty": "难度",
+
+  "baseDecoder": "基数解码",
+  "baseDecoderDesc": "在时间结束前完成不同进制数（二进制、八进制、十六进制）的转换",
+  "baseDecoderMode": "转换模式",
+  "baseDecoderSelectBase": "选择进制",
+  "baseToDec": "X进制 → 十进制",
+  "decToBase": "十进制 → X进制",
+  "baseDecoderConvertToDecimal": "转换为十进制",
+  "baseDecoderConvertToBase": "转换为 {base} 进制",
+  "@baseDecoderConvertToBase": {
+    "placeholders": {
+      "base": { "type": "String" }
+    }
+  },
+  "mixed": "混合",
+
+  "primeFactor": "质因数分解",
+  "primeFactorDesc": "在时间结束前将数分解为质因数",
+  "primeFactorMaxPrime": "允许的质数",
+  "primeFactorFound": "已找到因数: ",
+  "primeFactorStart": "开始分解",
+
+  "wordMemory": "单词记忆",
+  "wordMemoryDesc": "记住单词列表，然后找出你看到的那些单词",
+  "memorizeTime": "记忆时间",
+  "wordMemoryMemorizeHint": "记住这些单词！它们很快就会消失。",
+  "wordMemoryRecallHint": "你看到了哪些单词？",
+  "wordMemoryResults": "结果",
+  "wordMemoryRecallDesc": "选出你记住的{count}个单词",
+  "@wordMemoryRecallDesc": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "patternFold": "图案折叠",
+  "patternFoldDesc": "判断展示的2D展开图折叠后会形成哪个3D立方体",
+  "patternFoldHowTo": "展示一个彩色立方体展开图。选择折叠后与之匹配的3D立方体。注意各彩色面的位置！",
+  "patternFoldInstruction": "这个展开图折叠成哪个立方体？",
+  "patternFoldNet": "立方体展开图（展开状态）",
+  "patternFoldPickCube": "选择正确的3D立方体：",
+
+  "speedCount": "快速计数",
+  "speedCountDesc": "在点消失前数出屏幕上闪现的点的数量",
+  "speedCountWatch": "仔细观察！",
+  "speedCountHowMany": "有多少个点？",
+  "speedCountEasy": "简单",
+  "speedCountNormal": "普通",
+  "speedCountHard": "困难",
+  "speedCountFlashTime": "闪现时长：{ms}毫秒",
+  "@speedCountFlashTime": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  }
 }

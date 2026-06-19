@@ -9,17 +9,24 @@ import '../../brain_game/presentation/operator_game_screen.dart';
 import '../../brain_game/presentation/game_24_screen.dart';
 import '../../brain_game/presentation/speed_math_screen.dart';
 import '../../brain_game/presentation/schulte_game_screen.dart';
+import '../../brain_game/presentation/n_back_screen.dart';
+import '../../brain_game/presentation/typing_sprint_screen.dart';
+import '../../brain_game/presentation/base_decoder_screen.dart';
+import '../../brain_game/presentation/prime_factor_screen.dart';
 import '../../memory_game/presentation/memory_sequence_screen.dart';
 import '../../memory_game/presentation/chimp_game_screen.dart';
 import '../../memory_game/presentation/color_memory_screen.dart';
+import '../../memory_game/presentation/word_memory_screen.dart';
 import '../../spatial_game/presentation/spatial_iq_screen.dart';
 import '../../spatial_game/presentation/maze_game_screen.dart';
 import '../../spatial_game/presentation/dice_game_screen.dart';
 import '../../spatial_game/presentation/shadow_matching_screen.dart';
+import '../../spatial_game/presentation/pattern_fold_screen.dart';
 import '../../color_game/presentation/gradient_sort_screen.dart';
 import '../../color_game/presentation/odd_one_out_screen.dart';
 import '../../temporal_game/presentation/time_estimator_screen.dart';
 import '../../temporal_game/presentation/rhythm_sync_screen.dart';
+import '../../temporal_game/presentation/speed_count_screen.dart';
 import '../../../core/locale_provider.dart';
 import '../../../core/settings_provider.dart';
 import '../../../core/high_score_service.dart';
@@ -65,20 +72,27 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
       context: context,
       builder: (context) {
         final scores = HighScoreService.instance.getAllScores();
-        
+
         final trackedGames = [
           {'id': 'brain_reflex', 'name': l10n.brainReflex, 'icon': Icons.psychology_outlined, 'color': const Color(0xFF2DD4BF)},
           {'id': 'reflex_tap', 'name': l10n.reflexGame, 'icon': Icons.touch_app_outlined, 'color': const Color(0xFFFACC15)},
           {'id': 'operator_rush', 'name': l10n.operatorGame, 'icon': Icons.calculate_outlined, 'color': const Color(0xFF38BDF8)},
           {'id': 'game_24', 'name': l10n.game24, 'icon': Icons.filter_4, 'color': const Color(0xFF818CF8)},
           {'id': 'speed_math', 'name': l10n.speedMath, 'icon': Icons.flash_on_outlined, 'color': const Color(0xFFFACC15)},
+          {'id': 'n_back', 'name': l10n.nBack, 'icon': Icons.grid_view_outlined, 'color': const Color(0xFF38BDF8)},
+          {'id': 'typing_sprint', 'name': l10n.typingSprint, 'icon': Icons.keyboard_outlined, 'color': const Color(0xFF2DD4BF)},
+          {'id': 'base_decoder', 'name': l10n.baseDecoder, 'icon': Icons.code_outlined, 'color': const Color(0xFF818CF8)},
+          {'id': 'prime_factor', 'name': l10n.primeFactor, 'icon': Icons.calculate_outlined, 'color': const Color(0xFF2DD4BF)},
           {'id': 'memory_sequence', 'name': l10n.memorySequence, 'icon': Icons.memory, 'color': const Color(0xFF38BDF8)},
           {'id': 'chimp_memory', 'name': l10n.chimpGame, 'icon': Icons.psychology, 'color': const Color(0xFF818CF8)},
+          {'id': 'word_memory', 'name': l10n.wordMemory, 'icon': Icons.menu_book_outlined, 'color': const Color(0xFF10B981)},
           {'id': 'spatial_iq', 'name': l10n.spatialIq, 'icon': Icons.view_in_ar, 'color': const Color(0xFFF43F5E)},
           {'id': 'spatial_dice', 'name': l10n.diceGame, 'icon': Icons.casino_outlined, 'color': const Color(0xFFEC4899)},
+          {'id': 'pattern_fold', 'name': l10n.patternFold, 'icon': Icons.widgets_outlined, 'color': const Color(0xFF8B5CF6)},
           {'id': 'schulte_focus', 'name': l10n.schulteGame, 'icon': Icons.filter_9_plus_outlined, 'color': const Color(0xFFFB923C)},
           {'id': 'time_estimator', 'name': l10n.timeEstimator, 'icon': Icons.timer_outlined, 'color': const Color(0xFF10B981)},
           {'id': 'rhythm_sync', 'name': l10n.rhythmSync, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF8B5CF6)},
+          {'id': 'speed_count', 'name': l10n.speedCount, 'icon': Icons.visibility_outlined, 'color': const Color(0xFFF97316)},
         ];
 
         return Dialog(
@@ -133,8 +147,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               margin: const EdgeInsets.only(bottom: 12),
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: isLight 
-                                    ? Colors.black.withOpacity(0.02) 
+                                color: isLight
+                                    ? Colors.black.withOpacity(0.02)
                                     : const Color(0xFF1E293B).withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
@@ -298,13 +312,13 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                         const SizedBox(height: 8),
                         Container(height: 2, width: 60, color: const Color(0xFF38BDF8).withOpacity(0.3)),
                         const SizedBox(height: 24),
-                        
+
                         // Category selection dropdown
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                           decoration: BoxDecoration(
-                            color: isLight 
-                                ? Colors.white.withOpacity(0.9) 
+                            color: isLight
+                                ? Colors.white.withOpacity(0.9)
                                 : const Color(0xFF1E293B).withOpacity(0.6),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
@@ -344,7 +358,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                           ),
                         ),
                         const SizedBox(height: 28),
-                        
+
                         if (selectedCategory == 'All' || selectedCategory == 'Visual')
                           _CategorySection(title: l10n.visualGames, children: [
                             _MenuButton(
@@ -398,7 +412,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               ),
                             ),
                           ]),
-                        
+
                         if (selectedCategory == 'All' || selectedCategory == 'Audio')
                           _CategorySection(title: l10n.audioGames, children: [
                             _MenuButton(
@@ -445,6 +459,26 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const SchulteGameScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.nBack,
+                              subtitle: l10n.nBackDesc,
+                              icon: Icons.grid_view_outlined,
+                              gradient: const [Color(0xFF38BDF8), Color(0xFF0284C7)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const NBackScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.typingSprint,
+                              subtitle: l10n.typingSprintDesc,
+                              icon: Icons.keyboard_outlined,
+                              gradient: const [Color(0xFF2DD4BF), Color(0xFF0891B2)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const TypingSprintScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Numerical')
@@ -479,6 +513,26 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const SpeedMathScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.baseDecoder,
+                              subtitle: l10n.baseDecoderDesc,
+                              icon: Icons.code_outlined,
+                              gradient: const [Color(0xFF818CF8), Color(0xFF6D28D9)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const BaseDecoderScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.primeFactor,
+                              subtitle: l10n.primeFactorDesc,
+                              icon: Icons.calculate_outlined,
+                              gradient: const [Color(0xFF2DD4BF), Color(0xFF0D9488)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const PrimeFactorScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Memory')
@@ -511,6 +565,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const ColorMemoryScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.wordMemory,
+                              subtitle: l10n.wordMemoryDesc,
+                              icon: Icons.menu_book_outlined,
+                              gradient: const [Color(0xFF10B981), Color(0xFF059669)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const WordMemoryScreen()),
                               ),
                             ),
                           ]),
@@ -557,6 +621,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const ShadowMatchingScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.patternFold,
+                              subtitle: l10n.patternFoldDesc,
+                              icon: Icons.widgets_outlined,
+                              gradient: const [Color(0xFF8B5CF6), Color(0xFF4F46E5)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const PatternFoldScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Temporal')
@@ -579,6 +653,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const RhythmSyncScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.speedCount,
+                              subtitle: l10n.speedCountDesc,
+                              icon: Icons.visibility_outlined,
+                              gradient: const [Color(0xFFF97316), Color(0xFFEA580C)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SpeedCountScreen()),
                               ),
                             ),
                           ]),
@@ -668,7 +752,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                   children: [
                     Text(l10n.advancedSettings, style: theme.textTheme.titleLarge),
                     const SizedBox(height: 24),
-                    
+
                     // Theme Selector
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -700,7 +784,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Font Family Selector
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -715,6 +799,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                             DropdownMenuItem(value: 'Roboto', child: Text("Roboto")),
                             DropdownMenuItem(value: 'Poppins', child: Text("Poppins")),
                             DropdownMenuItem(value: 'Orbitron', child: Text("Orbitron")),
+                            DropdownMenuItem(value: 'Lato', child: Text("Lato")),
                           ],
                           onChanged: (val) {
                             if (val != null) {
@@ -725,7 +810,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Font Size Multiplier
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

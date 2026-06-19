@@ -452,5 +452,91 @@
     }
   },
   "whatIsResult": "最終結果は？",
-  "activeRules": "アクティブな色のルール"
+  "activeRules": "アクティブな色のルール",
+
+  "nBack": "Nバック",
+  "nBackDesc": "現在の位置がN手前と一致するか識別してワーキングメモリをテスト",
+  "nBackLevel": "Nバックレベル",
+  "nBackHowTo": "毎ラウンド、グリッドの一つのマスが光ります。現在の位置が{n}手前と同じなら「一致」を押してください。",
+  "@nBackHowTo": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackMatch": "一致！",
+  "nBackHint": "N手前と位置が繰り返すなら「一致」を押してください",
+  "nBackWaiting": "あと{n}手見てから回答できます",
+  "@nBackWaiting": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackAccuracy": "正答率 {percent}%",
+  "@nBackAccuracy": {
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
+  "typingSprint": "タイピングスプリント",
+  "typingSprintDesc": "制限時間内にできるだけ速く正確に単語をタイプ",
+  "gameDuration": "ゲーム時間",
+  "typingSprintType": "この単語を入力",
+  "typingSprintHint": "各単語の後にスペースを押して送信",
+  "difficulty": "難易度",
+
+  "baseDecoder": "基数デコーダー",
+  "baseDecoderDesc": "制限時間内に異なる基数（2進数、8進数、16進数）の間で数値を変換",
+  "baseDecoderMode": "変換モード",
+  "baseDecoderSelectBase": "基数を選択",
+  "baseToDec": "基数 X → 10進数",
+  "decToBase": "10進数 → 基数 X",
+  "baseDecoderConvertToDecimal": "10進数に変換",
+  "baseDecoderConvertToBase": "基数 {base} に変換",
+  "@baseDecoderConvertToBase": {
+    "placeholders": {
+      "base": { "type": "String" }
+    }
+  },
+  "mixed": "混合",
+
+  "primeFactor": "素因数分解",
+  "primeFactorDesc": "制限時間内に数値を素因数に分解",
+  "primeFactorMaxPrime": "許可された素数",
+  "primeFactorFound": "見つかった因数: ",
+  "primeFactorStart": "分解を開始",
+
+  "wordMemory": "単語記憶",
+  "wordMemoryDesc": "単語リストを暗記して、見た単語を識別する",
+  "memorizeTime": "暗記時間",
+  "wordMemoryMemorizeHint": "これらの単語を覚えてください！すぐに消えます。",
+  "wordMemoryRecallHint": "どの単語を見ましたか？",
+  "wordMemoryResults": "結果",
+  "wordMemoryRecallDesc": "暗記した{count}個の単語を選択",
+  "@wordMemoryRecallDesc": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "patternFold": "パターン折り",
+  "patternFoldDesc": "表示された2D展開図を折ったときにできる3D立方体を見極める",
+  "patternFoldHowTo": "色付きの立方体の展開図が表示されます。折りたたんだときに一致する3D立方体を選んでください。どの色の面がどこに来るかに注意！",
+  "patternFoldInstruction": "この展開図からどの立方体ができる？",
+  "patternFoldNet": "展開図（開いた状態）",
+  "patternFoldPickCube": "正しい3D立方体を選択：",
+
+  "speedCount": "スピードカウント",
+  "speedCountDesc": "消える前に画面に点滅する点の数を数える",
+  "speedCountWatch": "よく見て！",
+  "speedCountHowMany": "点はいくつありましたか？",
+  "speedCountEasy": "易しい",
+  "speedCountNormal": "普通",
+  "speedCountHard": "難しい",
+  "speedCountFlashTime": "点滅時間：{ms}ms",
+  "@speedCountFlashTime": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  }
 }

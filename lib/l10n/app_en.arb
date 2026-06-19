@@ -452,5 +452,91 @@
     }
   },
   "whatIsResult": "What is the final result?",
-  "activeRules": "Active Color Rules"
+  "activeRules": "Active Color Rules",
+
+  "nBack": "N-Back",
+  "nBackDesc": "Test working memory by identifying if the current position matches N steps ago",
+  "nBackLevel": "N-Back Level",
+  "nBackHowTo": "Each round, a square lights up on the grid. Press 'Match' if the current position matches the position from {n} steps ago.",
+  "@nBackHowTo": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackMatch": "Match!",
+  "nBackHint": "Press 'Match' if the position repeats from N steps back",
+  "nBackWaiting": "Watch {n} more positions before you can answer",
+  "@nBackWaiting": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackAccuracy": "{percent}% Accuracy",
+  "@nBackAccuracy": {
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
+  "typingSprint": "Typing Sprint",
+  "typingSprintDesc": "Type words as fast and accurately as possible before time runs out",
+  "gameDuration": "Game Duration",
+  "typingSprintType": "Type This Word",
+  "typingSprintHint": "Press Space after each word to submit",
+  "difficulty": "Difficulty",
+
+  "baseDecoder": "Base Decoder",
+  "baseDecoderDesc": "Convert numbers between different bases (binary, octal, hex) before time runs out",
+  "baseDecoderMode": "Conversion Mode",
+  "baseDecoderSelectBase": "Select Base",
+  "baseToDec": "Base X → Decimal",
+  "decToBase": "Decimal → Base X",
+  "baseDecoderConvertToDecimal": "Convert to Decimal",
+  "baseDecoderConvertToBase": "Convert to Base {base}",
+  "@baseDecoderConvertToBase": {
+    "placeholders": {
+      "base": { "type": "String" }
+    }
+  },
+  "mixed": "Mixed",
+
+  "primeFactor": "Prime Factor",
+  "primeFactorDesc": "Decompose numbers into their prime factors before time runs out",
+  "primeFactorMaxPrime": "Primes Allowed",
+  "primeFactorFound": "Factors Found: ",
+  "primeFactorStart": "Start Factorizing",
+
+  "wordMemory": "Word Memory",
+  "wordMemoryDesc": "Memorize a list of words, then identify which ones you saw",
+  "memorizeTime": "Memorize Time",
+  "wordMemoryMemorizeHint": "Remember these words! They'll disappear soon.",
+  "wordMemoryRecallHint": "Which words did you see?",
+  "wordMemoryResults": "Results",
+  "wordMemoryRecallDesc": "Select the {count} words you memorized",
+  "@wordMemoryRecallDesc": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "patternFold": "Pattern Fold",
+  "patternFoldDesc": "Identify which 3D cube results from folding the shown 2D net",
+  "patternFoldHowTo": "A colored cube net (unfolded cube) is shown. Select the 3D cube that matches when it's folded up. Pay attention to which colored faces end up where!",
+  "patternFoldInstruction": "Which cube does this net fold into?",
+  "patternFoldNet": "Cube Net (Unfolded)",
+  "patternFoldPickCube": "Select the correct 3D cube:",
+
+  "speedCount": "Speed Count",
+  "speedCountDesc": "Count how many dots flash on screen before they disappear",
+  "speedCountWatch": "Watch carefully!",
+  "speedCountHowMany": "How many dots were there?",
+  "speedCountEasy": "Easy",
+  "speedCountNormal": "Normal",
+  "speedCountHard": "Hard",
+  "speedCountFlashTime": "Flash duration: {ms}ms",
+  "@speedCountFlashTime": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  }
 }

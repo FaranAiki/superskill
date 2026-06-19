@@ -1,95 +1,105 @@
-# Superskill: Ultimate Cognitive & Brain Training Hub
+# Superskill: Cognitive Training Platform
 
-Superskill is a professional, high-fidelity Flutter cognitive training application designed with a sleek, vertical-first Dark/Neon-Blue aesthetic. The application allows users to challenge and measure their visual, audio, numerical, memory, spatial, and temporal capabilities with 18 highly refined mini-games.
+Superskill is a high-fidelity cognitive training application built using Flutter. Designed with a professional, mobile-first, vertical-constrained layout, it features a modern slate-gray and neon-blue aesthetic. The platform supports five languages and local high score tracking across 27 distinct mini-games.
 
 ---
 
-## Design Theme & Core Features
-* **Neon Blue Design System**: High-fidelity styling featuring deep slate-gray backgrounds (`#030712`), glowing cyan/blue highlights (`#38BDF8`), glassmorphic containers, and responsive micro-animations.
-* **Vertical / Mobile-First Layout**: Carefully structured layouts restricted to standard mobile dimensions (maximum width of 400-500px) on desktop and web, preventing visual stretching and layout overflows.
-* **Localization (i18n)**: Out-of-the-box support for five languages with fallback templates:
+## Product Requirements Document (PRD)
+
+### 1. Design System & User Interface
+* **Aesthetic**: Deep slate-gray background (HEX 030712), vibrant cyan/blue neon accents (HEX 38BDF8), glassmorphic border elements, and responsive micro-animations for interactive feedback.
+* **Layout Constraints**: The layout enforces a strict mobile-first architecture. All game screens are wrapped with maximum width constraints (400-500px), centered, and embedded in scrollable containers to ensure visual consistency and prevent layout scaling issues on desktop and web viewports.
+* **Text Case Guidelines**: All buttons, labels, and headers must consistently use Capital Case or Title Case to maintain a premium feel. Full uppercase typography is avoided.
+
+### 2. Core Functional Requirements
+* **Multi-Language Support (i18n)**: Native localization using Flutter ARB files for:
   * English (EN)
   * Indonesian (ID)
   * Japanese (JA)
   * Russian (RU)
   * Chinese (ZH)
-* **High Score Tracking**: Local persistence of user statistics and levels achieved across different games.
+  * All localized strings are accessed package-wide using local localizations imports rather than default flutter localizations wrappers.
+* **Local Persistence (High Score Service)**: Scores and levels achieved are persisted locally to enable tracking progress per game.
+* **Error Tolerant Gameplay (Self-Healing / Safety limits)**: All mathematical and temporal operations handle large scale inputs safely using BigInt or constraint clipping to avoid execution crashes.
 
 ---
 
-## Game Categories & Challenges
+## Game Catalog
 
-Superskill features 18 immersive mini-games categorized across 7 cognitive domains:
+The application includes 27 mini-games distributed across 7 cognitive categories:
 
 ### 1. Visual Games
-* **Guess HEX/RGB**: Identify the matching color block corresponding to the given hexadecimal color code.
-* **Guess CMYK**: A professional-grade CMYK color match challenge using slider adjustments.
-* **Gradient Sort**: Drag and drop color blocks to arrange them into a smooth, seamless gradient transition between two locked endpoints.
-* **Odd One Out**: Find the single grid tile that has a slightly different RGB color before the countdown timer runs out.
+* **Guess HEX/RGB**: Identify the color block that matches the provided hexadecimal color code.
+* **Guess CMYK**: Match colors using manual CMYK slider values.
+* **Gradient Sort**: Sort color blocks to create a perfect gradient between two locked end-hues.
+* **Odd One Out**: Find the single tile in a grid that has a slightly different shade.
 
 ### 2. Audio Games
-* **Perfect Pitch**: Train note identification by listening to musical pitches and guessing the correct key.
+* **Perfect Pitch**: Guess note keys after listening to musical pitches.
 
 ### 3. Brain Games
-* **Stroop Reflex**: Test cognitive focus and reaction speed under conflicting cognitive interference (color name word text vs. actual color ink).
-* **Reflex Tap**: Tap as fast as possible when the visual signal flashes to measure reaction time in milliseconds.
-* **Schulte Focus**: Find and tap numbers in ascending order from a randomized grid to test search speed and focus.
+* **Stroop Reflex**: Choose the correct color under conflicting text and ink conditions.
+* **Reflex Tap**: Measure reaction speed by tapping as soon as the screen flashes.
+* **Schulte Focus**: Find and tap numbers in ascending order from a randomized grid.
+* **N-Back**: Recall the grid cell position shown N steps back in a sequence.
+* **Typing Sprint**: Type random words quickly and accurately before time runs out.
 
 ### 4. Numerical Games
-* **Operator Rush**: Speed-solve arithmetic equations by selecting the correct mathematical operator.
-* **Game 24**: Given four numbers, determine if they can be mathematically manipulated using basic arithmetic to equal exactly 24.
-* **Speed Math**: Rapidly answer true/false math statements that scale in complexity as levels advance.
+* **Operator Rush**: Solve arithmetic equations by choosing the correct mathematical operator.
+* **Game 24**: Determine if four numbers can be combined using arithmetic to total 24.
+* **Speed Math**: Quickly evaluate if mathematical equations are true or false.
+* **Base Decoder**: Convert numeric values between different base systems (binary, octal, hexadecimal) and decimal.
+* **Prime Factor**: Perform prime factorization of a large number using BigInt arithmetic and sliding prime selection configuration.
 
 ### 5. Memory Games
-* **Memory Sequence**: Replicate an expanding sequence of flashing grid squares.
-* **Chimp Memory**: Memorize consecutive numbers and tap their hidden tiles in order, inspired by primate short-term visual memory studies.
-* **Color Memory**: Memorize a sequence of target colors and recall them by choosing from options containing highly similar hues.
+* **Memory Sequence**: Replicate an increasing sequence of blinking grid squares.
+* **Chimp Memory**: Memorize grid numbers, then tap hidden tiles in ascending order.
+* **Color Memory**: Memorize a color and identify it from options with highly similar hues.
+* **Word Memory**: Memorize a list of words, then select them from a list of distractors.
 
 ### 6. Spatial Games
-* **Spatial IQ**: Mental rotation challenge using 3D perspective projection and isometric cubes, featuring a grid outline helper and rotation lock.
-* **Maze Escape**: Navigate and guide your way out of procedurally generated grid-based mazes.
-* **Spatial Dice**: Match spatial dice faces where opposite sides always sum up to 7.
-* **Shadow Matching**: Match a rotating 3D block figure to its correct 2D shadow projection (Top, Front, Side) with interactive manual drag controls and coordinate axes indicators.
+* **Spatial IQ**: Rotate a 3D isometric cube structure to match a target grid shape.
+* **Maze Escape**: Navigate out of a procedurally generated maze.
+* **Spatial Dice**: Identify correct spatial cube orientations where opposite sides sum to 7.
+* **Shadow Matching**: Match a rotating 3D block figure to its correct orthogonal shadow projection.
+* **Pattern Fold**: Determine which 3D cube model matches the unfolded 2D cube net.
 
-### 7. Temporal Control
-* **Time Estimator**: Estimate a target duration. The visual clock vanishes after 3 seconds, requiring accurate internal timing.
-* **Rhythm Sync**: Synchronize tapping to a given BPM tempo. Listen to the visual pulse for 3 beats, then tap accurately on beats 4 to 8.
-
----
-
-## Scoring & High Score System
-Every game integrates with a localized high-score system. For temporal challenges, scores are calculated using a precise mathematical penalty system based on error offset $d$:
-* If the absolute difference $d > 1$: $\text{Penalty} = d^2$
-* If the absolute difference $d < 1$: $\text{Penalty} = \sqrt{d}$
-* The score scales up to a maximum of 1,000: $\text{Score} = \max(0, 1000 - (\text{Penalty} \times 200))$
+### 7. Temporal Games
+* **Time Estimator**: Estimate a target duration after the visual countdown timer disappears.
+* **Rhythm Sync**: Tap a sequence in sync with a specified BPM tempo.
+* **Speed Count**: Rapidly count how many dots flashed on the screen during a short window.
 
 ---
 
-## Getting Started & Build
+## Scoring Formulas
+
+Scoring calculations use localized, deterministic algorithms. For games measuring temporal precision, scores are computed using an error offset (d):
+* For error offset (d) greater than 1: Penalty = d * d
+* For error offset (d) less than or equal to 1: Penalty = square root of d
+* Final Score = max(0, 1000 - (Penalty * 200))
+
+---
+
+## Build and Run Instructions
 
 ### Prerequisites
-* Flutter SDK (3.22.x or newer recommended)
+* Flutter SDK (3.22.x or newer)
 * Dart SDK
 
-### Installation & Run
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/faranaiki/superskill.git
-   cd superskill
-   ```
-2. Retrieve packages and generate localizations:
+### Running Locally
+1. Retrieve dependencies and generate localizations:
    ```bash
    flutter pub get
    flutter gen-l10n
    ```
-3. Run the project:
+2. Launch the application:
    ```bash
    flutter run
    ```
 
-### Building for Android (APK)
-To export the debug build to the git-ignored output folder:
-```bash
-flutter build apk --debug
-```
-The resulting package will be generated at `build/app/outputs/flutter-apk/app-debug.apk`.
+### Production and Debug Build
+* Build debug Android APK:
+  ```bash
+  flutter build apk --debug
+  ```
+  The build package is located at `build/app/outputs/flutter-apk/app-debug.apk`.

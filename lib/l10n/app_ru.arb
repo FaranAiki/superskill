@@ -452,5 +452,91 @@
     }
   },
   "whatIsResult": "Каков конечный результат?",
-  "activeRules": "Активные правила цвета"
+  "activeRules": "Активные правила цвета",
+
+  "nBack": "N-Назад",
+  "nBackDesc": "Проверьте рабочую память, определяя совпадает ли текущая позиция с позицией N шагов назад",
+  "nBackLevel": "Уровень N-Назад",
+  "nBackHowTo": "Каждый раунд на сетке загорается клетка. Нажмите «Совпадение» если текущая позиция совпадает с позицией {n} шагов назад.",
+  "@nBackHowTo": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackMatch": "Совпадение!",
+  "nBackHint": "Нажмите «Совпадение» если позиция повторяется с N шагов назад",
+  "nBackWaiting": "Посмотрите ещё {n} позиций перед ответом",
+  "@nBackWaiting": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "nBackAccuracy": "Точность {percent}%",
+  "@nBackAccuracy": {
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+
+  "typingSprint": "Скоростной Набор",
+  "typingSprintDesc": "Набирайте слова как можно быстрее и точнее до истечения времени",
+  "gameDuration": "Продолжительность",
+  "typingSprintType": "Напечатайте это слово",
+  "typingSprintHint": "Нажмите Пробел после каждого слова для отправки",
+  "difficulty": "Сложность",
+
+  "baseDecoder": "Декодер Систем Счисления",
+  "baseDecoderDesc": "Преобразуйте числа между различными системами счисления (двоичной, восьмеричной, шестнадцатеричной) до истечения времени",
+  "baseDecoderMode": "Режим Конвертации",
+  "baseDecoderSelectBase": "Выбор Системы",
+  "baseToDec": "Система X → Десятичная",
+  "decToBase": "Десятичная → Система X",
+  "baseDecoderConvertToDecimal": "Преобразовать в десятичную",
+  "baseDecoderConvertToBase": "Преобразовать в систему {base}",
+  "@baseDecoderConvertToBase": {
+    "placeholders": {
+      "base": { "type": "String" }
+    }
+  },
+  "mixed": "Смешанный",
+
+  "primeFactor": "Простые Множители",
+  "primeFactorDesc": "Разложите числа на простые множители до истечения времени",
+  "primeFactorMaxPrime": "Допустимые Простые Числа",
+  "primeFactorFound": "Найдено Множителей: ",
+  "primeFactorStart": "Начать Разложение",
+
+  "wordMemory": "Память Слов",
+  "wordMemoryDesc": "Запомните список слов, затем определите какие из них вы видели",
+  "memorizeTime": "Время запоминания",
+  "wordMemoryMemorizeHint": "Запомните эти слова! Они скоро исчезнут.",
+  "wordMemoryRecallHint": "Какие слова вы видели?",
+  "wordMemoryResults": "Результаты",
+  "wordMemoryRecallDesc": "Выберите {count} слов которые вы запомнили",
+  "@wordMemoryRecallDesc": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "patternFold": "Сложение Паттерна",
+  "patternFoldDesc": "Определите какой 3D куб получится при складывании показанной 2D развёртки",
+  "patternFoldHowTo": "Показана цветная развёртка куба. Выберите 3D куб который соответствует результату складывания. Обратите внимание на расположение цветных граней!",
+  "patternFoldInstruction": "В какой куб сложится эта развёртка?",
+  "patternFoldNet": "Развёртка куба (раскрытая)",
+  "patternFoldPickCube": "Выберите правильный 3D куб:",
+
+  "speedCount": "Быстрый Счёт",
+  "speedCountDesc": "Посчитайте сколько точек мелькнуло на экране до их исчезновения",
+  "speedCountWatch": "Смотрите внимательно!",
+  "speedCountHowMany": "Сколько было точек?",
+  "speedCountEasy": "Лёгкий",
+  "speedCountNormal": "Нормальный",
+  "speedCountHard": "Сложный",
+  "speedCountFlashTime": "Время вспышки: {ms}мс",
+  "@speedCountFlashTime": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  }
 }

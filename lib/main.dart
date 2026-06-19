@@ -14,7 +14,7 @@ import 'core/high_score_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HighScoreService.instance.init();
-  
+
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     const Size windowSize = Size(450, 850);
@@ -26,7 +26,7 @@ void main() async {
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
-      title: 'Superskill Hub',
+      title: 'Superskill Games', // TODO change this into localized
     );
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.setSize(windowSize);
@@ -54,6 +54,8 @@ class MyApp extends ConsumerWidget {
         return GoogleFonts.poppinsTextTheme(baseTheme);
       case 'Orbitron':
         return GoogleFonts.orbitronTextTheme(baseTheme);
+      case 'Lato':
+        return GoogleFonts.latoTextTheme(baseTheme);
       default:
         return GoogleFonts.interTextTheme(baseTheme);
     }
@@ -82,7 +84,7 @@ class MyApp extends ConsumerWidget {
     );
 
     return MaterialApp(
-      title: 'Superskill Hub',
+      title: 'Superskill Games', // TODO change to localized
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
       theme: ThemeData(

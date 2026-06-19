@@ -143,7 +143,7 @@ class _StroopArithmeticScreenState extends State<StroopArithmeticScreen> {
     optionSet.add(unmodAns);
 
     // Generic distractors
-    while (optionSet.size < 4) {
+    while (optionSet.length < 4) {
       int offset = (_random.nextInt(6) + 1) * (_random.nextBool() ? 1 : -1);
       optionSet.add(correctAnswer + offset);
     }
@@ -405,7 +405,7 @@ class _StroopArithmeticScreenState extends State<StroopArithmeticScreen> {
                   foregroundColor: isLight ? Colors.black87 : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+                    side: BorderSide(color: primaryColor.withOpacity(0.2), width: 1.5),
                   ),
                   elevation: 0,
                 ),
