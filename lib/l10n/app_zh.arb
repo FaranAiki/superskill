@@ -9,6 +9,8 @@
   "pointDiffSystem": "颜色色差积分系统",
   "tebakHexCmyk": "猜 HEX/CMYK",
   "cmykChallenge": "CMYK 颜色挑战",
+  "tebakHexRyb": "猜 HEX/RYB",
+  "rybChallenge": "RYB 颜色挑战",
   "perfectPitch": "绝对音感",
   "trainMusicPitch": "练习音乐音高听力",
   "brainReflex": "大脑反射术",
@@ -414,5 +416,41 @@
         "type": "int"
       }
     }
-  }
+  },
+  "targetDurationLabel": "目标时间: {seconds} 秒",
+  "@targetDurationLabel": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "stroopArithmetic": "斯特鲁普算术",
+  "stroopArithmeticDesc": "使用动态颜色规则计算数学表达式",
+  "rulePlus": "红色: + {val}",
+  "@rulePlus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMinus": "绿色: - {val}",
+  "@ruleMinus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMultiply": "蓝色: * {val}",
+  "@ruleMultiply": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "whatIsResult": "最终结果是多少？",
+  "activeRules": "当前颜色规则"
 }

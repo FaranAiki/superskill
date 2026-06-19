@@ -9,6 +9,8 @@
   "pointDiffSystem": "Sistem poin selisih warna",
   "tebakHexCmyk": "Tebak HEX/CMYK",
   "cmykChallenge": "Tantangan warna CMYK",
+  "tebakHexRyb": "Tebak HEX/RYB",
+  "rybChallenge": "Tantangan warna RYB",
   "perfectPitch": "Perfect Pitch",
   "trainMusicPitch": "Latih pendengaran nada musik",
   "brainReflex": "Brain Reflex",
@@ -414,5 +416,41 @@
         "type": "int"
       }
     }
-  }
+  },
+  "targetDurationLabel": "Target Durasi: {seconds} detik",
+  "@targetDurationLabel": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "stroopArithmetic": "Aritmatika Stroop",
+  "stroopArithmeticDesc": "Selesaikan ekspresi matematika menggunakan operasi warna dinamis",
+  "rulePlus": "Merah: + {val}",
+  "@rulePlus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMinus": "Hijau: - {val}",
+  "@ruleMinus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMultiply": "Biru: * {val}",
+  "@ruleMultiply": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "whatIsResult": "Berapakah hasil akhirnya?",
+  "activeRules": "Aturan Warna Aktif"
 }

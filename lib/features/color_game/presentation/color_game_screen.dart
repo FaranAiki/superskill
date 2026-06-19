@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 
-enum ColorGameMode { rgb, cmyk }
+enum ColorGameMode { rgb, cmyk, ryb }
 
 class ColorGameScreen extends ConsumerStatefulWidget {
   final ColorGameMode mode;
@@ -17,6 +17,7 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
   late Color targetColor;
   double r = 0, g = 0, b = 0;
   double c = 0, m = 0, y = 0, k = 0;
+  double ryb_r = 128, ryb_y = 128, ryb_b = 128;
   double? score;
   bool submitted = false;
 
@@ -32,17 +33,25 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
   void _generateNewColor() {
     setState(() {
       final random = Random();
-      targetColor = Color.fromARGB(
-        255,
-        random.nextInt(256),
-        random.nextInt(256),
-        random.nextInt(256),
-      );
+      if (widget.mode == ColorGameMode.ryb) {
+        double tempR = random.nextDouble() * 255.0;
+        double tempY = random.nextDouble() * 255.0;
+        double tempB = random.nextDouble() * 255.0;
+        targetColor = _rybToColor(tempR, tempY, tempB);
+      } else {
+        targetColor = Color.fromARGB(
+          255,
+          random.nextInt(256),
+          random.nextInt(256),
+          random.nextInt(256),
+        );
+      }
       submitted = false;
       score = null;
       
       r = g = b = 128;
       c = m = y = k = 0;
+      ryb_r = ryb_y = ryb_b = 128;
       showTargetHex = false;
     });
   }
@@ -54,6 +63,13 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
         pow(targetColor.red - r, 2) +
         pow(targetColor.green - g, 2) +
         pow(targetColor.blue - b, 2)
+      );
+    } else if (widget.mode == ColorGameMode.ryb) {
+      Color userColor = _rybToColor(ryb_r, ryb_y, ryb_b);
+      distance = sqrt(
+        pow(targetColor.red - userColor.red, 2) +
+        pow(targetColor.green - userColor.green, 2) +
+        pow(targetColor.blue - userColor.blue, 2)
       );
     } else {
       double userR = 255 * (1 - c / 100) * (1 - k / 100);
@@ -80,11 +96,17 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
     final l10n = AppLocalizations.of(context)!;
     final userColor = widget.mode == ColorGameMode.rgb 
         ? Color.fromARGB(255, r.toInt(), g.toInt(), b.toInt())
-        : _cmykToColor(c, m, y, k);
+        : widget.mode == ColorGameMode.ryb
+            ? _rybToColor(ryb_r, ryb_y, ryb_b)
+            : _cmykToColor(c, m, y, k);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.mode == ColorGameMode.rgb ? l10n.tebakHexRgb : l10n.tebakHexCmyk),
+        title: Text(widget.mode == ColorGameMode.rgb 
+            ? l10n.tebakHexRgb 
+            : widget.mode == ColorGameMode.ryb
+                ? l10n.tebakHexRyb
+                : l10n.tebakHexCmyk),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -136,6 +158,10 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
                         _buildSlider(l10n.red, r, 0, 255, (v) => setState(() => r = v), const Color(0xFFEF4444)),
                         _buildSlider(l10n.green, g, 0, 255, (v) => setState(() => g = v), const Color(0xFF10B981)),
                         _buildSlider(l10n.blue, b, 0, 255, (v) => setState(() => b = v), const Color(0xFF3B82F6)),
+                      ] else if (widget.mode == ColorGameMode.ryb) ...[
+                        _buildSlider(l10n.red, ryb_r, 0, 255, (v) => setState(() => ryb_r = v), const Color(0xFFEF4444)),
+                        _buildSlider(l10n.yellow, ryb_y, 0, 255, (v) => setState(() => ryb_y = v), const Color(0xFFFACC15)),
+                        _buildSlider(l10n.blue, ryb_b, 0, 255, (v) => setState(() => ryb_b = v), const Color(0xFF3B82F6)),
                       ] else ...[
                         _buildSlider(l10n.cyan, c, 0, 100, (v) => setState(() => c = v), const Color(0xFF22D3EE), isCmyk: true),
                         _buildSlider(l10n.pink, m, 0, 100, (v) => setState(() => m = v), const Color(0xFFF472B6), isCmyk: true),
@@ -354,6 +380,60 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
     double g = 255 * (1 - m / 100) * (1 - k / 100);
     double b = 255 * (1 - y / 100) * (1 - k / 100);
     return Color.fromARGB(255, r.toInt(), g.toInt(), b.toInt());
+  }
+
+  Color _rybToColor(double r, double y, double b) {
+    // Normalize to 0..1
+    double R = r / 255.0;
+    double Y = y / 255.0;
+    double B = b / 255.0;
+
+    // 8 corners of the RYB interpolation cube in RGB
+    final c000 = [255, 255, 255]; // White
+    final c100 = [255, 0, 0];     // Red
+    final c010 = [255, 255, 0];   // Yellow
+    final c001 = [0, 0, 255];     // Blue
+    final c110 = [255, 128, 0];   // Orange
+    final c011 = [0, 168, 51];    // Green
+    final c101 = [127, 0, 127];   // Purple/Violet
+    final c111 = [32, 24, 16];    // Dark Brown/Black
+
+    double redVal = 
+        c000[0] * (1 - R) * (1 - Y) * (1 - B) +
+        c100[0] * R * (1 - Y) * (1 - B) +
+        c010[0] * (1 - R) * Y * (1 - B) +
+        c001[0] * (1 - R) * (1 - Y) * B +
+        c110[0] * R * Y * (1 - B) +
+        c101[0] * R * (1 - Y) * B +
+        c011[0] * (1 - R) * Y * B +
+        c111[0] * R * Y * B;
+
+    double greenVal = 
+        c000[1] * (1 - R) * (1 - Y) * (1 - B) +
+        c100[1] * R * (1 - Y) * (1 - B) +
+        c010[1] * (1 - R) * Y * (1 - B) +
+        c001[1] * (1 - R) * (1 - Y) * B +
+        c110[1] * R * Y * (1 - B) +
+        c101[1] * R * (1 - Y) * B +
+        c011[1] * (1 - R) * Y * B +
+        c111[1] * R * Y * B;
+
+    double blueVal = 
+        c000[2] * (1 - R) * (1 - Y) * (1 - B) +
+        c100[2] * R * (1 - Y) * (1 - B) +
+        c010[2] * (1 - R) * Y * (1 - B) +
+        c001[2] * (1 - R) * (1 - Y) * B +
+        c110[2] * R * Y * (1 - B) +
+        c101[2] * R * (1 - Y) * B +
+        c011[2] * (1 - R) * Y * B +
+        c111[2] * R * Y * B;
+
+    return Color.fromARGB(
+      255,
+      redVal.clamp(0, 255).toInt(),
+      greenVal.clamp(0, 255).toInt(),
+      blueVal.clamp(0, 255).toInt(),
+    );
   }
 }
 

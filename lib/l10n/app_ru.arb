@@ -9,6 +9,8 @@
   "pointDiffSystem": "Система очков по разнице цветов",
   "tebakHexCmyk": "Угадай HEX/CMYK",
   "cmykChallenge": "Цветовой вызов CMYK",
+  "tebakHexRyb": "Угадай HEX/RYB",
+  "rybChallenge": "Цветовой вызов RYB",
   "perfectPitch": "Абсолютный Слух",
   "trainMusicPitch": "Тренируйте музыкальный слух",
   "brainReflex": "Мозговой Рефлекс",
@@ -414,5 +416,41 @@
         "type": "int"
       }
     }
-  }
+  },
+  "targetDurationLabel": "Целевая длительность: {seconds} секунд",
+  "@targetDurationLabel": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "stroopArithmetic": "Арифметика Струпа",
+  "stroopArithmeticDesc": "Решайте математические выражения по динамическим цветовым правилам",
+  "rulePlus": "Красный: + {val}",
+  "@rulePlus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMinus": "Зеленый: - {val}",
+  "@ruleMinus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMultiply": "Синий: * {val}",
+  "@ruleMultiply": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "whatIsResult": "Каков конечный результат?",
+  "activeRules": "Активные правила цвета"
 }

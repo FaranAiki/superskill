@@ -9,6 +9,8 @@
   "pointDiffSystem": "色差ポイントシステム",
   "tebakHexCmyk": "HEX/CMYKを当てる",
   "cmykChallenge": "CMYKカラーチャレンジ",
+  "tebakHexRyb": "HEX/RYBを当てる",
+  "rybChallenge": "RYBカラーチャレンジ",
   "perfectPitch": "絶対音感",
   "trainMusicPitch": "音感トレーニング",
   "brainReflex": "脳トレ反射",
@@ -414,5 +416,41 @@
         "type": "int"
       }
     }
-  }
+  },
+  "targetDurationLabel": "目標時間: {seconds} 秒",
+  "@targetDurationLabel": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "stroopArithmetic": "ストループ計算",
+  "stroopArithmeticDesc": "動的な色のルールを使って数式を解く",
+  "rulePlus": "赤: + {val}",
+  "@rulePlus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMinus": "緑: - {val}",
+  "@ruleMinus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMultiply": "青: * {val}",
+  "@ruleMultiply": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "whatIsResult": "最終結果は？",
+  "activeRules": "アクティブな色のルール"
 }

@@ -9,6 +9,8 @@
   "pointDiffSystem": "Color difference point system",
   "tebakHexCmyk": "Guess HEX/CMYK",
   "cmykChallenge": "CMYK color challenge",
+  "tebakHexRyb": "Guess HEX/RYB",
+  "rybChallenge": "RYB color challenge",
   "perfectPitch": "Perfect Pitch",
   "trainMusicPitch": "Train your music pitch hearing",
   "brainReflex": "Brain Reflex",
@@ -422,5 +424,33 @@
         "type": "String"
       }
     }
-  }
+  },
+  "stroopArithmetic": "Stroop Arithmetic",
+  "stroopArithmeticDesc": "Solve math expressions using dynamic colored operations",
+  "rulePlus": "Red: + {val}",
+  "@rulePlus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMinus": "Green: - {val}",
+  "@ruleMinus": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleMultiply": "Blue: * {val}",
+  "@ruleMultiply": {
+    "placeholders": {
+      "val": {
+        "type": "int"
+      }
+    }
+  },
+  "whatIsResult": "What is the final result?",
+  "activeRules": "Active Color Rules"
 }

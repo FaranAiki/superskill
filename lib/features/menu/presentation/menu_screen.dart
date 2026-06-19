@@ -368,6 +368,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               ),
                             ),
                             _MenuButton(
+                              title: l10n.tebakHexRyb,
+                              subtitle: l10n.rybChallenge,
+                              icon: Icons.invert_colors_outlined,
+                              gradient: const [Color(0xFFEF4444), Color(0xFF3B82F6)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ColorGameScreen(mode: ColorGameMode.ryb)),
+                              ),
+                            ),
+                            _MenuButton(
                               title: l10n.gradientSort,
                               subtitle: l10n.gradientSortDesc,
                               icon: Icons.filter_hdr_outlined,
