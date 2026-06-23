@@ -538,5 +538,40 @@
     "placeholders": {
       "ms": { "type": "int" }
     }
-  }
+  },
+
+  "soundIntervalGame": "Тренажер Интервалов",
+  "soundIntervalGameDesc": "Тренируйте слух, определяя музыкальный интервал между двумя нотами",
+  "playInterval": "Воспроизвести Интервал",
+  "firstNote": "Первая Нота",
+  "secondNote": "Вторая Нота",
+  "correctInterval": "Правильно! Это {interval}",
+  "@correctInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "wrongInterval": "Неправильно! Это {interval}",
+  "@wrongInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "nextInterval": "Следующий Интервал",
+  "intervalAscending": "Восходящий",
+  "intervalDescending": "Нисходящий",
+  "intervalDirection": "Направление",
+  "minor2nd": "Малая секунда",
+  "major2nd": "Большая секунда",
+  "minor3rd": "Малая терция",
+  "major3rd": "Большая терция",
+  "perfect4th": "Чистая кварта",
+  "tritone": "Тритон",
+  "perfect5th": "Чистая квинта",
+  "minor6th": "Малая секста",
+  "major6th": "Большая секста",
+  "minor7th": "Малая септима",
+  "major7th": "Большая септима",
+  "perfectOctave": "Чистая октава"
 }
+

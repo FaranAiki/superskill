@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 class StroopGameScreen extends StatefulWidget {
   const StroopGameScreen({super.key});
@@ -92,8 +93,10 @@ class _StroopGameScreenState extends State<StroopGameScreen> {
     setState(() {
       if (correct) {
         score += 10;
+        SoundFontService.instance.playCorrect();
       } else {
         score = max(0, score - 5);
+        SoundFontService.instance.playIncorrect();
       }
       _nextRound();
     });

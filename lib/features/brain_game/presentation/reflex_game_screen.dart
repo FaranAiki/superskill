@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 class ReflexGameScreen extends StatefulWidget {
   const ReflexGameScreen({super.key});
@@ -108,11 +109,13 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
         
         _nextTile();
       });
+      SoundFontService.instance.playCorrect();
     } else {
       // Incorrect!
       setState(() {
         score = max(0, score - 5);
       });
+      SoundFontService.instance.playIncorrect();
     }
   }
 

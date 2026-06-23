@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import '../../color_game/presentation/color_game_screen.dart';
 import '../../sound_game/presentation/sound_game_screen.dart';
+import '../../sound_game/presentation/interval_game_screen.dart';
 import '../../brain_game/presentation/stroop_game_screen.dart';
 import '../../brain_game/presentation/reflex_game_screen.dart';
 import '../../brain_game/presentation/operator_game_screen.dart';
@@ -93,6 +94,8 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
           {'id': 'time_estimator', 'name': l10n.timeEstimator, 'icon': Icons.timer_outlined, 'color': const Color(0xFF10B981)},
           {'id': 'rhythm_sync', 'name': l10n.rhythmSync, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF8B5CF6)},
           {'id': 'speed_count', 'name': l10n.speedCount, 'icon': Icons.visibility_outlined, 'color': const Color(0xFFF97316)},
+          {'id': 'perfect_pitch', 'name': l10n.perfectPitch, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF818CF8)},
+          {'id': 'sound_interval', 'name': l10n.soundIntervalGame, 'icon': Icons.graphic_eq_outlined, 'color': const Color(0xFFEC4899)},
         ];
 
         return Dialog(
@@ -423,6 +426,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const SoundGameScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.soundIntervalGame,
+                              subtitle: l10n.soundIntervalGameDesc,
+                              icon: Icons.graphic_eq_outlined,
+                              gradient: const [Color(0xFFEC4899), Color(0xFF8B5CF6)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const IntervalGameScreen()),
                               ),
                             ),
                           ]),

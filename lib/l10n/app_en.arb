@@ -538,5 +538,40 @@
     "placeholders": {
       "ms": { "type": "int" }
     }
-  }
+  },
+
+  "soundIntervalGame": "Sound Interval Trainer",
+  "soundIntervalGameDesc": "Train your ears by identifying the musical interval between two notes",
+  "playInterval": "Play Interval",
+  "firstNote": "First Note",
+  "secondNote": "Second Note",
+  "correctInterval": "Correct! It was {interval}",
+  "@correctInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "wrongInterval": "Wrong! It was {interval}",
+  "@wrongInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "nextInterval": "Next Interval",
+  "intervalAscending": "Ascending",
+  "intervalDescending": "Descending",
+  "intervalDirection": "Play Direction",
+  "minor2nd": "Minor 2nd",
+  "major2nd": "Major 2nd",
+  "minor3rd": "Minor 3rd",
+  "major3rd": "Major 3rd",
+  "perfect4th": "Perfect 4th",
+  "tritone": "Tritone",
+  "perfect5th": "Perfect 5th",
+  "minor6th": "Minor 6th",
+  "major6th": "Major 6th",
+  "minor7th": "Minor 7th",
+  "major7th": "Major 7th",
+  "perfectOctave": "Perfect Octave"
 }
+

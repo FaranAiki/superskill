@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.20.2
   vector_math: ^2.2.0
   window_manager: ^0.5.1
+  dart_melty_soundfont: ^2.0.0
 
 dev_dependencies:
   flutter_test:

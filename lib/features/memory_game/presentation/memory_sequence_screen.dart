@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 enum GameSpeed {
   slow,
@@ -137,9 +138,17 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
   }
 
   void _playSound(int index) {
-    _audioPlayer.play(AssetSource('sounds/tile_$index.mp3')).catchError((_) {
-      // Ignore errors if sound files don't exist
-    });
+    if (!SoundFontService.instance.isLoaded) {
+      SoundFontService.instance.init();
+    }
+    final midiKeys = [60, 62, 64, 67, 69, 72, 74, 76, 79];
+    final midiKey = midiKeys[index % midiKeys.length];
+    try {
+      final wav = SoundFontService.instance.generateWavBytes(midiKey, instrument: 11, duration: 0.6);
+      _audioPlayer.play(BytesSource(wav)).catchError((e) {
+        debugPrint('Error playing memory tile sound: $e');
+      });
+    } catch (_) {}
   }
 
   void _onTileTap(int index) async {
@@ -170,7 +179,9 @@ class _MemorySequenceScreenState extends State<MemorySequenceScreen> {
         isGameOver = true;
         HighScoreService.instance.saveScore("memory_sequence", sequence.isEmpty ? 0 : sequence.length - 1);
       });
+      SoundFontService.instance.playIncorrect();
     } else if (userSequence.length == sequence.length) {
+      SoundFontService.instance.playCorrect();
       Future.delayed(const Duration(milliseconds: 500), _nextLevel);
     }
   }

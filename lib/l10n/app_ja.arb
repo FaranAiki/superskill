@@ -538,5 +538,40 @@
     "placeholders": {
       "ms": { "type": "int" }
     }
-  }
+  },
+
+  "soundIntervalGame": "音程トレーナー",
+  "soundIntervalGameDesc": "2つの音符の間の音程を識別して耳を鍛えましょう",
+  "playInterval": "音程を再生",
+  "firstNote": "最初の音符",
+  "secondNote": "次の音符",
+  "correctInterval": "正解！ {interval} でした",
+  "@correctInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "wrongInterval": "不正解！ {interval} でした",
+  "@wrongInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "nextInterval": "次の音程",
+  "intervalAscending": "上行",
+  "intervalDescending": "下行",
+  "intervalDirection": "再生方向",
+  "minor2nd": "短二度",
+  "major2nd": "長二度",
+  "minor3rd": "短三度",
+  "major3rd": "長三度",
+  "perfect4th": "完全四度",
+  "tritone": "三全音",
+  "perfect5th": "完全五度",
+  "minor6th": "短六度",
+  "major6th": "長六度",
+  "minor7th": "短七度",
+  "major7th": "長七度",
+  "perfectOctave": "完全八度"
 }
+

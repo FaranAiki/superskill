@@ -538,5 +538,40 @@
     "placeholders": {
       "ms": { "type": "int" }
     }
-  }
+  },
+
+  "soundIntervalGame": "Pelatih Interval Suara",
+  "soundIntervalGameDesc": "Latih pendengaranmu dengan mengidentifikasi interval musik antara dua nada",
+  "playInterval": "Mainkan Interval",
+  "firstNote": "Nada Pertama",
+  "secondNote": "Nada Kedua",
+  "correctInterval": "Benar! Itu adalah {interval}",
+  "@correctInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "wrongInterval": "Salah! Itu adalah {interval}",
+  "@wrongInterval": {
+    "placeholders": {
+      "interval": { "type": "String" }
+    }
+  },
+  "nextInterval": "Interval Berikutnya",
+  "intervalAscending": "Naik (Ascending)",
+  "intervalDescending": "Turun (Descending)",
+  "intervalDirection": "Arah Nada",
+  "minor2nd": "Minor ke-2",
+  "major2nd": "Mayor ke-2",
+  "minor3rd": "Minor ke-3",
+  "major3rd": "Mayor ke-3",
+  "perfect4th": "Murni ke-4",
+  "tritone": "Tritone",
+  "perfect5th": "Murni ke-5",
+  "minor6th": "Minor ke-6",
+  "major6th": "Mayor ke-6",
+  "minor7th": "Minor ke-7",
+  "major7th": "Mayor ke-7",
+  "perfectOctave": "Oktaf Murni"
 }
+

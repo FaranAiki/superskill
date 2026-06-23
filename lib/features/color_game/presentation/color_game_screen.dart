@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:superskill/l10n/app_localizations.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 enum ColorGameMode { rgb, cmyk, ryb }
 
@@ -89,6 +90,12 @@ class _ColorGameScreenState extends ConsumerState<ColorGameScreen> {
       showTargetHex = true;
       showUserPreview = true;
     });
+    
+    if (distance < 45) {
+      SoundFontService.instance.playCorrect();
+    } else {
+      SoundFontService.instance.playIncorrect();
+    }
   }
 
   @override

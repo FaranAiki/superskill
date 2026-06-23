@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 class OddOneOutScreen extends StatefulWidget {
   const OddOneOutScreen({super.key});
@@ -165,6 +166,7 @@ class _OddOneOutScreenState extends State<OddOneOutScreen> with SingleTickerProv
         setState(() => _flashColor = Colors.transparent);
       });
       _generateLevel();
+      SoundFontService.instance.playCorrect();
     } else {
       // Wrong tap! Deduct 2 seconds
       setState(() {
@@ -174,6 +176,7 @@ class _OddOneOutScreenState extends State<OddOneOutScreen> with SingleTickerProv
       _flashController.forward(from: 0.0).then((_) {
         setState(() => _flashColor = Colors.transparent);
       });
+      SoundFontService.instance.playIncorrect();
     }
   }
 
