@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform;
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
 import 'package:superskill/core/soundfont_service.dart';
+
+enum TapAction { left, right }
 
 class ReflexGameScreen extends StatefulWidget {
   const ReflexGameScreen({super.key});
@@ -26,6 +29,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
   bool isGameOver = false;
   
   int activeTileIndex = -1;
+  TapAction requiredAction = TapAction.left;
+  int requiredClicks = 1;
+
   final int gridCount = 16; // 4x4
   
   final List<FloatingScore> _floaters = [];
@@ -33,6 +39,17 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
   
   late List<AnimationController> _tapControllers;
   late List<Animation<double>> _tapAnimations;
+
+  // Settings
+  bool enableRightClick = false;
+  bool enableMultiClick = false;
+
+  bool get isDesktop {
+    if (kIsWeb) return true;
+    return defaultTargetPlatform == TargetPlatform.windows || 
+           defaultTargetPlatform == TargetPlatform.macOS || 
+           defaultTargetPlatform == TargetPlatform.linux;
+  }
 
   @override
   void initState() {
@@ -56,15 +73,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
     super.dispose();
   }
 
-  void _startNewGame() {
-    setState(() {
-      score = 0;
-      timeLeft = 20;
-      isGameOver = false;
-      _floaters.clear();
-      _nextTile();
-    });
-    
+  void _startTimer() {
     gameTimer?.cancel();
     gameTimer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (mounted) {
@@ -81,6 +90,17 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
     });
   }
 
+  void _startNewGame() {
+    setState(() {
+      score = 0;
+      timeLeft = 20;
+      isGameOver = false;
+      _floaters.clear();
+      _nextTile();
+    });
+    _startTimer();
+  }
+
   void _nextTile() {
     final random = Random();
     int newIndex;
@@ -88,35 +108,124 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
       newIndex = random.nextInt(gridCount);
     } while (newIndex == activeTileIndex);
     
+    TapAction nextAction = TapAction.left;
+    if (enableRightClick && isDesktop) {
+      nextAction = random.nextBool() ? TapAction.right : TapAction.left;
+    }
+    
+    int nextClicks = 1;
+    if (enableMultiClick) {
+      nextClicks = random.nextInt(3) + 1;
+    }
+    
     setState(() {
       activeTileIndex = newIndex;
+      requiredAction = nextAction;
+      requiredClicks = nextClicks;
     });
   }
 
-  void _onTileTap(int index, BuildContext context, TapUpDetails details) {
+  void _onTileTap(int index, BuildContext context, {TapAction action = TapAction.left}) {
     if (isGameOver) return;
     
     _tapControllers[index].forward(from: 0.0);
     
     if (index == activeTileIndex) {
-      // Correct!
+      if (action != requiredAction) {
+        // Wrong click type
+        setState(() {
+          score = max(0, score - 5);
+        });
+        SoundFontService.instance.playIncorrect();
+        return;
+      }
+      
       setState(() {
-        score += 10;
-        
-        // Add floater at tap coordinates
-        final localPos = details.localPosition;
-        _floaters.add(FloatingScore(_floaterIdCounter++, localPos.dx, localPos.dy));
-        
-        _nextTile();
+        requiredClicks--;
+        if (requiredClicks <= 0) {
+          score += 10;
+          _floaters.add(FloatingScore(_floaterIdCounter++, 40.0, 40.0));
+          _nextTile();
+          SoundFontService.instance.playCorrect();
+        } else {
+          SoundFontService.instance.playClick();
+        }
       });
-      SoundFontService.instance.playCorrect();
     } else {
-      // Incorrect!
+      // Incorrect tile!
       setState(() {
         score = max(0, score - 5);
       });
       SoundFontService.instance.playIncorrect();
     }
+  }
+
+  void _showSettings(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    gameTimer?.cancel();
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setModalState) => Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
+            ),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(l10n.gameSettings, style: theme.textTheme.titleLarge),
+                ),
+                const SizedBox(height: 24),
+                
+                if (isDesktop)
+                  SwitchListTile(
+                    title: const Text("Enable Right Click"),
+                    subtitle: const Text("Some tiles will require a right click (orange)"),
+                    activeColor: primaryColor,
+                    value: enableRightClick,
+                    onChanged: (val) {
+                      setState(() => enableRightClick = val);
+                      setModalState(() {});
+                    },
+                  ),
+                SwitchListTile(
+                  title: const Text("Enable Multi-Click"),
+                  subtitle: const Text("Some tiles will require 2-3 clicks"),
+                  activeColor: primaryColor,
+                  value: enableMultiClick,
+                  onChanged: (val) {
+                    setState(() => enableMultiClick = val);
+                    setModalState(() {});
+                  },
+                ),
+                const SizedBox(height: 12),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(l10n.ok),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).then((_) {
+      if (!isGameOver && timeLeft > 0) {
+        _startTimer();
+      }
+    });
   }
 
   @override
@@ -170,6 +279,10 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
       appBar: AppBar(
         title: Text(l10n.reflexGame),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => _showSettings(context),
+          ),
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -206,7 +319,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                 const SizedBox(height: 32),
                 
                 // 4x4 Grid of Tiles
-                Expanded(
+                Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -215,6 +328,8 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                       border: Border.all(color: primaryColor.withOpacity(0.15), width: 1.5),
                     ),
                     child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         crossAxisSpacing: 12,
@@ -224,9 +339,13 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                       itemBuilder: (context, idx) {
                         final isActive = idx == activeTileIndex;
                         
-                        return GestureDetector(
-                          onTapUp: (details) => _onTileTap(idx, context, details),
-                          child: ScaleTransition(
+                        return Material(
+                          type: MaterialType.transparency,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(16),
+                            onTap: () => _onTileTap(idx, context, action: TapAction.left),
+                            onSecondaryTap: () => _onTileTap(idx, context, action: TapAction.right),
+                            child: ScaleTransition(
                             scale: _tapAnimations[idx],
                             child: Stack(
                               clipBehavior: Clip.none,
@@ -235,7 +354,7 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                                   duration: const Duration(milliseconds: 100),
                                   decoration: BoxDecoration(
                                     color: isActive
-                                        ? primaryColor
+                                        ? (requiredAction == TapAction.right ? Colors.orangeAccent : primaryColor)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(16),
                                     border: Border.all(
@@ -245,13 +364,25 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                                     boxShadow: isActive
                                         ? [
                                             BoxShadow(
-                                              color: primaryColor.withOpacity(0.8),
+                                              color: (requiredAction == TapAction.right ? Colors.orangeAccent : primaryColor).withOpacity(0.8),
                                               blurRadius: 20,
                                               spreadRadius: 2,
                                             )
                                           ]
                                         : [],
                                   ),
+                                  child: isActive && (requiredClicks > 1 || requiredAction == TapAction.right)
+                                      ? Center(
+                                          child: Text(
+                                            requiredClicks > 1 ? "$requiredClicks" : (requiredAction == TapAction.right ? "R" : ""),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        )
+                                      : null,
                                 ),
                                 // Floating text stack overlays
                                 ..._floaters.where((f) => isActive).map((floater) {
@@ -289,8 +420,9 @@ class _ReflexGameScreenState extends State<ReflexGameScreen> with TickerProvider
                               ],
                             ),
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    },
                     ),
                   ),
                 ),

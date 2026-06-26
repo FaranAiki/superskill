@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:superskill/l10n/app_localizations.dart';
 import 'package:superskill/core/high_score_service.dart';
+import 'package:superskill/core/soundfont_service.dart';
 
 class SchulteGameScreen extends StatefulWidget {
   const SchulteGameScreen({super.key});
@@ -87,6 +88,7 @@ class _SchulteGameScreenState extends State<SchulteGameScreen> {
 
     if (tappedVal == nextNumber) {
       // Correct number clicked!
+      SoundFontService.instance.playCorrect(instrument: 11); // vibraphone for plucky sound
       _correctTimer?.cancel();
       setState(() {
         _wrongIndex = null; // Clear previous wrong flag
@@ -115,6 +117,7 @@ class _SchulteGameScreenState extends State<SchulteGameScreen> {
       });
     } else {
       // Wrong number clicked!
+      SoundFontService.instance.playIncorrect();
       _wrongTimer?.cancel();
       setState(() {
         _wrongIndex = index;

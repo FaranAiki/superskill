@@ -12,8 +12,7 @@ class SoundFontService {
   bool _isLoaded = false;
   ByteData? _soundFontData;
   
-  // Shared feedback player
-  final AudioPlayer _feedbackPlayer = AudioPlayer();
+  // Shared feedback player removed to allow non-blocking concurrent sounds
 
   bool get isLoaded => _isLoaded;
 
@@ -111,7 +110,9 @@ class SoundFontService {
     try {
       if (!_isLoaded) await init();
       final wav = generateCorrectChime(instrument: instrument);
-      await _feedbackPlayer.play(BytesSource(wav));
+      final player = AudioPlayer();
+      player.onPlayerComplete.listen((_) => player.dispose());
+      await player.play(BytesSource(wav));
     } catch (e) {
       debugPrint('Error playing correct sound feedback: $e');
     }
@@ -122,7 +123,9 @@ class SoundFontService {
     try {
       if (!_isLoaded) await init();
       final wav = generateIncorrectChime(instrument: instrument);
-      await _feedbackPlayer.play(BytesSource(wav));
+      final player = AudioPlayer();
+      player.onPlayerComplete.listen((_) => player.dispose());
+      await player.play(BytesSource(wav));
     } catch (e) {
       debugPrint('Error playing incorrect sound feedback: $e');
     }
@@ -142,7 +145,9 @@ class SoundFontService {
       synth.renderMonoInt16(buf16);
       final pcmBytes = buf16.bytes.buffer.asUint8List();
       final wav = _pcmToWav(pcmBytes, sampleRate, 1, 16);
-      await _feedbackPlayer.play(BytesSource(wav));
+      final player = AudioPlayer();
+      player.onPlayerComplete.listen((_) => player.dispose());
+      await player.play(BytesSource(wav));
     } catch (e) {
       debugPrint('Error playing click sound feedback: $e');
     }
