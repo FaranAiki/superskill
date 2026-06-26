@@ -453,14 +453,15 @@
   },
   "whatIsResult": "Каков конечный результат?",
   "activeRules": "Активные правила цвета",
-
   "nBack": "N-Назад",
   "nBackDesc": "Проверьте рабочую память, определяя совпадает ли текущая позиция с позицией N шагов назад",
   "nBackLevel": "Уровень N-Назад",
   "nBackHowTo": "Каждый раунд на сетке загорается клетка. Нажмите «Совпадение» если текущая позиция совпадает с позицией {n} шагов назад.",
   "@nBackHowTo": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "nBackMatch": "Совпадение!",
@@ -468,23 +469,25 @@
   "nBackWaiting": "Посмотрите ещё {n} позиций перед ответом",
   "@nBackWaiting": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "nBackAccuracy": "Точность {percent}%",
   "@nBackAccuracy": {
     "placeholders": {
-      "percent": { "type": "int" }
+      "percent": {
+        "type": "int"
+      }
     }
   },
-
   "typingSprint": "Скоростной Набор",
   "typingSprintDesc": "Набирайте слова как можно быстрее и точнее до истечения времени",
   "gameDuration": "Продолжительность",
   "typingSprintType": "Напечатайте это слово",
   "typingSprintHint": "Нажмите Пробел после каждого слова для отправки",
   "difficulty": "Сложность",
-
   "baseDecoder": "Декодер Систем Счисления",
   "baseDecoderDesc": "Преобразуйте числа между различными системами счисления (двоичной, восьмеричной, шестнадцатеричной) до истечения времени",
   "baseDecoderMode": "Режим Конвертации",
@@ -495,17 +498,17 @@
   "baseDecoderConvertToBase": "Преобразовать в систему {base}",
   "@baseDecoderConvertToBase": {
     "placeholders": {
-      "base": { "type": "String" }
+      "base": {
+        "type": "String"
+      }
     }
   },
   "mixed": "Смешанный",
-
   "primeFactor": "Простые Множители",
   "primeFactorDesc": "Разложите числа на простые множители до истечения времени",
   "primeFactorMaxPrime": "Допустимые Простые Числа",
   "primeFactorFound": "Найдено Множителей: ",
   "primeFactorStart": "Начать Разложение",
-
   "wordMemory": "Память Слов",
   "wordMemoryDesc": "Запомните список слов, затем определите какие из них вы видели",
   "memorizeTime": "Время запоминания",
@@ -515,17 +518,17 @@
   "wordMemoryRecallDesc": "Выберите {count} слов которые вы запомнили",
   "@wordMemoryRecallDesc": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-
   "patternFold": "Сложение Паттерна",
   "patternFoldDesc": "Определите какой 3D куб получится при складывании показанной 2D развёртки",
   "patternFoldHowTo": "Показана цветная развёртка куба. Выберите 3D куб который соответствует результату складывания. Обратите внимание на расположение цветных граней!",
   "patternFoldInstruction": "В какой куб сложится эта развёртка?",
   "patternFoldNet": "Развёртка куба (раскрытая)",
   "patternFoldPickCube": "Выберите правильный 3D куб:",
-
   "speedCount": "Быстрый Счёт",
   "speedCountDesc": "Посчитайте сколько точек мелькнуло на экране до их исчезновения",
   "speedCountWatch": "Смотрите внимательно!",
@@ -536,10 +539,11 @@
   "speedCountFlashTime": "Время вспышки: {ms}мс",
   "@speedCountFlashTime": {
     "placeholders": {
-      "ms": { "type": "int" }
+      "ms": {
+        "type": "int"
+      }
     }
   },
-
   "soundIntervalGame": "Тренажер Интервалов",
   "soundIntervalGameDesc": "Тренируйте слух, определяя музыкальный интервал между двумя нотами",
   "playInterval": "Воспроизвести Интервал",
@@ -548,13 +552,17 @@
   "correctInterval": "Правильно! Это {interval}",
   "@correctInterval": {
     "placeholders": {
-      "interval": { "type": "String" }
+      "interval": {
+        "type": "String"
+      }
     }
   },
   "wrongInterval": "Неправильно! Это {interval}",
   "@wrongInterval": {
     "placeholders": {
-      "interval": { "type": "String" }
+      "interval": {
+        "type": "String"
+      }
     }
   },
   "nextInterval": "Следующий Интервал",
@@ -572,6 +580,14 @@
   "major6th": "Большая секста",
   "minor7th": "Малая септима",
   "major7th": "Большая септима",
-  "perfectOctave": "Чистая октава"
+  "perfectOctave": "Чистая октава",
+  "search": "Поиск",
+  "simonSays": "Simon Says",
+  "simonSaysDesc": "Memorize and repeat the audio-visual sequence.",
+  "reactionTime": "Reaction Time",
+  "reactionTimeDesc": "Tap as quickly as possible when the color turns green.",
+  "movingCups": "Moving Cups",
+  "movingCupsDesc": "Keep track of the target object as the cups move.",
+  "targetSum": "Target Sum",
+  "targetSumDesc": "Select numbers that add up to the target value."
 }
-

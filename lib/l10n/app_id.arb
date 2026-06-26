@@ -453,14 +453,15 @@
   },
   "whatIsResult": "Berapakah hasil akhirnya?",
   "activeRules": "Aturan Warna Aktif",
-
   "nBack": "N-Back",
   "nBackDesc": "Uji memori kerja dengan mengenali apakah posisi saat ini cocok dengan N langkah yang lalu",
   "nBackLevel": "Level N-Back",
   "nBackHowTo": "Setiap ronde, sebuah kotak menyala di grid. Tekan 'Cocok' jika posisi saat ini sama dengan {n} langkah yang lalu.",
   "@nBackHowTo": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "nBackMatch": "Cocok!",
@@ -468,23 +469,25 @@
   "nBackWaiting": "Lihat {n} posisi lagi sebelum bisa menjawab",
   "@nBackWaiting": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "nBackAccuracy": "Akurasi {percent}%",
   "@nBackAccuracy": {
     "placeholders": {
-      "percent": { "type": "int" }
+      "percent": {
+        "type": "int"
+      }
     }
   },
-
   "typingSprint": "Ketik Cepat",
   "typingSprintDesc": "Ketik kata secepat dan seakurat mungkin sebelum waktu habis",
   "gameDuration": "Durasi Permainan",
   "typingSprintType": "Ketik Kata Ini",
   "typingSprintHint": "Tekan Spasi setelah setiap kata untuk mengirim",
   "difficulty": "Kesulitan",
-
   "baseDecoder": "Dekoder Basis",
   "baseDecoderDesc": "Konversi bilangan di antara berbagai basis (biner, oktal, heksadesimal) sebelum waktu habis",
   "baseDecoderMode": "Mode Konversi",
@@ -495,17 +498,17 @@
   "baseDecoderConvertToBase": "Konversi ke Basis {base}",
   "@baseDecoderConvertToBase": {
     "placeholders": {
-      "base": { "type": "String" }
+      "base": {
+        "type": "String"
+      }
     }
   },
   "mixed": "Campuran",
-
   "primeFactor": "Faktor Prima",
   "primeFactorDesc": "Uraikan bilangan menjadi faktor primanya sebelum waktu habis",
   "primeFactorMaxPrime": "Prima yang Diizinkan",
   "primeFactorFound": "Faktor Ditemukan: ",
   "primeFactorStart": "Mulai Faktorisasi",
-
   "wordMemory": "Memori Kata",
   "wordMemoryDesc": "Hafal daftar kata, lalu identifikasi mana yang sudah kamu lihat",
   "memorizeTime": "Waktu Menghafal",
@@ -515,17 +518,17 @@
   "wordMemoryRecallDesc": "Pilih {count} kata yang kamu hafal",
   "@wordMemoryRecallDesc": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-
   "patternFold": "Lipat Pola",
   "patternFoldDesc": "Tentukan kubus 3D mana yang terbentuk dari melipat jaring 2D yang ditampilkan",
   "patternFoldHowTo": "Jaring kubus berwarna (kubus yang dibuka) ditampilkan. Pilih kubus 3D yang cocok saat dilipat. Perhatikan wajah berwarna mana yang ada di mana!",
   "patternFoldInstruction": "Kubus mana yang terbentuk dari jaring ini?",
   "patternFoldNet": "Jaring Kubus (Dibuka)",
   "patternFoldPickCube": "Pilih kubus 3D yang benar:",
-
   "speedCount": "Hitung Cepat",
   "speedCountDesc": "Hitung berapa banyak titik yang berkedip di layar sebelum menghilang",
   "speedCountWatch": "Perhatikan baik-baik!",
@@ -536,10 +539,11 @@
   "speedCountFlashTime": "Durasi kilat: {ms}ms",
   "@speedCountFlashTime": {
     "placeholders": {
-      "ms": { "type": "int" }
+      "ms": {
+        "type": "int"
+      }
     }
   },
-
   "soundIntervalGame": "Pelatih Interval Suara",
   "soundIntervalGameDesc": "Latih pendengaranmu dengan mengidentifikasi interval musik antara dua nada",
   "playInterval": "Mainkan Interval",
@@ -548,13 +552,17 @@
   "correctInterval": "Benar! Itu adalah {interval}",
   "@correctInterval": {
     "placeholders": {
-      "interval": { "type": "String" }
+      "interval": {
+        "type": "String"
+      }
     }
   },
   "wrongInterval": "Salah! Itu adalah {interval}",
   "@wrongInterval": {
     "placeholders": {
-      "interval": { "type": "String" }
+      "interval": {
+        "type": "String"
+      }
     }
   },
   "nextInterval": "Interval Berikutnya",
@@ -572,6 +580,14 @@
   "major6th": "Mayor ke-6",
   "minor7th": "Minor ke-7",
   "major7th": "Mayor ke-7",
-  "perfectOctave": "Oktaf Murni"
+  "perfectOctave": "Oktaf Murni",
+  "search": "Cari",
+  "simonSays": "Simon Says",
+  "simonSaysDesc": "Memorize and repeat the audio-visual sequence.",
+  "reactionTime": "Reaction Time",
+  "reactionTimeDesc": "Tap as quickly as possible when the color turns green.",
+  "movingCups": "Moving Cups",
+  "movingCupsDesc": "Keep track of the target object as the cups move.",
+  "targetSum": "Target Sum",
+  "targetSumDesc": "Select numbers that add up to the target value."
 }
-

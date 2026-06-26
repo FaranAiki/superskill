@@ -28,6 +28,10 @@ import '../../color_game/presentation/odd_one_out_screen.dart';
 import '../../temporal_game/presentation/time_estimator_screen.dart';
 import '../../temporal_game/presentation/rhythm_sync_screen.dart';
 import '../../temporal_game/presentation/speed_count_screen.dart';
+import '../../temporal_game/presentation/reaction_time_screen.dart';
+import '../../brain_game/presentation/target_sum_screen.dart';
+import '../../memory_game/presentation/moving_cups_screen.dart';
+import '../../memory_game/presentation/simon_says_screen.dart';
 import '../../../core/locale_provider.dart';
 import '../../../core/settings_provider.dart';
 import '../../../core/high_score_service.dart';
@@ -41,6 +45,14 @@ class MenuScreen extends ConsumerStatefulWidget {
 
 class _MenuScreenState extends ConsumerState<MenuScreen> {
   String selectedCategory = "All"; // All, Visual, Audio, Brain, Numerical, Memory, Spatial
+  String searchQuery = "";
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   String _getCategoryName(String category, AppLocalizations l10n) {
     switch (category) {
@@ -96,6 +108,10 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
           {'id': 'speed_count', 'name': l10n.speedCount, 'icon': Icons.visibility_outlined, 'color': const Color(0xFFF97316)},
           {'id': 'perfect_pitch', 'name': l10n.perfectPitch, 'icon': Icons.music_note_outlined, 'color': const Color(0xFF818CF8)},
           {'id': 'sound_interval', 'name': l10n.soundIntervalGame, 'icon': Icons.graphic_eq_outlined, 'color': const Color(0xFFEC4899)},
+          {'id': 'reaction_time', 'name': l10n.reactionTime, 'icon': Icons.bolt, 'color': const Color(0xFFEAB308)},
+          {'id': 'target_sum', 'name': l10n.targetSum, 'icon': Icons.functions, 'color': const Color(0xFF3B82F6)},
+          {'id': 'moving_cups', 'name': l10n.movingCups, 'icon': Icons.remove_red_eye_outlined, 'color': const Color(0xFFEF4444)},
+          {'id': 'simon_says', 'name': l10n.simonSays, 'icon': Icons.touch_app, 'color': const Color(0xFF10B981)},
         ];
 
         return Dialog(
@@ -360,10 +376,40 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                             ),
                           ),
                         ),
+                        
+                        // Search Bar
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 24),
+                          decoration: BoxDecoration(
+                            color: isLight
+                                ? Colors.white.withOpacity(0.9)
+                                : const Color(0xFF1E293B).withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: primaryColor.withOpacity(0.4),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: TextField(
+                            controller: _searchController,
+                            style: TextStyle(color: isLight ? Colors.black : Colors.white),
+                            decoration: InputDecoration(
+                              hintText: l10n.search ?? 'Search...',
+                              prefixIcon: Icon(Icons.search, color: primaryColor),
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                            ),
+                            onChanged: (val) {
+                              setState(() {
+                                searchQuery = val.toLowerCase();
+                              });
+                            },
+                          ),
+                        ),
                         const SizedBox(height: 28),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Visual')
-                          _CategorySection(title: l10n.visualGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.visualGames, children: [
                             _MenuButton(
                               title: l10n.tebakHexRgb,
                               subtitle: l10n.pointDiffSystem,
@@ -417,7 +463,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Audio')
-                          _CategorySection(title: l10n.audioGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.audioGames, children: [
                             _MenuButton(
                               title: l10n.perfectPitch,
                               subtitle: l10n.trainMusicPitch,
@@ -441,7 +487,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Brain')
-                          _CategorySection(title: l10n.brainGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.brainGames, children: [
                             _MenuButton(
                               title: l10n.brainReflex,
                               subtitle: l10n.stroopTestDesc,
@@ -492,10 +538,20 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const TypingSprintScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.targetSum,
+                              subtitle: l10n.targetSumDesc,
+                              icon: Icons.functions,
+                              gradient: const [Color(0xFF8B5CF6), Color(0xFF4F46E5)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const TargetSumScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Numerical')
-                          _CategorySection(title: l10n.numericalGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.numericalGames, children: [
                             _MenuButton(
                               title: l10n.operatorGame,
                               subtitle: l10n.operatorGameDesc,
@@ -549,7 +605,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Memory')
-                          _CategorySection(title: l10n.memoryGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.memoryGames, children: [
                             _MenuButton(
                               title: l10n.memorySequence,
                               subtitle: l10n.memorySequenceDesc,
@@ -590,10 +646,30 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                                 MaterialPageRoute(builder: (_) => const WordMemoryScreen()),
                               ),
                             ),
+                            _MenuButton(
+                              title: l10n.movingCups,
+                              subtitle: l10n.movingCupsDesc,
+                              icon: Icons.remove_red_eye_outlined,
+                              gradient: const [Color(0xFFEF4444), Color(0xFFB91C1C)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const MovingCupsScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.simonSays,
+                              subtitle: l10n.simonSaysDesc,
+                              icon: Icons.touch_app,
+                              gradient: const [Color(0xFFF59E0B), Color(0xFFD97706)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const SimonSaysScreen()),
+                              ),
+                            ),
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Spatial')
-                          _CategorySection(title: l10n.spatialGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.spatialGames, children: [
                             _MenuButton(
                               title: l10n.spatialIq,
                               subtitle: l10n.spatialIqDesc,
@@ -647,7 +723,7 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                           ]),
 
                         if (selectedCategory == 'All' || selectedCategory == 'Temporal')
-                          _CategorySection(title: l10n.temporalGames, children: [
+                          _CategorySection(searchQuery: searchQuery, title: l10n.temporalGames, children: [
                             _MenuButton(
                               title: l10n.timeEstimator,
                               subtitle: l10n.timeEstimatorDesc,
@@ -676,6 +752,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                               onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (_) => const SpeedCountScreen()),
+                              ),
+                            ),
+                            _MenuButton(
+                              title: l10n.reactionTime,
+                              subtitle: l10n.reactionTimeDesc,
+                              icon: Icons.bolt,
+                              gradient: const [Color(0xFFEAB308), Color(0xFFCA8A04)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const ReactionTimeScreen()),
                               ),
                             ),
                           ]),
@@ -729,6 +815,22 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
               }),
               _LangTile(label: 'Русский', isSelected: ref.read(localeProvider).languageCode == 'ru', onTap: () {
                 ref.read(localeProvider.notifier).state = const Locale('ru');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Español', isSelected: ref.read(localeProvider).languageCode == 'es', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('es');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'العربية', isSelected: ref.read(localeProvider).languageCode == 'ar', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('ar');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'हिन्दी', isSelected: ref.read(localeProvider).languageCode == 'hi', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('hi');
+                Navigator.pop(context);
+              }),
+              _LangTile(label: 'Français', isSelected: ref.read(localeProvider).languageCode == 'fr', onTap: () {
+                ref.read(localeProvider.notifier).state = const Locale('fr');
                 Navigator.pop(context);
               }),
             ],
@@ -855,11 +957,24 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
 
 class _CategorySection extends StatelessWidget {
   final String title;
+  final String searchQuery;
   final List<Widget> children;
-  const _CategorySection({required this.title, required this.children});
+  const _CategorySection({required this.title, this.searchQuery = "", required this.children});
 
   @override
   Widget build(BuildContext context) {
+    final validChildren = children.where((child) {
+      if (child is _MenuButton && searchQuery.isNotEmpty) {
+        if (!child.title.toLowerCase().contains(searchQuery) &&
+            !child.subtitle.toLowerCase().contains(searchQuery)) {
+          return false;
+        }
+      }
+      return true;
+    }).toList();
+
+    if (validChildren.isEmpty) return const SizedBox.shrink();
+
     final isLight = Theme.of(context).brightness == Brightness.light;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -877,7 +992,7 @@ class _CategorySection extends StatelessWidget {
             ),
           ),
         ),
-        ...children.expand((w) => [w, const SizedBox(height: 12)]),
+        ...validChildren.expand((w) => [w, const SizedBox(height: 12)]),
         const SizedBox(height: 12),
       ],
     );
