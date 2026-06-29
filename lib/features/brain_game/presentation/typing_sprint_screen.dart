@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:superskill/l10n/app_localizations.dart';
-import 'package:superskill/core/high_score_service.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
+import 'package:cognitivegarden/core/high_score_service.dart';
 
 class TypingSprintScreen extends StatefulWidget {
   const TypingSprintScreen({super.key});

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:superskill/l10n/app_localizations.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
 
 class MazeCell {
   final int r;

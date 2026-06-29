@@ -2,8 +2,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as v;
-import 'package:superskill/l10n/app_localizations.dart';
-import 'package:superskill/core/high_score_service.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
+import 'package:cognitivegarden/core/high_score_service.dart';
 
 class SpatialIqScreen extends StatefulWidget {
   const SpatialIqScreen({super.key});

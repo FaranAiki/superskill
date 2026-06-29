@@ -2,9 +2,9 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:superskill/l10n/app_localizations.dart';
-import 'package:superskill/core/soundfont_service.dart';
-import 'package:superskill/core/high_score_service.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
+import 'package:cognitivegarden/core/soundfont_service.dart';
+import 'package:cognitivegarden/core/high_score_service.dart';
 
 class SoundGameScreen extends StatefulWidget {
   const SoundGameScreen({super.key});

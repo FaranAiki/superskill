@@ -1,4 +1,4 @@
-package com.faranaiki.superskill
+package com.faranaiki.cognitivegarden
 
 import io.flutter.embedding.android.FlutterActivity
 

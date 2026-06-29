@@ -44,7 +44,6 @@ coverage/
 /ios/Flutter/Generated.xcconfig
 /ios/Flutter/flutter_export_environment.sh
 /ios/Flutter/ephemeral/
-/lib/generated_plugin_registrant.dart
 /linux/flutter/ephemeral/
 /macos/Flutter/ephemeral/
 /macos/Flutter/Generated.xcconfig

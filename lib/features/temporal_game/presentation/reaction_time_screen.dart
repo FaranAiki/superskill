@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:superskill/l10n/app_localizations.dart';
-import 'package:superskill/core/high_score_service.dart';
-import 'package:superskill/core/soundfont_service.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
+import 'package:cognitivegarden/core/high_score_service.dart';
+import 'package:cognitivegarden/core/soundfont_service.dart';
+import 'package:flutter/services.dart';
 
 enum ReactionState { waiting, ready, tapped, early }
 
@@ -177,38 +178,48 @@ class _ReactionTimeScreenState extends State<ReactionTimeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: GestureDetector(
-        onTap: _handleTap,
-        behavior: HitTestBehavior.opaque,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                mainText,
-                style: const TextStyle(
-                  fontSize: 64,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+      body: Focus(
+        autofocus: true,
+        onKeyEvent: (node, event) {
+          if (event is KeyDownEvent) {
+            _handleTap();
+            return KeyEventResult.handled;
+          }
+          return KeyEventResult.ignored;
+        },
+        child: GestureDetector(
+          onTap: _handleTap,
+          behavior: HitTestBehavior.opaque,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  mainText,
+                  style: const TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                subText,
-                style: const TextStyle(
-                  fontSize: 24,
-                  color: Colors.white70,
+                const SizedBox(height: 16),
+                Text(
+                  subText,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: Colors.white70,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 64),
-              Text(
-                "Attempt ${_currentAttempt + 1} of $_maxAttempts",
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white54,
-                ),
-              )
-            ],
+                const SizedBox(height: 64),
+                Text(
+                  "Attempt ${_currentAttempt + 1} of $_maxAttempts",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white54,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:superskill/l10n/app_localizations.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
 
 import 'features/menu/presentation/menu_screen.dart';
 import 'core/locale_provider.dart';

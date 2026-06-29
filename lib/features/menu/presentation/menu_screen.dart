@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:superskill/l10n/app_localizations.dart';
+import 'package:cognitivegarden/l10n/app_localizations.dart';
 import '../../color_game/presentation/color_game_screen.dart';
 import '../../sound_game/presentation/sound_game_screen.dart';
 import '../../sound_game/presentation/interval_game_screen.dart';
@@ -14,6 +14,7 @@ import '../../brain_game/presentation/n_back_screen.dart';
 import '../../brain_game/presentation/typing_sprint_screen.dart';
 import '../../brain_game/presentation/base_decoder_screen.dart';
 import '../../brain_game/presentation/prime_factor_screen.dart';
+import '../../brain_game/presentation/abacus_screen.dart';
 import '../../memory_game/presentation/memory_sequence_screen.dart';
 import '../../memory_game/presentation/chimp_game_screen.dart';
 import '../../memory_game/presentation/color_memory_screen.dart';
@@ -552,6 +553,16 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
 
                         if (selectedCategory == 'All' || selectedCategory == 'Numerical')
                           _CategorySection(searchQuery: searchQuery, title: l10n.numericalGames, children: [
+                            _MenuButton(
+                              title: l10n.abacusGame,
+                              subtitle: l10n.abacusGameDesc,
+                              icon: Icons.calculate_outlined,
+                              gradient: const [Color(0xFF38BDF8), Color(0xFF0284C7)],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const AbacusScreen()),
+                              ),
+                            ),
                             _MenuButton(
                               title: l10n.operatorGame,
                               subtitle: l10n.operatorGameDesc,

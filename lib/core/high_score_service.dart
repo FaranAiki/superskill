@@ -31,7 +31,7 @@ class HighScoreService {
     } else {
       home = Platform.environment['HOME'] ?? '.';
     }
-    final dir = Directory('$home/.superskill');
+    final dir = Directory('$home/.cognitivegarden');
     if (!await dir.exists()) {
       await dir.create(recursive: true);
     }
